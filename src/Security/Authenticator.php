@@ -49,6 +49,7 @@ class Authenticator extends AbstractFormLoginAuthenticator implements PasswordAu
     {
         $credentials = [
             'email' => $request->request->get('email'),
+
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
@@ -70,7 +71,11 @@ class Authenticator extends AbstractFormLoginAuthenticator implements PasswordAu
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
-            throw new UsernameNotFoundException('Email could not be found.');
+
+            $user = $this->entityManager->getRepository(User::class)->findOneBy(['pseudo' => $credentials['email']]);
+
+        }else{
+            throw new UsernameNotFoundException('Pseudo ou Email could not be found.');
         }
 
         return $user;
