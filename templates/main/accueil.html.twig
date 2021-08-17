@@ -7,7 +7,52 @@
 
     <section>
         {{ form_start(sortieForm) }}
-        {{ form_widget(sortieForm) }}
+        <div class="group">
+            {{ form_label(sortieForm.campus) }}
+            {{ form_widget(sortieForm.campus) }}
+            {{ form_errors(sortieForm.campus) }}
+        </div>
+        <div class="group">
+            {{ form_label(sortieForm.campus) }}
+            {{ form_widget(sortieForm.campus) }}
+            {{ form_errors(sortieForm.campus) }}
+        </div>
+        <div class="group">
+            {{ form_label(sortieForm.text) }}
+            {{ form_widget(sortieForm.text) }}
+            {{ form_errors(sortieForm.text) }}
+        </div>
+        <div class="group">
+            {{ form_label(sortieForm.dateDebut) }}
+            {{ form_widget(sortieForm.dateDebut) }}
+            {{ form_errors(sortieForm.dateDebut) }}
+        </div>
+        <div class="group">
+            {{ form_label(sortieForm.dateFin) }}
+            {{ form_widget(sortieForm.dateFin) }}
+            {{ form_errors(sortieForm.dateFin) }}
+        </div>
+        <div class="group">
+            {{ form_label(sortieForm.organisateur) }}
+            {{ form_widget(sortieForm.organisateur) }}
+            {{ form_errors(sortieForm.organisateur) }}
+        </div>
+        <div class="group">
+            {{ form_label(sortieForm.inscrit) }}
+            {{ form_widget(sortieForm.inscrit) }}
+            {{ form_errors(sortieForm.inscrit) }}
+        </div>
+        <div class="group">
+            {{ form_label(sortieForm.noninscrit) }}
+            {{ form_widget(sortieForm.noninscrit) }}
+            {{ form_errors(sortieForm.noninscrit) }}
+        </div>
+        <div class="group">
+            {{ form_label(sortieForm.sortiePassee) }}
+            {{ form_widget(sortieForm.sortiePassee) }}
+            {{ form_errors(sortieForm.sortiePassee) }}
+        </div>
+
         <button class="btn">Recherche</button>
         {{ form_end(sortieForm) }}
     </section>
