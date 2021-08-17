@@ -1,50 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}} | Accueil{% endblock %}
+{% block title %}{{ parents }} | Profil{% endblock %}
 
 {% block body %}
-    <h1>Listes des sorties</h1>
-    <br>
-    <section>
-        <h2>Listes :</h2>
 
-        {% for sortie in sorties %}
-            <ul class="list-group"></ul>
-                <li class="list-group-item">
-                    {{ sortie.nom }}
-                </li>
-            <li class="list-group-item">
-                {{ sortie.dateHeureDebut |date("d/m/Y")}}
-            </li>
-            <li class="list-group-item">
-                {{ sortie.datelimiteInscription |date("d/m/Y")}}
-            </li>
-            <li class="list-group-item">
-                {{ sortie.users|length }}/{{ sortie.nbInscriptionsMax }}
-            </li>
-            <li class="list-group-item">
-                {{ sortie.etat.libelle }}
-            </li>
-            <li class="list-group-item">
-                {{ sortie.organisateur.pseudo }}
-            </li>
-            <li class="list-group-item">
-                <a href="#">Afficher</a>
-            </li>
-            <li class="list-group-item">
-                <a href="#">Se désister</a>
-            </li>
-            <li class="list-group-item">
-                <a href="#">S'inscire</a>
-            </li>
-            <li class="list-group-item">
-                <a href="#">Publier</a>
-            </li>
-            <li class="list-group-item">
-                <a href="#">Annuler</a>
-            </li>
-            <br>
-        {% endfor %}
-    </section>
-    <a href="{{ path('sortie_ajouter') }}" class="btn ">Créer une sortie</a>
+
+<div class="example-wrapper">
+    <h1>Profil de {{ user.pseudo }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/SymfonyProjects/sortirComv2/src/Controller/ProfilController.php'|file_link(0) }}">src/Controller/ProfilController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/wamp64/www/SymfonyProjects/sortirComv2/templates/profil/profil.html.twig'|file_link(0) }}">templates/profil/index.html.twig</a></code></li>
+    </ul>
+</div>
 {% endblock %}
