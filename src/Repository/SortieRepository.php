@@ -47,4 +47,22 @@ class SortieRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByPerso($Campus,$text,$dateDebut,$dateFin)
+    {
+        $qb =$this->createQueryBuilder('s')
+            ->where('s.campus_id = :campus.id')
+            ->andWhere('s.nom = :text')
+            ->andWhere('date_heure_debut> :dateDebut')
+            ->andWhere('date_limite_inscription< :dateFin')
+            ->setParameter('dateFin', $dateFin)
+            ->setParameter('dateDebut', $dateDebut)
+            ->setParameter('text', $text)
+            ->setParameter('campus', $Campus)
+            ->orderBy('date_limite_inscription','ASC');
+
+        $query = $qb->getQuery();
+        $query->setMaxResults(50);
+
+        return $query->execute();
+    }
 }

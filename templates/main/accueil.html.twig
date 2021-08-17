@@ -38,16 +38,15 @@
             {{ form_errors(sortieForm.inscrit) }}
         </div>
         <div class="group">
-            {{ form_label(sortieForm.noninscrit) }}
-            {{ form_widget(sortieForm.noninscrit) }}
-            {{ form_errors(sortieForm.noninscrit) }}
+            {{ form_label(sortieForm.nonInscrit) }}
+            {{ form_widget(sortieForm.nonInscrit) }}
+            {{ form_errors(sortieForm.nonInscrit) }}
         </div>
         <div class="group">
-            {{ form_label(sortieForm.sortiePassee) }}
-            {{ form_widget(sortieForm.sortiePassee) }}
-            {{ form_errors(sortieForm.sortiePassee) }}
+            {{ form_label(sortieForm.sortiesPassees) }}
+            {{ form_widget(sortieForm.sortiesPassees) }}
+            {{ form_errors(sortieForm.sortiesPassees) }}
         </div>
-
         <button class="btn">Recherche</button>
         {{ form_end(sortieForm) }}
     </section>
