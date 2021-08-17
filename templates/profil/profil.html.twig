@@ -5,13 +5,14 @@
 {% block body %}
 
 
-<div class="example-wrapper">
-    <h1>Profil de {{ user.pseudo }}! ✅</h1>
-
-
-    <ul>
-        <li></li>
-        <li></li>
-    </ul>
+<div class="container">
+    <h1>{{ user.pseudo }}</h1>
 </div>
+<div>
+    <div>Prénom : {{ user.prenom }}</div>
+    <div>Nom : {{ user.nom }}</div>
+    <div>Téléphone : {{ user.telephone }}</div>
+    <div>Campus : {{ user.campus.nom }}</div>
+</div>
+
 {% endblock %}
