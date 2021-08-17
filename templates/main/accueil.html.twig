@@ -14,19 +14,19 @@
                     {{ sortie.nom }}
                 </li>
             <li class="list-group-item">
-                {{ sortie.dateHeureDebut }}
+                {{ sortie.dateHeureDebut |date("d/m/Y")}}
             </li>
             <li class="list-group-item">
-                {{ sortie.datelimiteInscription }}
+                {{ sortie.datelimiteInscription |date("d/m/Y")}}
             </li>
             <li class="list-group-item">
                 {{ sortie.users|length }}/{{ sortie.nbInscriptionsMax }}
             </li>
             <li class="list-group-item">
-                {{ sortie.etat }}
+                {{ sortie.etat.libelle }}
             </li>
             <li class="list-group-item">
-                {{ sortie.organisateur }}
+                {{ sortie.organisateur.pseudo }}
             </li>
             <li class="list-group-item">
                 <a href="#">Afficher</a>
@@ -43,6 +43,7 @@
             <li class="list-group-item">
                 <a href="#">Annuler</a>
             </li>
+            <br>
         {% endfor %}
     </section>
 {% endblock %}
