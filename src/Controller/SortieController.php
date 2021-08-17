@@ -10,12 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/sortie")
+ * @Route("/sortie" name = "sortie_")
  */
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/sortie")
+     * @Route("/ajouter" name ='ajouter')
      * @param Request $request
      * @return Response
      */
