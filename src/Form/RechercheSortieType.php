@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,7 +36,10 @@ class RechercheSortieType extends AbstractType
                 'required'=>false,
                 'mapped'=>false,
             ])
-
+            ->add('organisateur',CheckboxType::class,['label'=>"Sorties dont je suis l'organisteur/trice"])
+            ->add('inscrit',CheckboxType::class,['label'=>"Sorties auquelles je suis inscrit/e"])
+            ->add('noninscrit',CheckboxType::class,['label'=>"Sorties auquelles je ne suis pas inscrit/e"])
+            ->add('sortiePassee',CheckboxType::class,['label'=>"Sorties passées"])
             /*->add('nom')
             ->add('dateHeureDebut')
             ->add('duree')
