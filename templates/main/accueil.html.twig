@@ -8,5 +8,41 @@
     <section>
         <h2>Listes :</h2>
 
+        {% for sortie in sorties %}
+            <ul class="list-group"></ul>
+                <li class="list-group-item">
+                    {{ sortie.nom }}
+                </li>
+            <li class="list-group-item">
+                {{ sortie.dateHeureDebut }}
+            </li>
+            <li class="list-group-item">
+                {{ sortie.datelimiteInscription }}
+            </li>
+            <li class="list-group-item">
+                {{ sortie.users|length }}/{{ sortie.nbInscriptionsMax }}
+            </li>
+            <li class="list-group-item">
+                {{ sortie.etat }}
+            </li>
+            <li class="list-group-item">
+                {{ sortie.organisateur }}
+            </li>
+            <li class="list-group-item">
+                <a href="#">Afficher</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">Se désister</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">S'inscire</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">Publier</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">Annuler</a>
+            </li>
+        {% endfor %}
     </section>
 {% endblock %}
