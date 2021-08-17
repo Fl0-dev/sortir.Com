@@ -22,10 +22,10 @@
                     {{ sortie.nom }}
                 </li>
             <li class="list-group-item">
-                {{ sortie.dateHeureDebut |date("d/m/Y")}}
+                {{ sortie.dateHeureDebut |date("d/m/Y h:m")}}
             </li>
             <li class="list-group-item">
-                {{ sortie.datelimiteInscription |date("d/m/Y")}}
+                {{ sortie.datelimiteInscription |date("d/m/Y h:m")}}
             </li>
             <li class="list-group-item">
                 {{ sortie.users|length }}/{{ sortie.nbInscriptionsMax }}
