@@ -9,12 +9,12 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Créer une sortie✅</h1>
+    {{ form_start(formSortie) }}
+    {{ form_widget(forSortie) }}
+    <button type="submit" class="btn btn-sucess">
+    </button>
+    {{ form_end(forSortie) }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/projet symfony/projetSortir/src/Controller/SortieController.php'|file_link(0) }}">src/Controller/SortieController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/projet symfony/projetSortir/templates/sortie/index.html.twig'|file_link(0) }}">templates/sortie/index.html.twig</a></code></li>
-    </ul>
 </div>
 {% endblock %}
