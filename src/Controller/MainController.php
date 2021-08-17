@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,8 +20,11 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil", name="accueil")
      */
-    public function list():Response
+    public function list(SortieRepository $sortieRepository):Response
     {
-        return $this->render('main/accueil.html.twig');
+        $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"DESC"]);
+        return $this->render('main/accueil.html.twig',[
+            "sorties"=>$sorties,
+        ]);
     }
 }
