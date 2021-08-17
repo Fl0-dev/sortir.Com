@@ -6,8 +6,9 @@
     <h1>Listes des sorties</h1>
 
     <section>
-        {{ form_start() }}
-
+        {{ form_start(sortieForm) }}
+        {{ form_widget(sortieForm) }}
+        {{ form_end(sortieForm) }}
     </section>
 
     <br>

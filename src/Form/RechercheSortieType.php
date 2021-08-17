@@ -20,17 +20,20 @@ class RechercheSortieType extends AbstractType
                 'class'=>Campus::class,
                 'choice_label'=>'nom',
             ])
-            ->add('text',TextType::class,[
+            ->add('text',null,[
                 'label'=>'Le nom de la sortie contient',
                 'required'=>false,
+                'mapped'=>false,
             ])
             ->add('dateDebut',DateTimeType::class,[
                 'widget'=>'single_text',
                 'required'=>false,
+                'mapped'=>false,
             ])
             ->add('dateFin',DateTimeType::class,[
                 'widget'=>'single_text',
                 'required'=>false,
+                'mapped'=>false,
             ])
 
             /*->add('nom')
