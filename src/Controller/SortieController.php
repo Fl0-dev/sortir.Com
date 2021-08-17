@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Entity\User;
 use App\Form\SortieFormType;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,7 @@ class SortieController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $sortie = new Sortie();
+        $sortie->setOrganisateur($this->getUser());
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,4 +42,27 @@ class SortieController extends AbstractController
         ('sortie/ajouter.sortie.html.twig',
             ['formSortie' => $form->createView()]);
     }
+
+    /**
+     * @Route("/modifierSortie", name = "modifier")
+     */
+    public function Modifier(Sortie $sortie, Request $request) :Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(SortieFormType::class, $sortie);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $sortie->setDateHeureDebut(new DateTime());
+            $em->flush();
+
+            return $this->redirectToRoute('home');
+
+        }
+
+        return $this->render
+        ('sortie/modifier.sortie.html.twig',
+            ['formSortie' => $form->createView()]);
+    }
+
+
 }
