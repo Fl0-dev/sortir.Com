@@ -63,11 +63,11 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('text', '%'.$text.'%');
         }
         if ($dateDebut != null) {
-            $qb->andWhere('date_heure_debut> :dateDebut')
+            $qb->andWhere('s.dateHeureDebut > :dateDebut')
                 ->setParameter('dateDebut', $dateDebut);
         }
         if ($dateFin != null) {
-            $qb->andWhere('date_limite_inscription< :dateFin')
+            $qb->andWhere('s.dateHeureDebut < :dateFin')
                 ->setParameter('dateFin', $dateFin);
         }
         if ($organisateur) {
@@ -89,7 +89,7 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('now', date('Y-m-d H:i:s') );
         }
 
-        $qb ->orderBy('date_limite_inscription','ASC');
+
 
         $query = $qb->getQuery();
         $query->setMaxResults(50);
