@@ -3,7 +3,7 @@
 {% block title %}{{parent()}} | Accueil{% endblock %}
 
 {% block body %}
-    <div class="container">
+<div class="container">
     <h1>Bienvenue {{ app.user.pseudo }}</h1>
 
     <section class="col-4">
@@ -90,5 +90,5 @@
         {% endfor %}
     </section>
     <a href="{{ path('sortie_ajouter') }}" class="btn btn-outline-primary">Créer une sortie</a>
-    </div>
+</div>
 {% endblock %}
