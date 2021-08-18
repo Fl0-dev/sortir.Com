@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Entity\User;
 use App\Form\SortieFormType;
+use App\Repository\SortieRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class SortieController extends AbstractController
 {
+
+    /**
+     * @Route("/afficher", name = "afficher")
+     */
+
+
+    public function index() : Response
+    {
+        return $this->render('sortie/afficher.html.twig');
+
+
+    }
+
+
     /**
      * @Route("/ajouter", name ="ajouter")
      * @param Request $request
@@ -61,6 +76,11 @@ class SortieController extends AbstractController
         ('sortie/modifier.html.twig',
             ['formSortie' => $form->createView()]);
     }
+    /**
+     * @Route("/afficher", name ="afficher")
+     */
+
+
 
 
 }
