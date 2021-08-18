@@ -8,8 +8,8 @@ class RechercheSortie{
 
     private Campus $campus;
     private ?string $text =null;
-    private ?Datetime $dateDebut=null;
-    private ?Datetime $dateFin=null;
+    private ?Datetime $dateDebut;
+    private ?Datetime $dateFin;
     private  $organisateur;
     private  $inscrit;
     private  $nonInscrit;

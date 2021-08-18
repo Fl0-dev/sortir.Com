@@ -89,7 +89,7 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('now', date('Y-m-d H:i:s') );
         }
 
-        $qb ->orderBy('date_limite_inscription','ASC');
+
 
         $query = $qb->getQuery();
         $query->setMaxResults(50);
