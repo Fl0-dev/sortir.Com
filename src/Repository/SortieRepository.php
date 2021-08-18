@@ -53,9 +53,10 @@ class SortieRepository extends ServiceEntityRepository
 
         //user qui fait la recherche
 
-
+        $qb->where('s.etat = :etat')
+            ->setParameter('etat', 'Ouverte');
         if($campus != null){
-            $qb ->where('s.campus = :campus')
+            $qb ->andWhere('s.campus = :campus')
                 ->setParameter('campus', $campus->getId());
         }
         if ($text != null) {

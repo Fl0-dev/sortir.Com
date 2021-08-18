@@ -18,10 +18,17 @@ class ProfilType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('email')
-            ->add('password', PasswordType::class,["mapped"=>false])
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'The password fields must match.',
+                'options' => ['attr' => ['class' => 'password-field']],
+                'required' => true,
+                'first_options'  => ['label' => 'Password'],
+                'second_options' => ['label' => 'Repeat Password'],
+            ])
+            ->add('plainPassword', PasswordType::class,["mapped"=>false])
             ->add('campus', null, ["choice_label"=>"nom"])
             //->add('photo')
-            //->add('password')
             //->add('roles')
         ;
     }
