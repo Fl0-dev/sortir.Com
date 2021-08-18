@@ -26,10 +26,11 @@ class MainController extends AbstractController
      */
     public function list(SortieRepository $sortieRepository):Response
     {
+        $rechercheSortie = new RechercheSortie();
         //liste des sorties sans recherche
         $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"ASC"]);
         //mise en route du du formulaire de recherche
-        $sortieForm = $this->createForm(RechercheSortieType::class);
+        $sortieForm = $this->createForm(RechercheSortieType::class,$rechercheSortie);
 
         return $this->render('main/accueil.html.twig',[
             "sorties"=>$sorties,
@@ -44,13 +45,13 @@ class MainController extends AbstractController
     {
         //initialisation de l'instance des resultats du form
         $rechercheSortie = new RechercheSortie();
-        //liste des sorties sans recherche
-        $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"DESC"]);
+
         //mise en route du du formulaire de recherche
-        $sortieForm = $this->createForm(RechercheSortieType::class);
+        $sortieForm = $this->createForm(RechercheSortieType::class,$rechercheSortie);
         // retour de la réponse
         $sortieForm->handleRequest($request);
         //si form soumis et valide
+
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
 
             //hydratation pour recherche
@@ -69,10 +70,13 @@ class MainController extends AbstractController
                 $organisateur, $inscrit,$nonInscrit,$sortiesPassees);
             //TODO:return la recherche
 
+        }else{
+            //liste des sorties sans recherche
+            $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"DESC"]);
         }
         return $this->render('main/accueil.html.twig',[
             "sorties"=>$sorties,
-            "sortieForm"=>$sortieForm,
+            "sortieForm"=>$sortieForm->createView(),
         ]);
     }
 
