@@ -56,29 +56,31 @@ class MainController extends AbstractController
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
 
-            //hydratation pour recherche
+            //récupération pour recherche
             $campus = $rechercheSortie->getCampus();
             $text = $rechercheSortie->getText();
-            //récupération des champs mapped=>false
-            $dateDebut= $sortieForm->get('dateDebut')->getData();
-            $dateFin= $sortieForm->get('dateFin')->getData();
-            //traitement des dates si null
-            if($dateDebut==null){
-                //date du jour
-                $rechercheSortie->setDateDebut((new \DateTime())->modify('-1 month'));
-            }
-            if($dateFin==null){
-                //date du jour + 1 mois
-                $rechercheSortie->setDateFin((new \DateTime())->modify('+1 month'));
-            }
             $organise =$rechercheSortie->isOrganise();
             $inscrit = $rechercheSortie->isInscrit();
             $nonInscrit = $rechercheSortie->isNonInscrit();
             $sortiesPassees = $rechercheSortie->isSortiesPassees();
+            //récupération des champs mapped=>false
+            $dateDebut= $sortieForm->get('dateDebut')->getData();
+            $dateFin= $sortieForm->get('dateFin')->getData();
+            //traitement des dates si null
+
+            if($dateDebut==null){
+                //date du jour
+                $dateDebut= ((new \DateTime())->modify('-1 month'));
+            }
+            if($dateFin==null){
+                //date du jour + 1 mois
+                $dateFin=((new \DateTime())->modify('+1 month'));
+            }
 
 
-            //TODO:recherches persos
-            $sorties = $sortieRepository->findByPerso($campus,$text,$rechercheSortie->getDateDebut(),$rechercheSortie->getDateFin(),
+
+            //utilisation d'une fonction perso pour récupérer les sorties en fonction des données de recherche
+            $sorties = $sortieRepository->findByPerso($campus,$text,$dateDebut, $dateFin,
                 $organise, $inscrit,$nonInscrit,$sortiesPassees,$user);
             //TODO:return la recherche
 
