@@ -47,7 +47,7 @@ class SortieRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findByPerso($campus,$text,$dateDebut,$dateFin,$organisateur,$inscrit,$nonInscrit,$sortiesPassees)
+    public function findByPerso($campus,$text,$dateDebut,$dateFin,$organise,$inscrit,$nonInscrit,$sortiesPassees)
     {
         $qb =$this->createQueryBuilder('s');
 
@@ -64,15 +64,17 @@ class SortieRepository extends ServiceEntityRepository
         }
         if ($dateDebut != null) {
             $qb->andWhere('s.dateHeureDebut > :dateDebut')
+
                 ->setParameter('dateDebut', $dateDebut);
         }
         if ($dateFin != null) {
             $qb->andWhere('s.dateHeureDebut < :dateFin')
                 ->setParameter('dateFin', $dateFin);
         }
-        if ($organisateur) {
+        if ($organise) {
+            $user = $this;
             $qb ->andWhere('s.organisateur = :organisateur')
-                ->setParameter('organisateur',$organisateur->getId());
+                ->setParameter('organisateur',$user->getId());
         }
         /*if($inscrit){
             //TODO
