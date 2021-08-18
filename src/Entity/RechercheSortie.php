@@ -16,7 +16,7 @@ class RechercheSortie{
     private  $sortiesPassees;
 
 
-    public function isOrganisateur(): ?bool
+    public function isOrganise(): ?bool
     {
         return $this->organise;
     }

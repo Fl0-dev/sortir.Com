@@ -39,7 +39,7 @@ class RechercheSortieType extends AbstractType
                 'empty_data' => '',
                 'mapped'=>false,
             ])
-            ->add('organisateur',CheckboxType::class,[
+            ->add('organise',CheckboxType::class,[
                 'label'=>"Sorties dont je suis l'organisteur/trice",
                 'required'=>false,
 

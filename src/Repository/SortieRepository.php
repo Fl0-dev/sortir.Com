@@ -71,11 +71,11 @@ class SortieRepository extends ServiceEntityRepository
             $qb->andWhere('s.dateHeureDebut < :dateFin')
                 ->setParameter('dateFin', $dateFin);
         }
-        if ($organise) {
+        /*if ($organise) {
             $user = $this;
-            $qb ->andWhere('s.organisateur = :organisateur')
-                ->setParameter('organisateur',$user->getId());
-        }
+            $qb ->andWhere('s.organisateur = :organise')
+                ->setParameter('organise',$organise->getId());
+        }*/
         /*if($inscrit){
             //TODO
             $qb ->andWhere(':inscrit MEMBER OF s.users')
