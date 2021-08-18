@@ -42,11 +42,12 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil/recherche", name="recherche")
      */
-    public function recherche(SortieRepository $sortieRepository, Request $request, UserRepository $userRepository):Response
+    public function recherche(SortieRepository $sortieRepository, Request $request):Response
     {
         //initialisation de l'instance des resultats du form
         $rechercheSortie = new RechercheSortie();
-
+        //récupération de l'user connecté
+        $user = $this->getUser();
         //mise en route du du formulaire de recherche
         $sortieForm = $this->createForm(RechercheSortieType::class,$rechercheSortie);
         // retour de la réponse
@@ -70,7 +71,7 @@ class MainController extends AbstractController
                 //date du jour + 1 mois
                 $rechercheSortie->setDateFin((new \DateTime())->modify('+1 month'));
             }
-            $organise =$rechercheSortie->isOrganisateur();
+            $organise =$rechercheSortie->isOrganise();
             $inscrit = $rechercheSortie->isInscrit();
             $nonInscrit = $rechercheSortie->isNonInscrit();
             $sortiesPassees = $rechercheSortie->isSortiesPassees();
@@ -78,7 +79,7 @@ class MainController extends AbstractController
 
             //TODO:recherches persos
             $sorties = $sortieRepository->findByPerso($campus,$text,$rechercheSortie->getDateDebut(),$rechercheSortie->getDateFin(),
-                $organise, $inscrit,$nonInscrit,$sortiesPassees);
+                $organise, $inscrit,$nonInscrit,$sortiesPassees,$user);
             //TODO:return la recherche
 
         }else{

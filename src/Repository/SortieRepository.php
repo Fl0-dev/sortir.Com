@@ -47,12 +47,12 @@ class SortieRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findByPerso($campus,$text,$dateDebut,$dateFin,$organise,$inscrit,$nonInscrit,$sortiesPassees)
+    public function findByPerso($campus,$text,$dateDebut,$dateFin,$organise,$inscrit,$nonInscrit,$sortiesPassees,$user )
     {
         $qb =$this->createQueryBuilder('s');
 
         //user qui fait la recherche
-        //$user ;
+
 
         if($campus != null){
             $qb ->where('s.campus = :campus')
@@ -71,21 +71,21 @@ class SortieRepository extends ServiceEntityRepository
             $qb->andWhere('s.dateHeureDebut < :dateFin')
                 ->setParameter('dateFin', $dateFin);
         }
-        /*if ($organise) {
-            $user = $this;
-            $qb ->andWhere('s.organisateur = :organise')
-                ->setParameter('organise',$organise->getId());
-        }*/
-        /*if($inscrit){
+        if ($organise) {
+
+            $qb ->andWhere('s.organisateur = :organisateur')
+                ->setParameter('organisateur',$user);
+        }
+        if($inscrit){
             //TODO
             $qb ->andWhere(':inscrit MEMBER OF s.users')
-                ->setParameter('inscrit', $user->getId());
+                ->setParameter('inscrit', $user);
         }
         if($nonInscrit){
             //TODO
             $qb ->andWhere(':inscrit NOT MEMBER OF s.users')
-                ->setParameter('inscrit', $user->getId());
-        }*/
+                ->setParameter('inscrit', $user);
+        }
         if($sortiesPassees){
             $qb ->andWhere('s.dateHeureDebut <= :now')
                 ->setParameter('now', date('Y-m-d H:i:s') );
