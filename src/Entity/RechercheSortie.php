@@ -100,7 +100,7 @@ class RechercheSortie{
     }
 
 
-    public function setDateDebut(\DateTimeInterface $dateDebut): self
+    public function setDateDebut(?\DateTimeInterface $dateDebut): self
     {
         $this->dateDebut = $dateDebut;
         return $this;
