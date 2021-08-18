@@ -7,9 +7,9 @@ use phpDocumentor\Reflection\Types\Boolean;
 class RechercheSortie{
 
     private Campus $campus;
-    private string $text;
-    private Datetime $dateDebut;
-    private Datetime $dateFin;
+    private ?string $text =null;
+    private ?Datetime $dateDebut=null;
+    private ?Datetime $dateFin=null;
     private  $organisateur;
     private  $inscrit;
     private  $nonInscrit;

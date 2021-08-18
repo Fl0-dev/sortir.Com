@@ -57,6 +57,7 @@ class MainController extends AbstractController
             //hydratation pour recherche
             $campus = $rechercheSortie->getCampus();
             $text = $rechercheSortie->getText();
+
             $dateDebut = $rechercheSortie->getDateDebut();
             $dateFin = $rechercheSortie->getDateFin();
             $organisateur =$rechercheSortie->isOrganisateur();
