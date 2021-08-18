@@ -40,7 +40,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/accueil/recherche/{id}", name="recherche")
+     * @Route("/accueil/recherche", name="recherche")
      */
     public function recherche(SortieRepository $sortieRepository, Request $request, UserRepository $userRepository):Response
     {
