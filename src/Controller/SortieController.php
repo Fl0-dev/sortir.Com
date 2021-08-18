@@ -47,7 +47,6 @@ class SortieController extends AbstractController
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $sortie->setDateHeureDebut(new DateTime());
             $em->persist($sortie);
             $em->flush();
 
