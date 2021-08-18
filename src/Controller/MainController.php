@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\RechercheSortie;
 use App\Form\RechercheSortieType;
 use App\Repository\SortieRepository;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,8 +58,15 @@ class MainController extends AbstractController
             $text = $rechercheSortie->getText();
             $dateDebut = $rechercheSortie->getDateDebut();
             $dateFin = $rechercheSortie->getDateFin();
+            $organisateur =$rechercheSortie->isOrganisateur();
+            $inscrit = $rechercheSortie->isInscrit();
+            $nonInscrit = $rechercheSortie->isNonInscrit();
+            $sortiesPassees = $rechercheSortie->isSortiesPassees();
+
+
             //TODO:recherches persos
-            $sorties = $sortieRepository->findByPerso($campus,$text,$dateDebut=date("Y-m-d H:i:s"),$dateFin=date("Y-m-d H:i:s"));
+            $sorties = $sortieRepository->findByPerso($campus,$text,$dateDebut,$dateFin,
+                $organisateur, $inscrit,$nonInscrit,$sortiesPassees);
             //TODO:return la recherche
 
         }
