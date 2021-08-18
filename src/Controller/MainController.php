@@ -5,8 +5,6 @@ namespace App\Controller;
 use App\Entity\RechercheSortie;
 use App\Form\RechercheSortieType;
 use App\Repository\SortieRepository;
-use App\Repository\UserRepository;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -82,7 +80,7 @@ class MainController extends AbstractController
             //utilisation d'une fonction perso pour récupérer les sorties en fonction des données de recherche
             $sorties = $sortieRepository->findByPerso($campus,$text,$dateDebut, $dateFin,
                 $organise, $inscrit,$nonInscrit,$sortiesPassees,$user);
-            //TODO:return la recherche
+
 
         }else{
             //liste des sorties sans recherche
