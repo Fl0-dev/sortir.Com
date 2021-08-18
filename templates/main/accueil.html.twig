@@ -82,9 +82,13 @@
             <li class="list-group-item">
                 <a href="#">Annuler</a>
             </li>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ path('sortie_modifier',{id:sortie.id}) }}">Modifier sortie</a>
+            </li>
             <br>
         {% endfor %}
     </section>
     <a href="{{ path('sortie_ajouter') }}" class="btn btn-sucess">Créer une sortie</a>
-    <a href="{{ path('sortie_modifier') }}" class="btn btn-sucess">Modifier une sortie</a>
+
 {% endblock %}

@@ -39,28 +39,26 @@ class SortieController extends AbstractController
         }
 
         return $this->render
-        ('sortie/ajouter.sortie.html.twig',
+        ('sortie/ajouter.html.twig',
             ['formSortie' => $form->createView()]);
     }
 
     /**
-     * @Route("/modifierSortie", name = "modifier")
+     * @Route("/{id}/modifier/", name ="modifier")
      */
-    public function Modifier(Sortie $sortie, Request $request) :Response
+    public function Modifier(Sortie $sortie, Request $request) : Response
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $sortie->setDateHeureDebut(new DateTime());
             $em->flush();
 
-            return $this->redirectToRoute('home');
-
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render
-        ('sortie/modifier.sortie.html.twig',
+        ('sortie/modifier.html.twig',
             ['formSortie' => $form->createView()]);
     }
 
