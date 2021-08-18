@@ -5,17 +5,34 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Entity\User;
 use App\Form\SortieFormType;
+use App\Repository\SortieRepository;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\Translation\t;
 
 /**
  * @Route("/sortie", name = "sortie_")
  */
 class SortieController extends AbstractController
 {
+
+    /**
+     * @Route("/afficher", name = "afficher")
+     */
+
+
+    public function index() : Response
+    {
+        return $this->render('sortie/afficher.html.twig');
+
+
+    }
+
+
     /**
      * @Route("/ajouter", name ="ajouter")
      * @param Request $request
@@ -30,7 +47,6 @@ class SortieController extends AbstractController
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $sortie->setDateHeureDebut(new DateTime());
             $em->persist($sortie);
             $em->flush();
 
@@ -61,6 +77,20 @@ class SortieController extends AbstractController
         ('sortie/modifier.html.twig',
             ['formSortie' => $form->createView()]);
     }
+
+    /**
+     * @Route("/annuler/{id}", name ="annuler")
+     */
+
+    public function annuler(Sortie $sortie, EntityManagerInterface $em) : Response
+    {
+        $em->remove($sortie);
+        $em->flush();
+        return $this->redirectToRoute('accueil');
+    }
+
+
+
 
 
 }

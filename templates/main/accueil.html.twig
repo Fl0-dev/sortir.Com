@@ -68,7 +68,7 @@
                 {{ sortie.organisateur.pseudo }}
             </li>
             <li class="list-group-item">
-                <a href="#">Afficher</a>
+                <a href="{{ path('sortie_afficher',{id:sortie.id}) }}">Afficher</a>
             </li>
             <li class="list-group-item">
                 <a href="#">Se désister</a>
@@ -80,7 +80,7 @@
                 <a href="#">Publier</a>
             </li>
             <li class="list-group-item">
-                <a href="#">Annuler</a>
+                <a href="{{ path('sortie_annuler',{id:sortie.id}) }}">Annuler</a>
             </li>
             </li>
             <li class="list-group-item">
