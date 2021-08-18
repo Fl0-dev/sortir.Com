@@ -10,10 +10,10 @@ class RechercheSortie{
     private string $text;
     private Datetime $dateDebut;
     private Datetime $dateFin;
-    private Boolean $organisateur;
-    private Boolean $inscrit;
-    private Boolean $nonInscrit;
-    private Boolean $sortiesPassees;
+    private  $organisateur;
+    private  $inscrit;
+    private  $nonInscrit;
+    private  $sortiesPassees;
 
 
     public function isOrganisateur(): ?bool
@@ -22,10 +22,10 @@ class RechercheSortie{
     }
 
 
-    public function setOrganisateur(bool $organisateur): ?bool
+    public function setOrganisateur(bool $organisateur): self
     {
-        return $this->organisateur = $organisateur;
-
+        $this->organisateur = $organisateur;
+        return $this;
     }
 
 
@@ -35,9 +35,10 @@ class RechercheSortie{
     }
 
 
-    public function setInscrit(bool $inscrit): ?bool
+    public function setInscrit(bool $inscrit): self
     {
-        return $this->inscrit = $inscrit;
+        $this->inscrit = $inscrit;
+        return $this;
     }
 
 
@@ -47,9 +48,10 @@ class RechercheSortie{
     }
 
 
-    public function setNonInscrit(bool $nonInscrit): ?bool
+    public function setNonInscrit(bool $nonInscrit): self
     {
-        return $this->nonInscrit = $nonInscrit;
+        $this->nonInscrit = $nonInscrit;
+        return $this;
     }
 
 
@@ -59,9 +61,10 @@ class RechercheSortie{
     }
 
 
-    public function setSortiesPassees(bool $sortiesPassees): ?bool
+    public function setSortiesPassees(bool $sortiesPassees): self
     {
-        return $this->sortiesPassees = $sortiesPassees;
+        $this->sortiesPassees = $sortiesPassees;
+        return $this;
     }
 
 
@@ -71,9 +74,10 @@ class RechercheSortie{
     }
 
 
-    public function setCampus(Campus $campus): ?Campus
+    public function setCampus(Campus $campus): self
     {
-        return $this->campus = $campus;
+        $this->campus = $campus;
+        return $this;
     }
 
 
@@ -83,9 +87,10 @@ class RechercheSortie{
     }
 
 
-    public function setText(string $text): ?string
+    public function setText(string $text): self
     {
-        return $this->text = $text;
+        $this->text = $text;
+        return $this;
     }
 
 
@@ -95,9 +100,10 @@ class RechercheSortie{
     }
 
 
-    public function setDateDebut(\DateTimeInterface $dateDebut): ?\DateTimeInterface
+    public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
-        return $this->dateDebut = $dateDebut;
+        $this->dateDebut = $dateDebut;
+        return $this;
     }
 
 
@@ -109,7 +115,8 @@ class RechercheSortie{
 
     public function setDateFin(?\DateTimeInterface $dateFin): self
     {
-        return $this->dateFin = $dateFin;
+        $this->dateFin = $dateFin;
+        return $this;
     }
 
 
