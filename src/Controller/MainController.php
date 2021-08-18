@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\RechercheSortie;
 use App\Form\RechercheSortieType;
 use App\Repository\SortieRepository;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +27,7 @@ class MainController extends AbstractController
     public function list(SortieRepository $sortieRepository):Response
     {
         //liste des sorties sans recherche
-        $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"DESC"]);
+        $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"ASC"]);
         //mise en route du du formulaire de recherche
         $sortieForm = $this->createForm(RechercheSortieType::class);
 
@@ -40,6 +42,8 @@ class MainController extends AbstractController
      */
     public function recherche(SortieRepository $sortieRepository, Request $request):Response
     {
+        //initialisation de l'instance des resultats du form
+        $rechercheSortie = new RechercheSortie();
         //liste des sorties sans recherche
         $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"DESC"]);
         //mise en route du du formulaire de recherche
@@ -48,10 +52,23 @@ class MainController extends AbstractController
         $sortieForm->handleRequest($request);
         //si form soumis et valide
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-            //TODO:hydratation pour recherche
+
+            //hydratation pour recherche
+            $campus = $rechercheSortie->getCampus();
+            $text = $rechercheSortie->getText();
+            $dateDebut = $rechercheSortie->getDateDebut();
+            $dateFin = $rechercheSortie->getDateFin();
+            $organisateur =$rechercheSortie->isOrganisateur();
+            $inscrit = $rechercheSortie->isInscrit();
+            $nonInscrit = $rechercheSortie->isNonInscrit();
+            $sortiesPassees = $rechercheSortie->isSortiesPassees();
+
+
             //TODO:recherches persos
+            $sorties = $sortieRepository->findByPerso($campus,$text,$dateDebut,$dateFin,
+                $organisateur, $inscrit,$nonInscrit,$sortiesPassees);
             //TODO:return la recherche
-            return $this->redirectToRoute('accueil',[],Response::HTTP_SEE_OTHER);
+
         }
         return $this->render('main/accueil.html.twig',[
             "sorties"=>$sorties,

@@ -47,4 +47,53 @@ class SortieRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByPerso($campus,$text,$dateDebut,$dateFin,$organisateur,$inscrit,$nonInscrit,$sortiesPassees)
+    {
+        $qb =$this->createQueryBuilder('s');
+
+        //user qui fait la recherche
+        //$user ;
+
+        if($campus != null){
+            $qb ->where('s.campus = :campus')
+                ->setParameter('campus', $campus->getId());
+        }
+        if ($text != null) {
+            $qb->andWhere('s.nom LIKE :text')
+                ->setParameter('text', '%'.$text.'%');
+        }
+        if ($dateDebut != null) {
+            $qb->andWhere('date_heure_debut> :dateDebut')
+                ->setParameter('dateDebut', $dateDebut);
+        }
+        if ($dateFin != null) {
+            $qb->andWhere('date_limite_inscription< :dateFin')
+                ->setParameter('dateFin', $dateFin);
+        }
+        if ($organisateur) {
+            $qb ->andWhere('s.organisateur = :organisateur')
+                ->setParameter('organisateur',$organisateur->getId());
+        }
+        /*if($inscrit){
+            //TODO
+            $qb ->andWhere(':inscrit MEMBER OF s.users')
+                ->setParameter('inscrit', $user->getId());
+        }
+        if($nonInscrit){
+            //TODO
+            $qb ->andWhere(':inscrit NOT MEMBER OF s.users')
+                ->setParameter('inscrit', $user->getId());
+        }*/
+        if($sortiesPassees){
+            $qb ->andWhere('s.dateHeureDebut <= :now')
+                ->setParameter('now', date('Y-m-d H:i:s') );
+        }
+
+        $qb ->orderBy('date_limite_inscription','ASC');
+
+        $query = $qb->getQuery();
+        $query->setMaxResults(50);
+
+        return $query->execute();
+    }
 }

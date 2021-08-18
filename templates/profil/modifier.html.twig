@@ -5,13 +5,14 @@
 {% block body %}
 
 
-<div class="example-wrapper">
-    <h1>Modifier le profil de {{ user.pseudo }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/SymfonyProjects/sortirComv2/src/Controller/ProfilController.php'|file_link(0) }}">src/Controller/ProfilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/SymfonyProjects/sortirComv2/templates/profil/profil.html.twig'|file_link(0) }}">templates/profil/index.html.twig</a></code></li>
-    </ul>
+<div class="container py-5">
+    <h1>Modifies ton profil, {{ app.user.pseudo }}</h1>
 </div>
+<div class="col-4">
+    {{ form_start (formUser) }}
+    {{ form_widget(formUser) }}
+    {{ form_end (formUser) }}
+</div>
+
+
 {% endblock %}

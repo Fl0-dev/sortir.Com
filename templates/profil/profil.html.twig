@@ -5,13 +5,16 @@
 {% block body %}
 
 
-<div class="example-wrapper">
-    <h1>Profil de {{ user.pseudo }}! ✅</h1>
-
-
-    <ul>
-        <li></li>
-        <li></li>
-    </ul>
+<div class="container py-5">
+    <h1>{{ user.pseudo }}</h1>
+</div>
+<div>
+    <div>Prénom : {{ user.prenom }}</div>
+    <div>Nom : {{ user.nom }}</div>
+    <div>Téléphone : {{ user.telephone }}</div>
+    <div>Campus : {{ user.campus.nom }}</div>
+</div>
+<div class="py-5">
+    <a href="{{ path('user_modifier', { id : user.id }) }}" class="btn btn-outline-primary">Modifier</a>
 </div>
 {% endblock %}
