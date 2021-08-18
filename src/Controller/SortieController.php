@@ -34,7 +34,7 @@ class SortieController extends AbstractController
             $em->persist($sortie);
             $em->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('accueil');
 
         }
 

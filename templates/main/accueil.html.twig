@@ -3,7 +3,8 @@
 {% block title %}{{parent()}} | Accueil{% endblock %}
 
 {% block body %}
-    <h1>Listes des sorties</h1>
+    <div class="container">
+    <h1>Bienvenue {{ app.user.pseudo }}</h1>
 
     <section class="col-4">
         {{ form_start(sortieForm, {'action': path('recherche'), 'method': 'POST'}) }}
@@ -43,9 +44,8 @@
         {{ form_end(sortieForm) }}
     </section>
 
-    <br>
-    <section>
-        <h2>Listes :</h2>
+    <section id="liste">
+        <h2>Listes des sorties:</h2>
 
         {% for sortie in sorties %}
             <ul class="list-group"></ul>
@@ -74,7 +74,7 @@
                 <a href="#">Se désister</a>
             </li>
             <li class="list-group-item">
-                <a href="#">S'inscire</a>
+                <a href="#">S'inscrire</a>
             </li>
             <li class="list-group-item">
                 <a href="#">Publier</a>
@@ -90,5 +90,5 @@
         {% endfor %}
     </section>
     <a href="{{ path('sortie_ajouter') }}" class="btn btn-outline-primary">Créer une sortie</a>
-
+    </div>
 {% endblock %}

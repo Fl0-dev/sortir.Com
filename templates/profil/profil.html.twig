@@ -5,17 +5,25 @@
 {% block body %}
 
 
-<div class="container py-5">
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">détail profil</li>
+        </ol>
+    </nav>
+
     <h1>{{ user.pseudo }}</h1>
-</div>
-<div>
-    <div>Prénom : {{ user.prenom }}</div>
-    <div>Nom : {{ user.nom }}</div>
-    <div>Téléphone : {{ user.telephone }}</div>
-    <div>Campus : {{ user.campus.nom }}</div>
-</div>
-<div class="py-5">
-    <a href="{{ path('user_modifier', { id : user.id }) }}" class="btn btn-outline-primary">Modifier</a>
-    <a href="accueil" class="btn btn-outline-primary">Accueil</a>
+
+
+    <div>
+        <div>Prénom : {{ user.prenom }}</div>
+        <div>Nom : {{ user.nom }}</div>
+        <div>Téléphone : {{ user.telephone }}</div>
+        <div>Campus : {{ user.campus.nom }}</div>
+    </div>
+    <div class="py-5">
+        <a href="{{ path('user_modifier', { id : user.id }) }}" class="btn btn-outline-primary">Modifier</a>
+    </div>
 </div>
 {% endblock %}
