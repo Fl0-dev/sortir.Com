@@ -18,41 +18,43 @@
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('img/favicon.png') }}" alt="home !"> Sortie.com</a>
+        {#  <div class="container">#}
+        <a class="navbar-brand" href="{{ path('accueil') }}"><img src="{{ asset('img/favicon.png') }}" alt="home !"> Sortie.com</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-
+                {% set chemin = app.request.get('_route') %}
                 {% if app.user %}
-                    <li class="nav-item">
+                    <li class="nav-item {% if chemin  == 'accueil' %}active{% endif %}">
                         <a class="nav-link" href="{{ path('accueil') }}">Accueil</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if chemin  == 'user_profil' %}active{% endif %}">
                         <a class="nav-link" href="{{ path('user_profil', {id:app.user.id}) }}">Mon profil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Deconnection</a>
+                    <li class="nav-item {% if chemin  == 'app_logout' %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                     </li>
                 {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">Connection</a>
+                    <li class="nav-item {% if chemin  == 'app_login' %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
                     </li>
                 {% endif %}
                 {% if is_granted("ROLE_ADMIN") %}
-                    <li class="nav-item">
+                    <li class="nav-item {% if chemin  == 'app_register' %}active{% endif %}">
                         <a class="nav-link" href="{{path('app_register') }}">Ajouter un compte</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if chemin  == '#' %}active{% endif %}">
                         <a class="nav-link" href="#">Villes</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if chemin  == '#' %}active{% endif %}">
                         <a class="nav-link" href="#">Campus</a>
                     </li>
                 {% endif %}
             </ul>
         </div>
+        {# </div>  #}
     </nav>
 </header>
 {# read and display all flash messages #}

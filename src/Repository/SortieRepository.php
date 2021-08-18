@@ -47,12 +47,12 @@ class SortieRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findByPerso($campus,$text,$dateDebut,$dateFin,$organisateur,$inscrit,$nonInscrit,$sortiesPassees)
+    public function findByPerso($campus,$text,$dateDebut,$dateFin,$organise,$inscrit,$nonInscrit,$sortiesPassees,$user )
     {
         $qb =$this->createQueryBuilder('s');
 
         //user qui fait la recherche
-        //$user ;
+
 
         if($campus != null){
             $qb ->where('s.campus = :campus')
@@ -63,33 +63,35 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('text', '%'.$text.'%');
         }
         if ($dateDebut != null) {
-            $qb->andWhere('date_heure_debut> :dateDebut')
+            $qb->andWhere('s.dateHeureDebut > :dateDebut')
+
                 ->setParameter('dateDebut', $dateDebut);
         }
         if ($dateFin != null) {
-            $qb->andWhere('date_limite_inscription< :dateFin')
+            $qb->andWhere('s.dateHeureDebut < :dateFin')
                 ->setParameter('dateFin', $dateFin);
         }
-        if ($organisateur) {
+        if ($organise) {
+
             $qb ->andWhere('s.organisateur = :organisateur')
-                ->setParameter('organisateur',$organisateur->getId());
+                ->setParameter('organisateur',$user);
         }
-        /*if($inscrit){
+        if($inscrit){
             //TODO
             $qb ->andWhere(':inscrit MEMBER OF s.users')
-                ->setParameter('inscrit', $user->getId());
+                ->setParameter('inscrit', $user);
         }
         if($nonInscrit){
             //TODO
             $qb ->andWhere(':inscrit NOT MEMBER OF s.users')
-                ->setParameter('inscrit', $user->getId());
-        }*/
+                ->setParameter('inscrit', $user);
+        }
         if($sortiesPassees){
             $qb ->andWhere('s.dateHeureDebut <= :now')
                 ->setParameter('now', date('Y-m-d H:i:s') );
         }
 
-        $qb ->orderBy('date_limite_inscription','ASC');
+
 
         $query = $qb->getQuery();
         $query->setMaxResults(50);

@@ -29,13 +29,17 @@ class RechercheSortieType extends AbstractType
                 'widget'=>'single_text',
                 'label'=>'Entre',
                 'required'=>false,
+                'empty_data' => '',
+                'mapped'=>false,
             ])
             ->add('dateFin',DateTimeType::class,[
                 'widget'=>'single_text',
                 'label'=>'et',
                 'required'=>false,
+                'empty_data' => '',
+                'mapped'=>false,
             ])
-            ->add('organisateur',CheckboxType::class,[
+            ->add('organise',CheckboxType::class,[
                 'label'=>"Sorties dont je suis l'organisteur/trice",
                 'required'=>false,
 

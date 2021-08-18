@@ -7,24 +7,24 @@ use phpDocumentor\Reflection\Types\Boolean;
 class RechercheSortie{
 
     private Campus $campus;
-    private string $text;
-    private Datetime $dateDebut;
-    private Datetime $dateFin;
-    private  $organisateur;
+    private ?string $text =null;
+    private ?Datetime $dateDebut;
+    private ?Datetime $dateFin;
+    private  $organise;
     private  $inscrit;
     private  $nonInscrit;
     private  $sortiesPassees;
 
 
-    public function isOrganisateur(): ?bool
+    public function isOrganise(): ?bool
     {
-        return $this->organisateur;
+        return $this->organise;
     }
 
 
-    public function setOrganisateur(bool $organisateur): self
+    public function setOrganise(bool $organise): self
     {
-        $this->organisateur = $organisateur;
+        $this->organise = $organise;
         return $this;
     }
 
