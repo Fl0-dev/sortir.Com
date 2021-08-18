@@ -6,39 +6,35 @@
 <div class="container">
     <h1>Bienvenue {{ app.user.pseudo }}</h1>
 
-    <section class="col-4">
+    <section >
         {{ form_start(sortieForm, {'action': path('recherche'), 'method': 'POST'}) }}
-        <div class="group">
-            {{ form_row(sortieForm.campus) }}
-
+        <div class="row">
+            <div class="group col-6">
+                {{ form_row(sortieForm.campus) }}
+            </div>
+            <div class="group col-6">
+                {{ form_row(sortieForm.text) }}
+            </div>
+            <div class="group col-6">
+                {{ form_row(sortieForm.dateDebut) }}
+            </div>
+            <div class="group col-6">
+                {{ form_row(sortieForm.dateFin) }}
+            </div>
         </div>
-        <div class="group">
-            {{ form_row(sortieForm.text) }}
-
-        </div>
-        <div class="group">
-            {{ form_row(sortieForm.dateDebut) }}
-
-        </div>
-        <div class="group">
-            {{ form_row(sortieForm.dateFin) }}
-
-        </div>
-        <div class="group">
-            {{ form_row(sortieForm.organise) }}
-
-        </div>
-        <div class="group">
-            {{ form_row(sortieForm.inscrit) }}
-
-        </div>
-        <div class="group">
-            {{ form_row(sortieForm.nonInscrit) }}
-
-        </div>
-        <div class="group">
-            {{ form_row(sortieForm.sortiesPassees) }}
-
+        <div class="row">
+            <div class="group col-6">
+                {{ form_row(sortieForm.organise) }}
+            </div>
+            <div class="group col-6">
+                {{ form_row(sortieForm.inscrit) }}
+            </div>
+            <div class="group col-6">
+                {{ form_row(sortieForm.sortiesPassees) }}
+            </div>
+            <div class="group col-6">
+                {{ form_row(sortieForm.nonInscrit) }}
+            </div>
         </div>
         <button type="submit" class="btn">Recherche</button>
         {{ form_end(sortieForm) }}
@@ -48,46 +44,24 @@
         <h2>Listes des sorties:</h2>
 
         {% for sortie in sorties %}
-            <ul class="list-group"></ul>
-                <li class="list-group-item">
-                    {{ sortie.nom }}
-                </li>
-            <li class="list-group-item">
-                {{ sortie.dateHeureDebut |date("d/m/Y h:m")}}
-            </li>
-            <li class="list-group-item">
-                {{ sortie.datelimiteInscription |date("d/m/Y h:m")}}
-            </li>
-            <li class="list-group-item">
-                {{ sortie.users|length }}/{{ sortie.nbInscriptionsMax }}
-            </li>
-            <li class="list-group-item">
-                {{ sortie.etat.libelle }}
-            </li>
-            <li class="list-group-item">
-                {{ sortie.organisateur.pseudo }}
-            </li>
-            <li class="list-group-item">
-                <a href="{{ path('sortie_afficher',{id:sortie.id}) }}">Afficher</a>
-            </li>
-            <li class="list-group-item">
-                <a href="#">Se désister</a>
-            </li>
-            <li class="list-group-item">
-                <a href="#">S'inscrire</a>
-            </li>
-            {% if app.user==sortie.organisateur%}
-            <li class="list-group-item">
-                <a href="#">Publier</a>
-            </li>
-            <li class="list-group-item">
-                <a href="{{ path('sortie_annuler',{id:sortie.id}) }}">Annuler</a>
-            </li>
+            <div class="card" >
+                <div class="card-body">
+                    <h5 class="card-title">{{ sortie.nom }}</h5>
+                    <h6 class="card-title">{{ sortie.organisateur.pseudo }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ sortie.dateHeureDebut |date("d/m/Y h:m")}}</h6>
+                    <p class="card-text">Places restantes : {{ sortie.users|length }}/{{ sortie.nbInscriptionsMax }}</p>
+                    <p class="card-text">Etat : {{ sortie.etat.libelle }}</p>
+                    <a href="{{ path('sortie_afficher',{id:sortie.id}) }}" class="card-link">Afficher</a>
+                    <a href="#" class="card-link">Se désister</a>
+                    <a href="#" class="card-link">S'inscrire</a>
+                    {% if app.user==sortie.organisateur%}
+                    <a href="#" class="card-link">Publier</a>
+                    <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="card-link">Annuler</a>
+                        <a href="{{ path('sortie_modifier',{id:sortie.id}) }}" class="card-link">Modifier sortie</a>
+                    {% endif %}
+                </div>
+            </div>
 
-            <li class="list-group-item">
-                <a href="{{ path('sortie_modifier',{id:sortie.id}) }}">Modifier sortie</a>
-            </li>
-            {% endif %}
             <br>
         {% endfor %}
     </section>
