@@ -79,13 +79,14 @@
             <li class="list-group-item">
                 <a href="#">Publier</a>
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item" >
                 <a href="{{ path('sortie_annuler',{id:sortie.id}) }}">Annuler</a>
             </li>
             </li>
             <li class="list-group-item">
                 <a href="{{ path('sortie_modifier',{id:sortie.id}) }}">Modifier sortie</a>
             </li>
+
             <br>
         {% endfor %}
     </section>
