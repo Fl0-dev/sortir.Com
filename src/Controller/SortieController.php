@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Entity\User;
 use App\Form\SortieFormType;
+
 use App\Repository\SortieRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,13 +22,18 @@ class SortieController extends AbstractController
 {
 
     /**
-     * @Route("/afficher", name = "afficher")
+     * @Route("/afficher/{id}", name = "afficher")
      */
 
 
-    public function index() : Response
+    public function afficher(Sortie $sortie) : Response
+
     {
-        return $this->render('sortie/afficher.html.twig');
+
+        return $this->render('sortie/afficher.html.twig', [
+            "sortie"=>$sortie
+        ]);
+
 
 
     }
@@ -84,10 +90,12 @@ class SortieController extends AbstractController
 
     public function annuler(Sortie $sortie, EntityManagerInterface $em) : Response
     {
+
         $em->remove($sortie);
         $em->flush();
         return $this->redirectToRoute('accueil');
-    }
+        }
+
 
 
 

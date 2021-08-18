@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter une sortie{% endblock %}
+{% block title %}Détails de la sortie{% endblock %}
 
 {% block body %}
 <style>
@@ -9,32 +9,17 @@
 </style>
 
 <div class="container col-4">
-    <h1>Afficher une sortie</h1>
-    <table>
-        <tbody>
-        {% for s in sortie %}
-        <tr>
-            <td> {{ s.nom }}</td>
-            <td> {{ s.dateHeureDebut|date('d/m/Y') }}</td>
-            <td> {{ s.duree }}</td>
-            <td> {{ s.dateLimiteInscription|date('d/m/Y') }}</td>
-            <td> {{ s.nbInscriptionsMax }}</td>
-            <td> {{ s.infosSortie }}</td>
-            <td> {{ s.lieu }}</td>
-            <td> {{ s.etat }}</td>
-            <td> {{ s.campus }}</td>
-            <td> {{ s.users }}</td>
-            <td> {{ s.organisateur }}</td>
-        </tr>
-        </tbody>
-        {% endfor %}
+    <h1>Détails de la sortie :</h1>
+
+    <div> Nom de la sortie : {{ sortie.nom }}</div>
+
+    <div> Nombre d'inscription maxi : {{ sortie.nbInscriptionsMax }}</div>
+    <div> Infos sortie : {{ sortie.infosSortie }}</div>
 
 
 
 
-
-    </table>
-    <button type="button"  class="btn btn-sucess" href="accueil.html.twig">
+    <button type="submit"  class="btn btn-sucess" href="{{ path('accueil')}}">
         retour
     </button>
 
