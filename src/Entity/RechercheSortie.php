@@ -10,7 +10,7 @@ class RechercheSortie{
     private ?string $text =null;
     private ?Datetime $dateDebut;
     private ?Datetime $dateFin;
-    private  $organisateur;
+    private  $organise;
     private  $inscrit;
     private  $nonInscrit;
     private  $sortiesPassees;
@@ -18,13 +18,13 @@ class RechercheSortie{
 
     public function isOrganisateur(): ?bool
     {
-        return $this->organisateur;
+        return $this->organise;
     }
 
 
-    public function setOrganisateur(bool $organisateur): self
+    public function setOrganise(bool $organise): self
     {
-        $this->organisateur = $organisateur;
+        $this->organise = $organise;
         return $this;
     }
 
