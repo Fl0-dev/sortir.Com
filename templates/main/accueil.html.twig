@@ -76,16 +76,18 @@
             <li class="list-group-item">
                 <a href="#">S'inscrire</a>
             </li>
+            {% if app.user==sortie.organisateur%}
             <li class="list-group-item">
                 <a href="#">Publier</a>
             </li>
             <li class="list-group-item">
                 <a href="{{ path('sortie_annuler',{id:sortie.id}) }}">Annuler</a>
             </li>
-            </li>
+
             <li class="list-group-item">
                 <a href="{{ path('sortie_modifier',{id:sortie.id}) }}">Modifier sortie</a>
             </li>
+            {% endif %}
             <br>
         {% endfor %}
     </section>
