@@ -77,12 +77,10 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('organisateur',$user);
         }
         if($inscrit){
-            //TODO
             $qb ->andWhere(':inscrit MEMBER OF s.users')
                 ->setParameter('inscrit', $user);
         }
         if($nonInscrit){
-            //TODO
             $qb ->andWhere(':inscrit NOT MEMBER OF s.users')
                 ->setParameter('inscrit', $user);
         }

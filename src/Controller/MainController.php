@@ -65,7 +65,7 @@ class MainController extends AbstractController
             //traitement des dates si null
             if($dateDebut==null){
                 //date du jour
-                $rechercheSortie->setDateDebut(new \DateTime());
+                $rechercheSortie->setDateDebut((new \DateTime())->modify('-1 month'));
             }
             if($dateFin==null){
                 //date du jour + 1 mois
