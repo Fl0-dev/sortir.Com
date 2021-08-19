@@ -18,7 +18,7 @@
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        {#  <div class="container">#}
+
         <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('img/favicon.png') }}" alt="home !"> Sortie.com</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -55,23 +55,25 @@
 
             </ul>
         </div>
-        {# </div>  #}
+
     </nav>
 </header>
-{# read and display all flash messages #}
-{% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="flash flash-{{ label }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endfor %}
+
 
 <main>
     <div class="container-fluid text-right">
     <span>Date du jour : {{ "now"|date('d-m-Y') }}</span>
     </div>
     <section class="container">
+        {# read and display all flash messages #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
     </section>
 </main>
