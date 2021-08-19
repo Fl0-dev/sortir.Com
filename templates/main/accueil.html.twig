@@ -48,11 +48,12 @@
             <div class="card col-xl-6" >
                 <div class="card-body">
                     <h5 class="card-title">{{ sortie.nom }}</h5>
+                    <a href="{{ path('sortie_afficher',{id:sortie.id}) }}" class="card-link">Afficher</a>
                     <h6 class="card-title">{{ sortie.organisateur.pseudo }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">{{ sortie.dateHeureDebut |date("d/m/Y h:m")}}</h6>
                     <p class="card-text">Places restantes : {{ sortie.users|length }}/{{ sortie.nbInscriptionsMax }}</p>
                     <p class="card-text">Etat : {{ sortie.etat.libelle }}</p>
-                    <a href="{{ path('sortie_afficher',{id:sortie.id}) }}" class="card-link">Afficher</a>
+
 
                     {% if app.user in sortie.users %} {#si inscrit#}
                         <p>Inscrit/e <a href="#" class="card-link">Se désister</a></p>
