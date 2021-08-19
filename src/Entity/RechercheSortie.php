@@ -3,13 +3,29 @@ namespace App\Entity;
 
 use DateTime;
 use phpDocumentor\Reflection\Types\Boolean;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class RechercheSortie{
 
+    /**
+     * @var Campus
+     */
     private Campus $campus;
+    /**
+     * @var string|null
+     */
     private ?string $text =null;
+    /**
+     * @var DateTime|null
+     */
     private ?Datetime $dateDebut;
+    /**
+     * @Assert\Expression("this.getDateDebut() > this.getDateFin()",
+     *     message="Attention la date de du début de recherche doit être antérieure à celle de fin")
+     * @var DateTime|null
+     */
     private ?Datetime $dateFin;
+
     private  $organise;
     private  $inscrit;
     private  $nonInscrit;

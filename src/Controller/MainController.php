@@ -6,6 +6,7 @@ use App\Entity\RechercheSortie;
 use App\Entity\Sortie;
 use App\Form\RechercheSortieType;
 use App\Repository\SortieRepository;
+use App\Services\Verification;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
@@ -28,89 +29,93 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil", name="accueil")
      */
-    public function list(SortieRepository $sortieRepository):Response
+    public function list(SortieRepository $sortieRepository): Response
     {
         $rechercheSortie = new RechercheSortie();
         //liste des sorties sans recherche
-        $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"ASC"]);
+        $sorties = $sortieRepository->findBy([], ["dateHeureDebut" => "ASC"]);
         //mise en route du du formulaire de recherche
-        $sortieForm = $this->createForm(RechercheSortieType::class,$rechercheSortie);
+        $sortieForm = $this->createForm(RechercheSortieType::class, $rechercheSortie);
 
-        return $this->render('main/accueil.html.twig',[
-            "sorties"=>$sorties,
-            "sortieForm"=>$sortieForm->createView(),
+        return $this->render('main/accueil.html.twig', [
+            "sorties" => $sorties,
+            "sortieForm" => $sortieForm->createView(),
         ]);
     }
 
     /**
      * @Route("/accueil/recherche", name="recherche")
      */
-    public function recherche(SortieRepository $sortieRepository, Request $request):Response
+    public function recherche(SortieRepository $sortieRepository, Request $request): Response
     {
         //initialisation de l'instance des resultats du form
         $rechercheSortie = new RechercheSortie();
         //récupération de l'user connecté
         $user = $this->getUser();
         //mise en route du du formulaire de recherche
-        $sortieForm = $this->createForm(RechercheSortieType::class,$rechercheSortie);
+        $sortieForm = $this->createForm(RechercheSortieType::class, $rechercheSortie);
         // retour de la réponse
         $sortieForm->handleRequest($request);
         //si form soumis et valide
 
-        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
             //récupération pour recherche
             $campus = $rechercheSortie->getCampus();
             $text = $rechercheSortie->getText();
-            $organise =$rechercheSortie->isOrganise();
+            $organise = $rechercheSortie->isOrganise();
             $inscrit = $rechercheSortie->isInscrit();
             $nonInscrit = $rechercheSortie->isNonInscrit();
             $sortiesPassees = $rechercheSortie->isSortiesPassees();
             //récupération des champs mapped=>false
-            $dateDebut= $sortieForm->get('dateDebut')->getData();
-            $dateFin= $sortieForm->get('dateFin')->getData();
+            $dateDebut = $sortieForm->get('dateDebut')->getData();
+            $dateFin = $sortieForm->get('dateFin')->getData();
             //traitement des dates si null
 
-            if($dateDebut==null){
+            if ($dateDebut == null) {
                 //date du jour
-                $dateDebut= ((new \DateTime())->modify('-1 month'));
+                $dateDebut = ((new \DateTime())->modify('-1 month'));
             }
-            if($dateFin==null){
+            if ($dateFin == null) {
                 //date du jour + 1 mois
-                $dateFin=((new \DateTime())->modify('+1 month'));
+                $dateFin = ((new \DateTime())->modify('+1 month'));
             }
 
             //utilisation d'une fonction perso pour récupérer les sorties en fonction des données de recherche
-            $sorties = $sortieRepository->findByPerso($campus,$text,$dateDebut, $dateFin,
-                $organise, $inscrit,$nonInscrit,$sortiesPassees,$user);
-        }else{
+            $sorties = $sortieRepository->findByPerso($campus, $text, $dateDebut, $dateFin,
+                $organise, $inscrit, $nonInscrit, $sortiesPassees, $user);
+        } else {
             //liste des sorties sans recherche
-            $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"DESC"]);
+            $sorties = $sortieRepository->findBy([], ["dateHeureDebut" => "DESC"]);
         }
-        return $this->render('main/accueil.html.twig',[
-            "sorties"=>$sorties,
-            "sortieForm"=>$sortieForm->createView(),
+        return $this->render('main/accueil.html.twig', [
+            "sorties" => $sorties,
+            "sortieForm" => $sortieForm->createView(),
         ]);
     }
 
     /**
      * @Route("/accueil/inscription/{id}", name="inscription")
      */
-    public function inscription(Sortie $sortie, EntityManagerInterface $entityManager):Response
+    public function inscription(Sortie $sortie, EntityManagerInterface $entityManager,Verification $verification): Response
     {
         //recupération de l'User connecté
         $user = $this->getUser();
+        $inscrit =$verification->verifUserInscrit($sortie,$user);
 
-        //vérifier si sortie est à l'état : ouverte
-        if (($sortie->getEtat()->getId() == '2')&&($sortie->getNbInscriptionsMax()>count($sortie->getUsers()))){
+        //vérifier si sortie est à l'état : ouverte, si il y a encore de la place et si pas déjà inscrit
+        if (($sortie->getEtat()->getId() == '2') && ($sortie->getNbInscriptionsMax() > count($sortie->getUsers()))&&!$inscrit) {
             //ajout du user dans la sortie
             $sortie->addUser($user);
             $entityManager->persist($user);
             $entityManager->flush();
-            }
-            $this->addFlash('success','Tu es inscrit pour la sortie : '.$sortie->getNom());
-            return $this->redirectToRoute('accueil');
+            $this->addFlash('success', 'Tu es inscrit pour la sortie : ' . $sortie->getNom());
         }
+        else{
+            $this->addFlash('danger', "Tu n'as pas réussi à t'inscrire pour la sortie : " . $sortie->getNom());
+        }
+        return $this->redirectToRoute('accueil');
+    }
 
     /**
      * @Route("/accueil/desinscription/{id}",name="desinscription")
@@ -118,19 +123,22 @@ class MainController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function desincription(Sortie $sortie, EntityManagerInterface $entityManager):Response
+    public function desincription(Sortie $sortie, EntityManagerInterface $entityManager,Verification $verification):Response
     {
         //recupération de l'User connecté
         $user = $this->getUser();
+        $inscrit =$verification->verifUserInscrit($sortie,$user);
 
-        $sortie->removeUser($user);
-        $entityManager->flush();
-
-        $this->addFlash('success','Tu as bien annulé ton inscription à la sortie : '.$sortie->getNom());
+        //vérifier si sortie toujours ouverte et si déjà inscrit
+        if ($sortie->getEtat()->getId() == '2'&&$inscrit) {
+            $sortie->removeUser($user);
+            $entityManager->flush();
+            $this->addFlash('success', 'Tu as bien annulé ton inscription à la sortie : ' . $sortie->getNom());
+        }
+        else{
+            $this->addFlash('danger', "Tu n'as pas réussi à annuler ton inscription pour la sortie : " . $sortie->getNom());
+        }
         return $this->redirectToRoute('accueil');
     }
-
-
-
 
 }
