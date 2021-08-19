@@ -53,9 +53,13 @@ class SortieController extends AbstractController
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($this.date_diff())
+
             $em->persist($sortie);
             $em->flush();
 
+            $this->addFlash('sucess', 'Sortie crée !');
             return $this->redirectToRoute('accueil');
 
         }
