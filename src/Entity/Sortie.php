@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -26,21 +27,30 @@ class Sortie
 
     /**
      * @ORM\Column(type="datetime")
+
      */
+
     private $dateHeureDebut;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive
      */
     private $duree;
 
     /**
      * @ORM\Column(type="datetime")
+     * * @Assert\Expression(
+     *     "this.getdateHeureDebut() > this.getdateLimiteInscription()",
+     *     message="La date de fin d'inscription doit être antérieure à la date du début de la sortie"
+     * )
+     *
      */
     private $dateLimiteInscription;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
      */
     private $nbInscriptionsMax;
 
