@@ -6,6 +6,10 @@ use App\Entity\RechercheSortie;
 use App\Entity\Sortie;
 use App\Form\RechercheSortieType;
 use App\Repository\SortieRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -92,18 +96,23 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil/inscription/{id}", name="inscription")
      */
-    public function inscription(Sortie $sortie):Response
+    public function inscription(Sortie $sortie, EntityManagerInterface $entityManager):Response
     {
         //recupération de l'User connecté
         $user = $this->getUser();
 
         //vérifier si sortie est à l'état : ouverte
-        if ($sortie->getEtat()->getLibelle() !== 'Ouverte')
-            $this->addFlash('danger','La sortie est ');
+        if (($sortie->getEtat()->getId() == '2')&&($sortie->getNbInscriptionsMax()>count($sortie->getUsers()))){
+            $sortie->addUser($user);
+            $entityManager->persist($user);
+            $entityManager->flush();
+            }
+            $this->addFlash('success','Tu es inscrit pour la sortie : '.$sortie->getNom());
+            return $this->redirectToRoute('accueil');
+        }
 
 
 
 
-        return $this->redirectToRoute('accueil');
-    }
+
 }
