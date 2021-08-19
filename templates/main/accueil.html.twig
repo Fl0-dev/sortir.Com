@@ -48,17 +48,32 @@
             <div class="card col-xl-6" >
                 <div class="card-body">
                     <h5 class="card-title">{{ sortie.nom }}</h5>
+                    <a href="{{ path('sortie_afficher',{id:sortie.id}) }}" class="card-link">Afficher</a>
                     <h6 class="card-title">{{ sortie.organisateur.pseudo }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">{{ sortie.dateHeureDebut |date("d/m/Y h:m")}}</h6>
                     <p class="card-text">Places restantes : {{ sortie.users|length }}/{{ sortie.nbInscriptionsMax }}</p>
                     <p class="card-text">Etat : {{ sortie.etat.libelle }}</p>
-                    <a href="{{ path('sortie_afficher',{id:sortie.id}) }}" class="card-link">Afficher</a>
-                    <a href="#" class="card-link">Se désister</a>
-                    <a href="#" class="card-link">S'inscrire</a>
-                    {% if app.user==sortie.organisateur%}
-                    <a href="#" class="card-link">Publier</a>
-                    <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="card-link">Annuler</a>
-                        <a href="{{ path('sortie_modifier',{id:sortie.id}) }}" class="card-link">Modifier sortie</a>
+
+
+                    {% if app.user in sortie.users %} {#si inscrit#}
+                        <p>Inscrit/e <a href="#" class="card-link">Se désister</a></p>
+                    {% endif %}
+
+                    {% if sortie.etat.id==2 and app.user not in sortie.users %} {# si sortie ouverte et pas déjà inscrit#}
+                        <a href="{{ path('inscription',{id:sortie.id})}}" class="card-link">S'inscrire</a>
+                    {% endif %}
+
+                    {% if app.user==sortie.organisateur%} {# si organisateur#}
+
+                        {% if sortie.etat.id== 1%} {# si créée#}
+                            <a href="#" class="card-link">Publier</a>
+                            <a href="{{ path('sortie_modifier',{id:sortie.id}) }}" class="card-link">Modifier sortie</a>
+                        {% endif %}
+
+                        {% if sortie.etat.id==2 %} {# si ouverte#}
+                            <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="card-link">Annuler</a>
+                        {% endif %}
+
                     {% endif %}
                 </div>
             </div>

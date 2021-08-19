@@ -3,8 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\RechercheSortie;
+use App\Entity\Sortie;
 use App\Form\RechercheSortieType;
 use App\Repository\SortieRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,13 +80,9 @@ class MainController extends AbstractController
                 $dateFin=((new \DateTime())->modify('+1 month'));
             }
 
-
-
             //utilisation d'une fonction perso pour récupérer les sorties en fonction des données de recherche
             $sorties = $sortieRepository->findByPerso($campus,$text,$dateDebut, $dateFin,
                 $organise, $inscrit,$nonInscrit,$sortiesPassees,$user);
-
-
         }else{
             //liste des sorties sans recherche
             $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"DESC"]);
@@ -91,5 +92,28 @@ class MainController extends AbstractController
             "sortieForm"=>$sortieForm->createView(),
         ]);
     }
+
+    /**
+     * @Route("/accueil/inscription/{id}", name="inscription")
+     */
+    public function inscription(Sortie $sortie, EntityManagerInterface $entityManager):Response
+    {
+        //recupération de l'User connecté
+        $user = $this->getUser();
+
+        //vérifier si sortie est à l'état : ouverte
+        if (($sortie->getEtat()->getId() == '2')&&($sortie->getNbInscriptionsMax()>count($sortie->getUsers()))){
+            $sortie->addUser($user);
+            $entityManager->persist($user);
+            $entityManager->flush();
+            }
+            $this->addFlash('success','Tu es inscrit pour la sortie : '.$sortie->getNom());
+            return $this->redirectToRoute('accueil');
+        }
+
+
+
+
+
 
 }
