@@ -52,6 +52,7 @@
                         <a class="nav-link" href="#">Campus</a>
                     </li>
                 {% endif %}
+
             </ul>
         </div>
         {# </div>  #}
@@ -67,13 +68,16 @@
 {% endfor %}
 
 <main>
+    <div class="container-fluid text-right">
+    <span>Date du jour : {{ "now"|date('d-m-Y') }}</span>
+    </div>
     <section class="container">
         {% block body %}{% endblock %}
     </section>
 </main>
 <!--
 <footer class="py-5 bg-dark">
-    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Sortie.com {{ "now"|date('Y') }}</p></div>
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Sortie.com {{ "now"|date('d-m-Y') }}</p></div>
 </footer>
 -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
