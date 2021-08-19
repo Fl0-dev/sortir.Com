@@ -8,20 +8,38 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+
 <div class="container col-4">
     <h1>Détails de la sortie :</h1>
 
     <div> Nom de la sortie : {{ sortie.nom }}</div>
-
+    <br>
     <div> Nombre d'inscription maxi : {{ sortie.nbInscriptionsMax }}</div>
-    <div> Infos sortie : {{ sortie.infosSortie }}</div>
+    <br>
+    <div> Campus : {{ sortie.campus.nom }}</div>
+    <br>
+    <div> Date et heure de sortie : {{ sortie.dateHeureDebut|date("d-m-Y") }}</div>
+    <br>
+    <div> Date limite d'inscription : {{ sortie.infosSortie|date("d-m-Y") }}</div>
+    <br>
+    <div> Nombres de places : {{ sortie.nbInscriptionsMax }}</div>
+    <br>
+     <div> Rue : {{ sortie.lieu.rue }}</div>
+    <br>
+     <div> Code postal : {{ sortie.lieu.ville.codePostal }}</div>
+    {#<div> latitude : {{ sortie.infosSortie }}</div>#}
+    {#<div> longitude : {{ sortie.infosSortie }}</div>#}
+    <br>
+
+
+    </div>
 
 
 
 
-    <button type="submit"  class="btn btn-sucess" href="{{ path('accueil')}}">
+    <button type="button"  class="btn btn-sucess"> <a href="{{ path('accueil')}}">
         retour
-    </button>
+        </a></button>
 
 
 
