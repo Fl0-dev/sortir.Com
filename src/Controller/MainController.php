@@ -103,6 +103,7 @@ class MainController extends AbstractController
 
         //vérifier si sortie est à l'état : ouverte
         if (($sortie->getEtat()->getId() == '2')&&($sortie->getNbInscriptionsMax()>count($sortie->getUsers()))){
+            //ajout du user dans la sortie
             $sortie->addUser($user);
             $entityManager->persist($user);
             $entityManager->flush();
@@ -111,7 +112,23 @@ class MainController extends AbstractController
             return $this->redirectToRoute('accueil');
         }
 
+    /**
+     * @Route("/accueil/desinscription/{id}",name="desinscription")
+     * @param Sortie $sortie
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function desincription(Sortie $sortie, EntityManagerInterface $entityManager):Response
+    {
+        //recupération de l'User connecté
+        $user = $this->getUser();
 
+        $sortie->removeUser($user);
+        $entityManager->flush();
+
+        $this->addFlash('success','Tu as bien annulé ton inscription à la sortie : '.$sortie->getNom());
+        return $this->redirectToRoute('accueil');
+    }
 
 
 
