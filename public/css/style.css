@@ -62,3 +62,34 @@ h2
     box-shadow: 2px 2px 10px rgba(0,0,0,.2);
     padding: .5rem;
 }
+
+/*------------------------ Détail sortie ------------------------------*/
+
+#bloc-detail-sortie {
+    border : 1px solid #ccc;
+    border-radius: .5rem;
+    box-shadow: 2px 2px 10px rgba(0,0,0,.2);
+    padding: .5rem;
+
+}
+
+#bloc-detail-sortie div {
+    margin : 0 .5rem;
+    padding: 0 1rem;
+}
+
+.grid_2 div {
+    margin : 0 5rem;
+}
+
+.grid_2 {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 2vw;
+    padding: 0 2rem;
+}
+
+.font {
+    font-weight: bold;
+
+}
