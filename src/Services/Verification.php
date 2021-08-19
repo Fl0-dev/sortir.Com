@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Entity\Sortie;
 use App\Entity\User;
+use App\Repository\SortieRepository;
 
 class Verification
 {
@@ -27,10 +28,24 @@ class Verification
     }
 
     /**
-     * verifie l'état des
-     * @param $sortie
+     * verifie l'état des sortie par rapport aux dates et le change si besoin
+     * @param SortieRepository $sortieRepository
      */
-    public function verifEtatSortie($sortie){
+    public function verifEtatSortie(SortieRepository $sortieRepository){
+
+        //si etat ouvert ou cloturé :
+
+        //vérification par rapport à aujourd'hui
+
+        //si date = aujourd'hui
+
+            //si heure >heure de début
+                //calcul du temps avant fin d'activité
+
+                // si inférieure ->état débuté
+
+
+
 
     }
 }
