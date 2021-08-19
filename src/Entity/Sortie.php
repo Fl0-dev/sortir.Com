@@ -27,8 +27,9 @@ class Sortie
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Type("DateTime")
+
      */
+
     private $dateHeureDebut;
 
     /**
@@ -39,6 +40,11 @@ class Sortie
 
     /**
      * @ORM\Column(type="datetime")
+     * * @Assert\Expression(
+     *     "this.getdateHeureDebut() > this.getdateLimiteInscription()",
+     *     message="La date de fin d'inscription doit être antérieure à la date du début de la sortie"
+     * )
+     *
      */
     private $dateLimiteInscription;
 
