@@ -33,7 +33,7 @@ class Verification
      * @param SortieRepository $sortieRepository
      * @param EntityManagerInterface $entityManager
      */
-    public function verifEtatSortie(SortieRepository $sortieRepository,EntityManagerInterface $entityManager,
+    public function gestionEtatSorties(SortieRepository $sortieRepository,EntityManagerInterface $entityManager,
             EtatRepository $etatRepository){
 
         //date du jour
@@ -45,10 +45,12 @@ class Verification
         $etatCloture = $etatRepository->find(3);
         $etatEnCours = $etatRepository->find(4);
         $etatPassee = $etatRepository->find(5);
+        $etatArchivee = $etatRepository->find(7);
 
 
         //pour chaque sortie
         foreach ($sorties as $sortie){
+            $dateFinsortie = ($sortie->getDateHeureDebut())->add(new DateInterval('PT'.$sortie->getDuree(). 'M'));
             //si état ouvert
             if ($sortie->getEtat()->getId()==2) {
                 //si date d'insciption > date d'aujourd'hui
@@ -60,7 +62,7 @@ class Verification
                     //sortie débutée
                     $sortie->setEtat($etatEnCours);
                     //calcul de la fin de la sortie
-                    $dateFinsortie = ($sortie->getDateHeureDebut())->add(new DateInterval('PT'.$sortie->getDuree(). 'M'));
+
                     //si fin de sortie > à aujourd'hui
                     if ($dateFinsortie>$today){
                         //sortie passée
@@ -69,7 +71,13 @@ class Verification
                 }
 
             }
-        }   //if ($dateFinsortie)
+            //pour les sorties qui se sont finit depuis 30 jours minimum
+            $dateFinSortiePlusTrente = $dateFinsortie->modify('+ 1 month');
+            if ($dateFinSortiePlusTrente > $today){
+                $sortie->setEtat($etatArchivee);
+            }
+        }
+
 
 
     }
