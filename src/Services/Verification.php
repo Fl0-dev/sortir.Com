@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Verification
@@ -42,6 +43,9 @@ class Verification
         $sorties = $sortieRepository->findAll();
         //récupération des états voulus
         $etatCloture = $etatRepository->find(3);
+        $etatEnCours = $etatRepository->find(4);
+        $etatPassee = $etatRepository->find(5);
+
 
         //pour chaque sortie
         foreach ($sorties as $sortie){
@@ -51,25 +55,21 @@ class Verification
                 if($sortie->getDateLimiteInscription()>$today){
                     $sortie->setEtat($etatCloture);
                 }
-                //si date aujourdhui > activité
+                //si date aujourdhui > à la sortie
                 if($sortie->getDateHeureDebut()>$today){
-                    //si diff entre dateDuDebut et today inf à 0
-                    $interval = date_diff($sortie->getDateHeureDebut() + $sortie->getDuree(), $today);
+                    //sortie débutée
+                    $sortie->setEtat($etatEnCours);
+                    //calcul de la fin de la sortie
+                    $dateFinsortie = ($sortie->getDateHeureDebut())->add(new DateInterval('PT'.$sortie->getDuree(). 'M'));
+                    //si fin de sortie > à aujourd'hui
+                    if ($dateFinsortie>$today){
+                        //sortie passée
+                        $sortie->setEtat($etatPassee);
+                    }
                 }
 
-
-                //vérification par rapport à aujourd'hui
-
-                //si date = aujourd'hui
-
-                //si heure >heure de début
-                //calcul du temps avant fin d'activité
-
-                // si inférieure ->état débuté
-
-                // si supérieure ->état passé
             }
-        }
+        }   //if ($dateFinsortie)
 
 
     }
