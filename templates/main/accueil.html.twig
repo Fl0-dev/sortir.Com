@@ -54,22 +54,22 @@
                     <p class="card-text">Etat : {{ sortie.etat.libelle }}</p>
                     <a href="{{ path('sortie_afficher',{id:sortie.id}) }}" class="card-link">Afficher</a>
 
-                    {% if app.user in sortie.users %} <!-- si inscrit-->
+                    {% if app.user in sortie.users %} {#si inscrit#}
                         <p>Inscrit/e <a href="#" class="card-link">Se désister</a></p>
                     {% endif %}
 
-                    {% if sortie.etat.id==2 %} <!-- si sortie ouverte-->
+                    {% if sortie.etat.id==2 %} {# si sortie ouverte#}
                         <a href="#" class="card-link">S'inscrire</a>
                     {% endif %}
 
-                    {% if app.user==sortie.organisateur%} <!-- si organisateur-->
+                    {% if app.user==sortie.organisateur%} {# si organisateur#}
 
-                        {% if sortie.etat.id== 1%} <!-- si créée-->
+                        {% if sortie.etat.id== 1%} {# si créée#}
                             <a href="#" class="card-link">Publier</a>
                             <a href="{{ path('sortie_modifier',{id:sortie.id}) }}" class="card-link">Modifier sortie</a>
                         {% endif %}
 
-                        {% if sortie.etat.id==2 %} <!-- si ouverte-->
+                        {% if sortie.etat.id==2 %} {# si ouverte#}
                             <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="card-link">Annuler</a>
                         {% endif %}
 
