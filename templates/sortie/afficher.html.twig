@@ -8,7 +8,6 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-
 <div class="container col-4">
     <h1>Détails de la sortie :</h1>
 
@@ -20,9 +19,9 @@
     <br>
     <div> Date et heure de sortie : {{ sortie.dateHeureDebut|date("d-m-Y") }}</div>
     <br>
-    <div> Date limite d'inscription : {{ sortie.infosSortie|date("d-m-Y") }}</div>
+    <div> Date limite d'inscription : {{ sortie.dateLimiteInscription|date("d-m-Y") }}</div>
     <br>
-    <div> Nombres de places : {{ sortie.nbInscriptionsMax }}</div>
+    <div> Nombres de places disponibles : {{ sortie.nbInscriptionsMax }}</div>
     <br>
      <div> Rue : {{ sortie.lieu.rue }}</div>
     <br>
