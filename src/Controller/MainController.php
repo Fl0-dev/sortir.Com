@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\RechercheSortie;
+use App\Entity\Sortie;
 use App\Form\RechercheSortieType;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,13 +76,9 @@ class MainController extends AbstractController
                 $dateFin=((new \DateTime())->modify('+1 month'));
             }
 
-
-
             //utilisation d'une fonction perso pour récupérer les sorties en fonction des données de recherche
             $sorties = $sortieRepository->findByPerso($campus,$text,$dateDebut, $dateFin,
                 $organise, $inscrit,$nonInscrit,$sortiesPassees,$user);
-
-
         }else{
             //liste des sorties sans recherche
             $sorties = $sortieRepository->findBy([],["dateHeureDebut"=>"DESC"]);
@@ -92,4 +89,21 @@ class MainController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/accueil/inscription/{id}", name="inscription")
+     */
+    public function inscription(Sortie $sortie):Response
+    {
+        //recupération de l'User connecté
+        $user = $this->getUser();
+
+        //vérifier si sortie est à l'état : ouverte
+        if ($sortie->getEtat()->getLibelle() !== 'Ouverte')
+            $this->addFlash('danger','La sortie est ');
+
+
+
+
+        return $this->redirectToRoute('accueil');
+    }
 }
