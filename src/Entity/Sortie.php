@@ -88,6 +88,11 @@ class Sortie
      */
     private $organisateur;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $infosAnnulation;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -241,6 +246,18 @@ class Sortie
     public function setOrganisateur(?User $organisateur): self
     {
         $this->organisateur = $organisateur;
+
+        return $this;
+    }
+
+    public function getInfosAnnulation(): ?string
+    {
+        return $this->infosAnnulation;
+    }
+
+    public function setInfosAnnulation(?string $infosAnnulation): self
+    {
+        $this->infosAnnulation = $infosAnnulation;
 
         return $this;
     }

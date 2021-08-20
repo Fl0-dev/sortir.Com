@@ -82,16 +82,15 @@ class SortieController extends AbstractController
 
 
     /**
-     * @Route("/annuler/{id}", name ="annuler")
+     * @Route("/{id}/annuler", name"annuler")
+     * @param Sortie $sortie
+     * @return Response
      */
-
-    public function annuler(Sortie $sortie, EntityManagerInterface $em) : Response
+    public function Annuler(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
-
-        $em->remove($sortie);
-        $em->flush();
-        return $this->redirectToRoute('accueil');
-        }
+        return $this->render
+        ('sortie/annuler.html.twig');
+    }
 
 
 
