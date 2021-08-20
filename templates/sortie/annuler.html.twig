@@ -18,7 +18,7 @@
     <p>Campus : {{ sortie.campus.nom }}</p>
     <p>Lieu : {{ sortie.lieu.nom }}{{', '}}{{ sortie.lieu.rue }}{{' '}}{{ sortie.lieu.ville.codePostal }}{{' '}}{{ sortie.lieu.ville.nom }}</p>
 
-    <div class="col-4">
+    <div class="col-6">
     {{ form_start(annulationForm) }}
     {{ form_widget(annulationForm) }}
     <button type="submit"  class="btn btn-sucess">
