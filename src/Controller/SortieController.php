@@ -90,6 +90,15 @@ class SortieController extends AbstractController
             ['formSortie' => $form->createView()]);
     }
 
+    /**
+     * @Route("/{id}/supprimer/", name ="supprimer")
+     */
+    public function supprimer(Sortie $sortie, EntityManagerInterface $em) : Response
+    {
+        $em->remove($sortie);
+        $em->flush();
+        return $this->redirectToRoute("accueil");
+    }
 
     /**
      * @Route("/{id}/annuler", name="annuler")
