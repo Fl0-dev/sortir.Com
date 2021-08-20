@@ -84,9 +84,7 @@ class SortieController extends AbstractController
     }
 
 
-    /**
-     * @Route("/{id}/annuler", name"annuler")
-     */
+
     /*public function annuler(Sortie $sortie,EntityManagerInterface $entityManager, Request $request,EtatRepository $etatRepository): Response
     {
         $annulationForm = $this->createForm(AnnulationType::class,$sortie);
