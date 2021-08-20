@@ -114,9 +114,9 @@ class SortieController extends AbstractController
         $annulationForm->handleRequest($request);
         if ($annulationForm->isSubmitted() && $annulationForm->isValid()) {
 
+
             $etatAnnulee = $etatRepository->find(6);
             $sortie->setEtat($etatAnnulee);
-            $entityManager->persist($sortie);
             $entityManager->flush();
 
             return $this->redirectToRoute('accueil');
