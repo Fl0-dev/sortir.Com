@@ -54,12 +54,13 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($this.date_diff())
+            //Todo OBLIGE CE FOUTU USER A RENTRER DES DATES ULTERIEURES A LA DATE DU JOUR
+            //if ($this.date_diff())
 
             $em->persist($sortie);
             $em->flush();
 
-            $this->addFlash('sucess', 'Sortie crée !');
+            $this->addFlash('success', 'Sortie crée !');
             return $this->redirectToRoute('accueil');
 
         }
@@ -95,10 +96,7 @@ class SortieController extends AbstractController
     public function annuler(Sortie $sortie, EntityManagerInterface $em) : Response
     {
 
-        $em->remove($sortie);
-        $em->flush();
-        return $this->redirectToRoute('accueil');
-        }
+    }
 
 
 
