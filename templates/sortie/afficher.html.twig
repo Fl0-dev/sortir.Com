@@ -15,7 +15,7 @@
     </nav>
 
     <h1>{{ sortie.nom }}</h1>
-    <div id="bloc-detail-sortie" class="">
+    <section id="bloc-detail-sortie">
         <div class="grid_2">
             <div class="font"> Description : </div>
             <div>{{ sortie.infosSortie }}</div>
@@ -46,6 +46,33 @@
         </div>
         {#<div> latitude : {{ sortie.infosSortie }}</div>#}
         {#<div> longitude : {{ sortie.infosSortie }}</div>#}
-    </div>
+    </section>
+
+        <div id="liste-inscrits">
+            <h5>Liste des participants inscrits :</h5>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <caption>Liste des participants inscrits</caption>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Pseudo</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for u in sortie.users %}
+                        <tr>
+                            <td>{{ u.pseudo }}</td>
+                            <td>{{ u.nom }}</td>
+                            <td>{{ u.prenom }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
 </div>
 {% endblock %}
