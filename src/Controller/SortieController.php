@@ -6,6 +6,7 @@ use App\Entity\Sortie;
 use App\Entity\User;
 use App\Form\SortieFormType;
 
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,11 +41,17 @@ class SortieController extends AbstractController
      * @return Response
      */
 
-    public function Ajouter(Request $request ): Response
+
+    public function Ajouter(Request $request, EtatRepository $etatRepository): Response
+
+
     {
+        // récupération de l'état
+        $etatCreee = $etatRepository->find(1);
         $em = $this->getDoctrine()->getManager();
         $sortie = new Sortie();
         $sortie->setOrganisateur($this->getUser());
+        $sortie->setEtat($etatCreee);
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -88,10 +95,22 @@ class SortieController extends AbstractController
 
     /**
      * @Route("/annuler/{id}", name ="annuler")
+     * @param SortieRepository $sortieRepository
+     * @param EntityManagerInterface $entityManager
      */
 
-    public function annuler(Sortie $sortie, EntityManagerInterface $em) : Response
+    public function annuler(Sortie $sortie, EtatRepository $etatRepository) : Response
+
     {
+        // récupération de l'état voulu
+
+        $etatAnnulee = $etatRepository->find(6);
+                for (){
+                $sortie->setEtat($etatAnnulee);
+                }
+
+        $this->addFlash('success', 'Les modifications ont bien été prise en compte!');
+        return $this->redirectToRoute('accueil');
 
     }
 
