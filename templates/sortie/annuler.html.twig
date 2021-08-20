@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Annulation{% endblock %}
+
+{% block body %}
+
+    {{ form_start(AnnulationForm) }}
+    {{ form_widget(AnnulationForm) }}
+    <button type="submit"  class="btn btn-sucess">
+        Enregistrer
+    </button>
+    {{ form_end(AnnulationForm) }}
+
+
+{% endblock %}

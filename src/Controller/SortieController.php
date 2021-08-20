@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Entity\User;
+use App\Form\AnnulationType;
 use App\Form\SortieFormType;
 
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -69,6 +71,7 @@ class SortieController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
@@ -83,14 +86,26 @@ class SortieController extends AbstractController
 
     /**
      * @Route("/{id}/annuler", name"annuler")
-     * @param Sortie $sortie
-     * @return Response
      */
-    public function Annuler(Sortie $sortie, EntityManagerInterface $entityManager): Response
+    /*public function annuler(Sortie $sortie,EntityManagerInterface $entityManager, Request $request,EtatRepository $etatRepository): Response
     {
+        $annulationForm = $this->createForm(AnnulationType::class,$sortie);
+        $annulationForm->handleRequest($request);
+        if ($annulationForm->isSubmitted() && $annulationForm->isValid()) {
+
+            $etatAnnulee = $etatRepository->find(6);
+            $sortie->setEtat($etatAnnulee);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('accueil');
+        }
+
         return $this->render
-        ('sortie/annuler.html.twig');
-    }
+        ('sortie/annuler.html.twig',[
+            'annulationForm'=>$annulationForm->createView(),
+        ]);
+    }*/
 
 
 
