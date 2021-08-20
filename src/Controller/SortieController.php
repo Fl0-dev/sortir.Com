@@ -28,10 +28,10 @@ class SortieController extends AbstractController
      */
 
 
-    public function afficher(Sortie $sortie) : Response
+    public function afficher(Sortie $sortie): Response
     {
         return $this->render('sortie/afficher.html.twig', [
-            "sortie"=>$sortie
+            "sortie" => $sortie
         ]);
     }
 
@@ -42,17 +42,28 @@ class SortieController extends AbstractController
      * @return Response
      */
 
-    public function Ajouter(Request $request ): Response
+
+    public function Ajouter(Request $request, EtatRepository $etatRepository): Response
+
+
     {
+        // récupération de l'état
+        $etatCreee = $etatRepository->find(1);
         $em = $this->getDoctrine()->getManager();
         $sortie = new Sortie();
         $sortie->setOrganisateur($this->getUser());
+        $sortie->setEtat($etatCreee);
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //Todo OBLIGE CE FOUTU USER A RENTRER DES DATES ULTERIEURES A LA DATE DU JOUR
+            //if ($this.date_diff())
+
             $em->persist($sortie);
             $em->flush();
 
+            $this->addFlash('success', 'Sortie crée !');
             return $this->redirectToRoute('accueil');
 
         }
@@ -71,7 +82,6 @@ class SortieController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
@@ -84,9 +94,7 @@ class SortieController extends AbstractController
     }
 
 
-    /**
-     * @Route("/{id}/annuler", name"annuler")
-     */
+
     /*public function annuler(Sortie $sortie,EntityManagerInterface $entityManager, Request $request,EtatRepository $etatRepository): Response
     {
         $annulationForm = $this->createForm(AnnulationType::class,$sortie);
