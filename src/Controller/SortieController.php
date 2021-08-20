@@ -27,10 +27,10 @@ class SortieController extends AbstractController
      */
 
 
-    public function afficher(Sortie $sortie) : Response
+    public function afficher(Sortie $sortie): Response
     {
         return $this->render('sortie/afficher.html.twig', [
-            "sortie"=>$sortie
+            "sortie" => $sortie
         ]);
     }
 
@@ -76,7 +76,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}/modifier/", name ="modifier")
      */
-    public function Modifier(Sortie $sortie, Request $request) : Response
+    public function Modifier(Sortie $sortie, Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(SortieFormType::class, $sortie);
@@ -102,21 +102,23 @@ class SortieController extends AbstractController
     public function annuler(Sortie $sortie, EtatRepository $etatRepository) : Response
 
     {
-        // récupération de l'état voulu
+        //récupération de l'état voulu
+        $etatAnnulee = $this->$etatRepository->find(6);
+        $em = $this->getDoctrine()->getManager();
+        $sortie->setEtat($etatAnnulee);
+        $em->flush();
 
-        $etatAnnulee = $etatRepository->find(6);
-                for (){
-                $sortie->setEtat($etatAnnulee);
-                }
-
-        $this->addFlash('success', 'Les modifications ont bien été prise en compte!');
-        return $this->redirectToRoute('accueil');
-
+        return $this->redirectToRoute("accueil");
+        }
+        /**
+         * @Route("/supprimer/{id}", name ="supprimer")
+         */
+    public function supprimer(Sortie $sortie, EntityManagerInterface $em) : Response
+    {
+        $em->remove($sortie);
+        $em->flush();
+        return $this->redirectToRoute("accueil");
     }
 
 
-
-
-
-
-}
+    }

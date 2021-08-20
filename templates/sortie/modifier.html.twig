@@ -17,7 +17,10 @@
     <div class="col-4">
         {{ form_start(formSortie) }}
         {{ form_widget(formSortie) }}
-        <button type="submit" class="btn btn-outline-primary">Modifier</button>
+        <button type="submit" class="btn btn-outline-primary">Enregistrer</button>
+        <button type="submit" class="btn btn-outline-primary"><a href=" {{ path('supprimer') }}">Supprimer la sortie</a></button>
+        <button type="submit" class="btn btn-outline-primary">Enregistrer</button>
+        <button type="submit" class="btn btn-outline-primary">Enregistrer</button>
         {{ form_end(formSortie) }}
     </div>
 
