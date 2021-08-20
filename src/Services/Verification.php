@@ -8,7 +8,18 @@ use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Verification
+
+
 {
+    private  $sortieRepository;
+    private  $entityManager;
+    private  $etatRepository;
+
+    public function __construct(SortieRepository $sortieRepository,EntityManagerInterface $entityManager,EtatRepository $etatRepository){
+        $this->sortieRepository =$sortieRepository;
+        $this->entityManager = $entityManager;
+        $this->etatRepository = $etatRepository;
+    }
     /**
      * renvoie un bool si l'user est dans le groupe des participants
      * @param $sortie
@@ -30,22 +41,20 @@ class Verification
 
     /**
      * verifie l'état des sortie par rapport aux dates et le change si besoin
-     * @param SortieRepository $sortieRepository
-     * @param EntityManagerInterface $entityManager
+     *
      */
-    public function gestionEtatSorties(SortieRepository $sortieRepository,EntityManagerInterface $entityManager,
-            EtatRepository $etatRepository){
+    public function gestionEtatSorties(){
 
         //date du jour
         $today = new \DateTime();
 
         //récupération de toutes les sorties
-        $sorties = $sortieRepository->findAll();
+        $sorties = $this->sortieRepository->findBy([], ["dateHeureDebut" => "ASC"]);
         //récupération des états voulus
-        $etatCloture = $etatRepository->find(3);
-        $etatEnCours = $etatRepository->find(4);
-        $etatPassee = $etatRepository->find(5);
-        $etatArchivee = $etatRepository->find(7);
+        $etatCloture = $this->etatRepository->find(3);
+        $etatEnCours = $this->etatRepository->find(4);
+        $etatPassee = $this->etatRepository->find(5);
+        $etatArchivee = $this->etatRepository->find(7);
 
 
         //pour chaque sortie
@@ -56,6 +65,7 @@ class Verification
                 //si date d'insciption > date d'aujourd'hui
                 if($sortie->getDateLimiteInscription()>$today){
                     $sortie->setEtat($etatCloture);
+
                 }
                 //si date aujourdhui > à la sortie
                 if($sortie->getDateHeureDebut()>$today){
@@ -76,9 +86,9 @@ class Verification
             if ($dateFinSortiePlusTrente > $today){
                 $sortie->setEtat($etatArchivee);
             }
+            $this->entityManager->persist($sortie);
+            $this->entityManager->flush();
         }
-
-
 
     }
 }
