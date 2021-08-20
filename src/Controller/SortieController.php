@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Entity\User;
+use App\Form\AnnulationType;
 use App\Form\SortieFormType;
 
 use App\Repository\EtatRepository;
@@ -76,7 +77,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}/modifier/", name ="modifier")
      */
-    public function Modifier(Sortie $sortie, Request $request): Response
+    public function Modifier(Sortie $sortie, Request $request) : Response
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(SortieFormType::class, $sortie);
@@ -92,19 +93,33 @@ class SortieController extends AbstractController
             ['formSortie' => $form->createView()]);
     }
 
-        /**
-         * @Route("/{id}/modifier/supprimer/", name ="supprimer")
-         *
-         */
-    public function supprimer(Sortie $sortie, EntityManagerInterface $em) : Response
+
+    /**
+     * @Route("/{id}/annuler", name"annuler")
+     */
+    /*public function annuler(Sortie $sortie,EntityManagerInterface $entityManager, Request $request,EtatRepository $etatRepository): Response
     {
-        $em->remove($sortie);
-        $em->flush();
+        $annulationForm = $this->createForm(AnnulationType::class,$sortie);
+        $annulationForm->handleRequest($request);
+        if ($annulationForm->isSubmitted() && $annulationForm->isValid()) {
 
-        return $this->redirectToRoute("accueil");
+            $etatAnnulee = $etatRepository->find(6);
+            $sortie->setEtat($etatAnnulee);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('accueil');
+        }
+
+        return $this->render
+        ('sortie/annuler.html.twig',[
+            'annulationForm'=>$annulationForm->createView(),
+        ]);
+    }*/
 
 
 
-    }
 
-    }
+
+
+}
