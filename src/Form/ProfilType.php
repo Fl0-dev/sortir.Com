@@ -24,7 +24,7 @@ class ProfilType extends AbstractType
                 "mapped"=>false,
                 'invalid_message' => 'Les mots de passe doivent correspondre.',
                 'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
+                //'required' => true,
                 'first_options'  => ['label' => 'Nouveau mot de passe'],
                 'second_options' => ['label' => 'Confirmation'],
             ])

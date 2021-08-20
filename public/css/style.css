@@ -1,8 +1,13 @@
-body{
-   /*background-image: url('../../public/img/979696.jpg');*/
-}
+
 
 /*---------------------------- THEME ------------------------------*/
+body {
+    font-family: Calibri;
+}
+
+body{
+    /*background-image: url('../../public/img/979696.jpg');*/
+}
 
 img
 {
@@ -56,11 +61,16 @@ h2
 
 /*------------------------ Détail Profil ------------------------------*/
 
-#detail {
+#bloc-detail-profil {
     border : 1px solid #ccc;
     border-radius: .5rem;
     box-shadow: 2px 2px 10px rgba(0,0,0,.2);
     padding: .5rem;
+}
+
+#bloc-detail-profil div {
+    margin : 0 .5rem;
+    padding: 0 1rem;
 }
 
 /*------------------------ Détail sortie ------------------------------*/
@@ -70,7 +80,7 @@ h2
     border-radius: .5rem;
     box-shadow: 2px 2px 10px rgba(0,0,0,.2);
     padding: .5rem;
-
+    margin: 1rem 0;
 }
 
 #bloc-detail-sortie div {
@@ -91,5 +101,15 @@ h2
 
 .font {
     font-weight: bold;
+}
 
+#liste-inscrits {
+    border : 1px solid #ccc;
+    border-radius: .5rem;
+    box-shadow: 2px 2px 10px rgba(0,0,0,.2);
+    padding: .5rem;
+    margin: 1rem 0;
+
+    overflow-y:scroll;
+    height:250px;
 }
