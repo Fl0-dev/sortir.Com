@@ -3,48 +3,53 @@
 {% block title %}{{parent()}} | Accueil{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Bienvenue {{ app.user.pseudo }}</h1>
-
-    <section >
-        {{ form_start(sortieForm, {'action': path('recherche'), 'method': 'POST'}) }}
-        <div class="row">
-            <div class="group col-6">
-                {{ form_row(sortieForm.campus) }}
+<div id="container">
+    <div>
+        <h1>Bienvenue {{ app.user.pseudo }}</h1>
+        <section >
+            {{ form_start(sortieForm, {'action': path('recherche'), 'method': 'POST'}) }}
+            <div class="row">
+                <div class="group col-6">
+                    {{ form_row(sortieForm.campus) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(sortieForm.text) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(sortieForm.dateDebut) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(sortieForm.dateFin) }}
+                </div>
             </div>
-            <div class="group col-6">
-                {{ form_row(sortieForm.text) }}
+            <div class="row">
+                <div class="group col-6">
+                    {{ form_row(sortieForm.organise) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(sortieForm.inscrit) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(sortieForm.sortiesPassees) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(sortieForm.nonInscrit) }}
+                </div>
             </div>
-            <div class="group col-6">
-                {{ form_row(sortieForm.dateDebut) }}
-            </div>
-            <div class="group col-6">
-                {{ form_row(sortieForm.dateFin) }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="group col-6">
-                {{ form_row(sortieForm.organise) }}
-            </div>
-            <div class="group col-6">
-                {{ form_row(sortieForm.inscrit) }}
-            </div>
-            <div class="group col-6">
-                {{ form_row(sortieForm.sortiesPassees) }}
-            </div>
-            <div class="group col-6">
-                {{ form_row(sortieForm.nonInscrit) }}
-            </div>
-        </div>
-        <button type="submit" class="btn">Recherche</button>
-        {{ form_end(sortieForm) }}
-    </section>
+            <button type="submit" class="btn">Recherche</button>
+            {{ form_end(sortieForm) }}
+        </section>
+    </div>
 
     <section id="liste">
-        <h2>Listes des sorties:</h2>
-            <div class="row">
-                {% for sortie in sorties %}
+        <div id="bouton-creer-sortie" class="container">
+            <h2>Listes des sorties:</h2>
+            <a href="{{ path('sortie_ajouter') }}" class="btn btn-outline-primary">Créer une sortie</a>
+        </div>
+        <div id="boites-sorties-alignement">
+            <div class="row center">
 
+                {% for sortie in sorties %}
                     <div class="card col-xl-5" >
                         <div class="card-body">
                             <nav class="sortie">
@@ -89,11 +94,10 @@
                             {% endif %}
                         </div>
                     </div>
-
-                    <br>
                 {% endfor %}
+
             </div>
+        </div>
     </section>
-    <a href="{{ path('sortie_ajouter') }}" class="btn btn-outline-primary">Créer une sortie</a>
 </div>
 {% endblock %}
