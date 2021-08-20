@@ -36,25 +36,36 @@ class SortieRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Sortie
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+    public function findSansLesArchives(){
+        //dans la table sortie
+        $qb=$this->createQueryBuilder('s');
+        //recherche où l'état n'est pas archivé
+        $qb->andWhere('s.etat<7');
+
+        $query = $qb->getQuery();
+        return $query->getResult();
     }
-    */
-    public function findByPerso($campus,$text,$dateDebut,$dateFin,$organise,$inscrit,$nonInscrit,$sortiesPassees,$user )
+
+
+    /**
+     * requête personnalisée selon les données de recherches donnés en paramètre
+     * @param $campus
+     * @param $text
+     * @param $dateDebut
+     * @param $dateFin
+     * @param $organise
+     * @param $inscrit
+     * @param $nonInscrit
+     * @param $sortiesPassees
+     * @param $user
+     * @return int|mixed|string
+     */
+    public function findByPerso($campus, $text, $dateDebut, $dateFin, $organise, $inscrit, $nonInscrit, $sortiesPassees, $user )
     {
         $qb =$this->createQueryBuilder('s');
 
-        //user qui fait la recherche
-
-        /*$qb->where('s.etat = :etat')
-            ->setParameter('etat', 'Ouverte');*/
+        //recherche où l'état n'est pas archivé
+        $qb->andWhere('s.etat<7');
         if($campus != null){
             $qb ->andWhere('s.campus = :campus')
                 ->setParameter('campus', $campus->getId());
@@ -89,9 +100,7 @@ class SortieRepository extends ServiceEntityRepository
             $qb ->andWhere('s.dateHeureDebut <= :now')
                 ->setParameter('now', date('Y-m-d H:i:s') );
         }
-
-
-
+        //$qb->orderBy('dateHeureDebut','ASC');
         $query = $qb->getQuery();
         $query->setMaxResults(50);
 

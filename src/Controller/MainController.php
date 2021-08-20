@@ -5,12 +5,12 @@ namespace App\Controller;
 use App\Entity\RechercheSortie;
 use App\Entity\Sortie;
 use App\Form\RechercheSortieType;
+
 use App\Repository\SortieRepository;
 use App\Services\Verification;
-use Doctrine\ORM\EntityManager;
+
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,11 +29,13 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil", name="accueil")
      */
-    public function list(SortieRepository $sortieRepository): Response
+    public function list(SortieRepository $sortieRepository,Verification $verification): Response
     {
+        //traitement des états des sorties
+        $verification->gestionEtatSorties();
         $rechercheSortie = new RechercheSortie();
         //liste des sorties sans recherche
-        $sorties = $sortieRepository->findBy([], ["dateHeureDebut" => "ASC"]);
+        $sorties = $sortieRepository->findSansLesArchives();
         //mise en route du du formulaire de recherche
         $sortieForm = $this->createForm(RechercheSortieType::class, $rechercheSortie);
 
@@ -46,8 +48,10 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil/recherche", name="recherche")
      */
-    public function recherche(SortieRepository $sortieRepository, Request $request): Response
+    public function recherche(SortieRepository $sortieRepository, Request $request,Verification $verification): Response
     {
+        //traitement des états des sorties
+        $verification->gestionEtatSorties();
         //initialisation de l'instance des resultats du form
         $rechercheSortie = new RechercheSortie();
         //récupération de l'user connecté
@@ -88,7 +92,7 @@ class MainController extends AbstractController
                 $organise, $inscrit, $nonInscrit, $sortiesPassees, $user);
         } else {
             //liste des sorties sans recherche
-            $sorties = $sortieRepository->findBy([], ["dateHeureDebut" => "DESC"]);
+            $sorties = $sortieRepository->findSansLesArchives();
         }
         return $this->render('main/accueil.html.twig', [
             "sorties" => $sorties,
