@@ -83,7 +83,7 @@
                                 {% endif %}
 
                                 {% if sortie.etat.id==2 %} {# si ouverte#}
-                                    <a href="#" class="card-link">Annuler</a>
+                                    <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="card-link">Annuler</a>
                                 {% endif %}
 
                             {% endif %}
