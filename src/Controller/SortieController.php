@@ -26,8 +26,6 @@ class SortieController extends AbstractController
     /**
      * @Route("/afficher/{id}", name = "afficher")
      */
-
-
     public function afficher(Sortie $sortie): Response
     {
         return $this->render('sortie/afficher.html.twig', [
@@ -39,10 +37,9 @@ class SortieController extends AbstractController
     /**
      * @Route("/ajouter", name ="ajouter")
      * @param Request $request
+     * @param EtatRepository $etatRepository
      * @return Response
      */
-
-
     public function Ajouter(Request $request, EtatRepository $etatRepository): Response
 
 
@@ -93,9 +90,25 @@ class SortieController extends AbstractController
             ['formSortie' => $form->createView()]);
     }
 
+    /**
+     * @Route("/{id}/supprimer/", name ="supprimer")
+     */
+    public function supprimer(Sortie $sortie, EntityManagerInterface $em) : Response
+    {
+        $em->remove($sortie);
+        $em->flush();
+        return $this->redirectToRoute("accueil");
+    }
 
-
-    /*public function annuler(Sortie $sortie,EntityManagerInterface $entityManager, Request $request,EtatRepository $etatRepository): Response
+    /**
+     * @Route("/{id}/annuler", name="annuler")
+     * @param Sortie $sortie
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @param EtatRepository $etatRepository
+     * @return Response
+     */
+    public function annuler(Sortie $sortie,EntityManagerInterface $entityManager, Request $request,EtatRepository $etatRepository): Response
     {
         $annulationForm = $this->createForm(AnnulationType::class,$sortie);
         $annulationForm->handleRequest($request);
@@ -112,8 +125,9 @@ class SortieController extends AbstractController
         return $this->render
         ('sortie/annuler.html.twig',[
             'annulationForm'=>$annulationForm->createView(),
+            'sortie'=>$sortie,
         ]);
-    }*/
+    }
 
 
 

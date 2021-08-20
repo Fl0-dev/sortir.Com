@@ -4,12 +4,28 @@
 
 {% block body %}
 
+    <div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">modifier le profil</li>
+        </ol>
+    </nav>
+
+    <h1>Annuler la sortie</h1>
+    <p>Nom de la sortie : {{ sortie.nom }}</p>
+    <p>Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y h:m") }}</p>
+    <p>Campus : {{ sortie.campus.nom }}</p>
+    <p>Lieu : {{ sortie.lieu.nom }}{{', '}}{{ sortie.lieu.rue }}{{' '}}{{ sortie.lieu.ville.codePostal }}{{' '}}{{ sortie.lieu.ville.nom }}</p>
+
+    <div class="col-4">
     {{ form_start(annulationForm) }}
     {{ form_widget(annulationForm) }}
     <button type="submit"  class="btn btn-sucess">
         Enregistrer
     </button>
     {{ form_end(annulationForm) }}
-
+    </div>
+    </div>
 
 {% endblock %}
