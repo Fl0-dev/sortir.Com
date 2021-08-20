@@ -27,15 +27,10 @@ class SortieController extends AbstractController
 
 
     public function afficher(Sortie $sortie) : Response
-
     {
-
         return $this->render('sortie/afficher.html.twig', [
             "sortie"=>$sortie
         ]);
-
-
-
     }
 
 
@@ -70,6 +65,7 @@ class SortieController extends AbstractController
             ['formSortie' => $form->createView()]);
     }
 
+
     /**
      * @Route("/{id}/modifier/", name ="modifier")
      */
@@ -88,6 +84,7 @@ class SortieController extends AbstractController
         ('sortie/modifier.html.twig',
             ['formSortie' => $form->createView()]);
     }
+
 
     /**
      * @Route("/annuler/{id}", name ="annuler")

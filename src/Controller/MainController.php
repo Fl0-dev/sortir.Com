@@ -60,6 +60,7 @@ class MainController extends AbstractController
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
+
             //récupération pour recherche
             $campus = $rechercheSortie->getCampus();
             $text = $rechercheSortie->getText();
@@ -69,6 +70,7 @@ class MainController extends AbstractController
             $sortiesPassees = $rechercheSortie->isSortiesPassees();
             //récupération des champs mapped=>false
             $dateDebut = $sortieForm->get('dateDebut')->getData();
+
             $dateFin = $sortieForm->get('dateFin')->getData();
             //traitement des dates si null
 

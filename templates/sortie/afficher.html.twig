@@ -1,46 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de la sortie{% endblock %}
+{% block title %}Détails de la sortie {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="container col-4">
-    <h1>Détails de la sortie :</h1>
-
-    <div> Nom de la sortie : {{ sortie.nom }}</div>
-    <br>
-    <div> Nombre d'inscription maxi : {{ sortie.nbInscriptionsMax }}</div>
-    <br>
-    <div> Campus : {{ sortie.campus.nom }}</div>
-    <br>
-    <div> Date et heure de sortie : {{ sortie.dateHeureDebut|date("d-m-Y") }}</div>
-    <br>
-    <div> Date limite d'inscription : {{ sortie.dateLimiteInscription|date("d-m-Y") }}</div>
-    <br>
-    <div> Nombres de places disponibles : {{ sortie.nbInscriptionsMax }}</div>
-    <br>
-     <div> Rue : {{ sortie.lieu.rue }}</div>
-    <br>
-     <div> Code postal : {{ sortie.lieu.ville.codePostal }}</div>
-    {#<div> latitude : {{ sortie.infosSortie }}</div>#}
-    {#<div> longitude : {{ sortie.infosSortie }}</div>#}
-    <br>
 
 
+<div class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">détail sortie</li>
+        </ol>
+    </nav>
+
+    <h1>{{ sortie.nom }}</h1>
+    <div id="bloc-detail-sortie" class="">
+        <div class="grid_2">
+            <div class="font"> Description : </div>
+            <div>{{ sortie.infosSortie }}</div>
+        </div>
+        <div class="grid_2">
+            <div class="font"> Campus :</div>
+            <div> {{ sortie.campus.nom }}</div>
+        </div>
+        <div class="grid_2">
+            <div class="font"> Date et heure de sortie : </div>
+            <div>{{ sortie.dateHeureDebut|date("d-m-Y") }}</div>
+        </div>
+        <div class="grid_2">
+            <div class="font"> Date limite d'inscription :</div>
+            <div> {{ sortie.dateLimiteInscription|date("d-m-Y") }}</div>
+        </div>
+        <div class="grid_2">
+            <div class="font"> Nombres de places disponibles :</div>
+            <div> {{ sortie.nbInscriptionsMax }}</div>
+        </div>
+        <div class="grid_2">
+            <div class="font"> Adresse :</div>
+            <div>{{ sortie.lieu.rue }}</div>
+        </div>
+        <div class="grid_2">
+            <div class="font"> Code postal : </div>
+            <div>{{ sortie.lieu.ville.codePostal }}</div>
+        </div>
+        {#<div> latitude : {{ sortie.infosSortie }}</div>#}
+        {#<div> longitude : {{ sortie.infosSortie }}</div>#}
     </div>
-
-
-
-
-    <button type="button"  class="btn btn-sucess"> <a href="{{ path('accueil')}}">
-        Retour à l'accueil
-        </a></button>
-
-
-
 </div>
 {% endblock %}
