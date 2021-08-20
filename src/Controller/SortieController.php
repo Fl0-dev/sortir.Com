@@ -92,33 +92,19 @@ class SortieController extends AbstractController
             ['formSortie' => $form->createView()]);
     }
 
-
-    /**
-     * @Route("/annuler/{id}", name ="annuler")
-     * @param SortieRepository $sortieRepository
-     * @param EntityManagerInterface $entityManager
-     */
-
-    public function annuler(Sortie $sortie, EtatRepository $etatRepository) : Response
-
-    {
-        //récupération de l'état voulu
-        $etatAnnulee = $this->$etatRepository->find(6);
-        $em = $this->getDoctrine()->getManager();
-        $sortie->setEtat($etatAnnulee);
-        $em->flush();
-
-        return $this->redirectToRoute("accueil");
-        }
         /**
-         * @Route("/supprimer/{id}", name ="supprimer")
+         * @Route("/{id}/modifier/supprimer/", name ="supprimer")
+         *
          */
     public function supprimer(Sortie $sortie, EntityManagerInterface $em) : Response
     {
         $em->remove($sortie);
         $em->flush();
-        return $this->redirectToRoute("accueil");
-    }
 
+        return $this->redirectToRoute("accueil");
+
+
+
+    }
 
     }
