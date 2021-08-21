@@ -41,9 +41,9 @@ class SortieController extends AbstractController
      * @return Response
      */
     public function ajouter(Request $request, EtatRepository $etatRepository): Response
-
-
     {
+        //récupération de la route pour la redirection dans lieu
+        $routeName = $request->get('_route');
         // récupération de l'état
         $etatCreee = $etatRepository->find(1);
         $em = $this->getDoctrine()->getManager();
@@ -66,8 +66,10 @@ class SortieController extends AbstractController
         }
 
         return $this->render
-        ('sortie/ajouter.html.twig',
-            ['formSortie' => $form->createView()]);
+        ('sortie/ajouter.html.twig', [
+            'route'=>$routeName,
+            'formSortie' => $form->createView(),
+            ]);
     }
 
 
