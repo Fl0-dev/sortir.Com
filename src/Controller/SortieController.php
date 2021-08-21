@@ -40,25 +40,39 @@ class SortieController extends AbstractController
      * @param EtatRepository $etatRepository
      * @return Response
      */
-    public function ajouter(Request $request, EtatRepository $etatRepository): Response
+    public function ajouter(Request $request,
+                            EtatRepository $etatRepository,
+                            EntityManagerInterface $entityManager): Response
     {
         //récupération de la route pour la redirection dans lieu
         $routeName = $request->get('_route');
         // récupération de l'état
-        $etatCreee = $etatRepository->find(1);
-        $em = $this->getDoctrine()->getManager();
+        $etats = $etatRepository->findAll();
+        //création de l'ojet sortie
         $sortie = new Sortie();
+        //récupération de l'user
         $sortie->setOrganisateur($this->getUser());
-        $sortie->setEtat($etatCreee);
+        //Utilisation du form de sortie
         $form = $this->createForm(SortieFormType::class, $sortie);
+        //et envoie du forme en requête
         $form->handleRequest($request);
+        //si valide
         if ($form->isSubmitted() && $form->isValid()) {
-
-            //Todo OBLIGE CE FOUTU USER A RENTRER DES DATES ULTERIEURES A LA DATE DU JOUR
+            //si l'user veut que la sortie soit créée
+            if ($request->get("choix")==="enregistre") {
+                $sortie->setEtat($etats[0]);
+            }
+            //Si l'user veut qu'elle soit publier direct
+            if ($request->get("choix")==="publie") {
+                $sortie->setEtat($etats[1]);
+            }
+            //ajout de l'user dans la sortie
+            $sortie->addUser($this->getUser());
             //if ($this.date_diff())
 
-            $em->persist($sortie);
-            $em->flush();
+            //on inscrit en BD
+            $entityManager->persist($sortie);
+            $entityManager->flush();
 
             $this->addFlash('success', 'Sortie crée !');
             return $this->redirectToRoute('accueil');
@@ -76,16 +90,31 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}/modifier/", name ="modifier")
      */
-    public function modifier(Sortie $sortie, Request $request) : Response
+    public function modifier(Sortie $sortie,
+                             Request $request,
+                             EtatRepository $etatRepository,
+                             EntityManagerInterface $entityManager) : Response
     {
         //récupération de la route pour la redirection dans lieu
         $routeName = $request->get('_route');
-
-        $em = $this->getDoctrine()->getManager();
+        // récupération de l'état
+        $etats = $etatRepository->findAll();
+        //Utilisation du form de sortie
         $form = $this->createForm(SortieFormType::class, $sortie);
+        //et envoie du forme en requête
         $form->handleRequest($request);
+        //si valide
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            //si l'user veut que la sortie soit créée
+            if ($request->get("choix")==="enregistre") {
+                $sortie->setEtat($etats[0]);
+            }
+            //Si l'user veut qu'elle soit publier direct
+            if ($request->get("choix")==="publie") {
+                $sortie->setEtat($etats[1]);
+            }
+            //on inscrit en BD
+            $entityManager->flush();
 
             return $this->redirectToRoute('accueil');
         }
@@ -138,8 +167,23 @@ class SortieController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("{id}/publier", name="publier")
+     * @param Sortie $sortie
+     * @param EntityManagerInterface $entityManager
+     * @param EtatRepository $etatRepository
+     * @return Response
+     */
+    public function publierDirect(Sortie $sortie,
+                                  EntityManagerInterface $entityManager,
+                                  EtatRepository $etatRepository):Response
+    {
+        $etatOuverte = $etatRepository->find(2);
+        $sortie->setEtat($etatOuverte);
+        $entityManager->flush();
+        return $this->redirectToRoute('accueil');
 
-
+    }
 
 
 

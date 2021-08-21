@@ -84,7 +84,7 @@
                             {% if app.user==sortie.organisateur%} {# si organisateur#}
 
                                 {% if sortie.etat.id== 1%} {# si créée#}
-                                    <a href="#" class="card-link">Publier</a>
+                                    <a href="{{ path('sortie_publier',{id:sortie.id}) }}" class="card-link">Publier</a>
                                     <a href="{{ path('sortie_modifier',{id:sortie.id}) }}" class="card-link">Modifier sortie</a>
                                 {% endif %}
 

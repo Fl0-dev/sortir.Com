@@ -58,13 +58,13 @@
                 </div>
             </div>
             <div class="row-12 text-center">
-                <button type="submit" value="enregistre" class="btn btn-lg btn-primary">Enregistrer</button>
+                <button type="submit" name="choix" value ="enregistre" class="btn btn-lg btn-primary">Enregistrer</button>
 
-                <button type="submit" value="publie" class="btn btn-lg btn-outline-primary">Publier</button>
+                <button type="submit" name="choix" value="publie" class="btn btn-lg btn-outline-primary">Publier</button>
 
-                <button type="submit" value="supprime" class="btn btn-lg btn-danger">Supprimer</button>
+                <button href="{{ path('sortie_supprimer',{id:sortie.id}) }}" class="btn btn-lg btn-danger">Supprimer</button>
 
-                <button href="{{ path('accueil') }}" value="supprime" class="btn btn-lg btn-secondary">Annuler</button>
+                <button href="{{ path('accueil') }}" class="btn btn-lg btn-secondary">Annuler</button>
             </div>
 
             {{ form_end(formSortie) }}
