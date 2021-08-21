@@ -40,7 +40,7 @@ class SortieController extends AbstractController
      * @param EtatRepository $etatRepository
      * @return Response
      */
-    public function Ajouter(Request $request, EtatRepository $etatRepository): Response
+    public function ajouter(Request $request, EtatRepository $etatRepository): Response
 
 
     {
@@ -74,7 +74,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}/modifier/", name ="modifier")
      */
-    public function Modifier(Sortie $sortie, Request $request) : Response
+    public function modifier(Sortie $sortie, Request $request) : Response
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(SortieFormType::class, $sortie);

@@ -11,7 +11,6 @@
                 <li class="breadcrumb-item active" aria-current="page">Modifier une sortie</li>
             </ol>
         </nav>
-
         <h1 class="text-center">Modifier votre sortie : {{ sortie.nom }}</h1>
         <section >
             {{ form_start(formSortie) }}
@@ -26,7 +25,8 @@
                     {{ form_row(formSortie.dateHeureDebut) }}
                 </div>
                 <div class="group col-6">
-                    {{ form_row(formSortie.lieu) }}
+                    {{ form_row(formSortie.lieu) }}<a href="{{ path('lieu_ajouter') }}"><i class="bi bi-plus-circle-fill"></i></a>
+
                 </div>
                 <div class="group col-6">
                     {{ form_row(formSortie.dateLimiteInscription) }}
