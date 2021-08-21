@@ -86,8 +86,10 @@ class SortieController extends AbstractController
         }
 
         return $this->render
-        ('sortie/modifier.html.twig',
-            ['formSortie' => $form->createView()]);
+        ('sortie/modifier.html.twig', [
+            'sortie'=>$sortie,
+            'formSortie' => $form->createView()
+        ]);
     }
 
     /**
@@ -101,6 +103,7 @@ class SortieController extends AbstractController
     }
 
     /**
+     * si déjà publier, annule la sortie en changeant son état
      * @Route("/{id}/annuler", name="annuler")
      * @param Sortie $sortie
      * @param EntityManagerInterface $entityManager

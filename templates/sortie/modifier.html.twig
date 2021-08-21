@@ -3,25 +3,75 @@
 {% block title %}Modifier une sortie{% endblock %}
 
 {% block body %}
-<div class="container">
+<div id="container">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Modifier une sortie</li>
+            </ol>
+        </nav>
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Modifier une sortie</li>
-        </ol>
-    </nav>
+        <h1 class="text-center">Modifier votre sortie : {{ sortie.nom }}</h1>
+        <section >
+            {{ form_start(formSortie) }}
+            <div class="row">
+                <div class="group col-6">
+                    {{ form_row(formSortie.nom) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(formSortie.campus) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(formSortie.dateHeureDebut) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(formSortie.lieu) }}
+                </div>
+                <div class="group col-6">
+                    {{ form_row(formSortie.dateLimiteInscription) }}
+                </div>
+                <div class="group col-6">
+                    <p> Rue : </p>
+                    <p>{{ sortie.lieu.rue }}</p>
+                </div>
+                <div class="group col-6">
+                    {{ form_row(formSortie.nbInscriptionsMax) }}
+                </div>
+                <div class="group col-6">
+                    <p> Code Postal : </p>
+                    <p>{{ sortie.lieu.ville.codePostal }}</p>
+                </div>
+                <div class="group col-6">
+                    {{ form_row(formSortie.duree) }}
+                </div>
+                <div class="group col-6">
+                    <p> Latitude : </p>
 
-    <h1>Modifier une sortie</h1>
+                </div>
+                <div class="group col-6">
+                    {{ form_row(formSortie.infosSortie) }}
+                </div>
+                <div class="group col-6">
+                    <p> Longitude : </p>
 
-    <li class="col-4">
-        {{ form_start(formSortie) }}
-        {{ form_widget(formSortie) }}
-        <button type="submit" class="btn btn-outline-primary">Enregistrer</button>
-        {{ form_end(formSortie) }}
+                </div>
+            </div>
+            <div class="row-12 text-center">
+                    <button type="submit" value="enregistre" class="btn btn-lg btn-primary">Enregistrer</button>
+
+                    <button type="submit" value="publie" class="btn btn-lg btn-outline-primary">Publier</button>
+
+                    <button type="submit" value="supprime" class="btn btn-lg btn-danger">Supprimer</button>
+
+                    <button href="{{ path('accueil') }}" value="supprime" class="btn btn-lg btn-secondary">Annuler</button>
+                </div>
+
+            {{ form_end(formSortie) }}
+            </div>
+
+        </section>
+
     </div>
-
-
-
 </div>
 {% endblock %}
