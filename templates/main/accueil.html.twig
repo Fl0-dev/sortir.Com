@@ -74,7 +74,7 @@
                                 <p>Motif d'annulation : {{ sortie.infosAnnulation }}</p>
                             {% endif %}
                             {% if app.user in sortie.users %} {#si inscrit#}
-                                <p>Inscrit/e <a href="{{ path('desinscription',{id:sortie.id})}}" class="card-link">(Se désister)</a></p>
+                                <p>Inscrit/e {% if not app.user==sortie.organisateur %}<a href="{{ path('desinscription',{id:sortie.id})}}" class="card-link">(Se désister)</a>{% endif %}</p>
                             {% endif %}
 
                             {% if sortie.etat.id==2 and app.user not in sortie.users %} {# si sortie ouverte et pas déjà inscrit#}
