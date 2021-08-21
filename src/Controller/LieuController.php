@@ -17,9 +17,9 @@ class LieuController extends AbstractController
 {
 
     /**
-     * @Route("/ajouter", name="ajouter")
+     * @Route("/ajouter/{route}/{id}", name="ajouter")
      */
-    public function ajouter(Request $request,EntityManagerInterface $entityManager): Response
+    public function ajouterLieu($id,$route,Request $request,EntityManagerInterface $entityManager): Response
     {
 
         $lieu = new Lieu();
@@ -35,10 +35,7 @@ class LieuController extends AbstractController
             //message flash
             $this->addFlash('success','Ce lieu a été bien ajouté ! Merci');
             //redirection selon d'où on vient
-            //TODO:: faire en sorte de choisir entre :
-            // sortie_ajouter return $this->redirectToRoute('sortie_ajouter');
-            // sortie_modifier return $this->redirectToRoute('sortie_modifier');
-            return $this->redirect($request->server->get('HTTP_REFERER'));
+            return $this->redirectToRoute($route,['id'=>$id]);
 
         }
         return $this->render('lieu/ajouter.html.twig',[

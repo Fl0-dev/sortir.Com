@@ -25,7 +25,7 @@
                     {{ form_row(formSortie.dateHeureDebut) }}
                 </div>
                 <div class="group col-6">
-                    {{ form_row(formSortie.lieu) }}<a href="{{ path('lieu_ajouter') }}"><i class="bi bi-plus-circle-fill"></i></a>
+                    {{ form_row(formSortie.lieu) }}<a href="{{ path('lieu_ajouter',{route:route,id:sortie.id}) }}"><i class="bi bi-plus-circle-fill"></i></a>
 
                 </div>
                 <div class="group col-6">
@@ -58,17 +58,16 @@
                 </div>
             </div>
             <div class="row-12 text-center">
-                    <button type="submit" value="enregistre" class="btn btn-lg btn-primary">Enregistrer</button>
+                <button type="submit" value="enregistre" class="btn btn-lg btn-primary">Enregistrer</button>
 
-                    <button type="submit" value="publie" class="btn btn-lg btn-outline-primary">Publier</button>
+                <button type="submit" value="publie" class="btn btn-lg btn-outline-primary">Publier</button>
 
-                    <button type="submit" value="supprime" class="btn btn-lg btn-danger">Supprimer</button>
+                <button type="submit" value="supprime" class="btn btn-lg btn-danger">Supprimer</button>
 
-                    <button href="{{ path('accueil') }}" value="supprime" class="btn btn-lg btn-secondary">Annuler</button>
-                </div>
+                <button href="{{ path('accueil') }}" value="supprime" class="btn btn-lg btn-secondary">Annuler</button>
+            </div>
 
             {{ form_end(formSortie) }}
-            </div>
 
         </section>
 

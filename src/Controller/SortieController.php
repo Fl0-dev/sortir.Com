@@ -76,6 +76,9 @@ class SortieController extends AbstractController
      */
     public function modifier(Sortie $sortie, Request $request) : Response
     {
+        //récupération de la route pour la redirection dans lieu
+        $routeName = $request->get('_route');
+
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(SortieFormType::class, $sortie);
         $form->handleRequest($request);
@@ -88,7 +91,8 @@ class SortieController extends AbstractController
         return $this->render
         ('sortie/modifier.html.twig', [
             'sortie'=>$sortie,
-            'formSortie' => $form->createView()
+            'route'=>$routeName,
+            'formSortie' => $form->createView(),
         ]);
     }
 
