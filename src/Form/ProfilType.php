@@ -31,15 +31,14 @@ class ProfilType extends AbstractType
                 'second_options' => ['label' => 'Confirmation'],
             ])
             ->add('plainPassword', PasswordType::class,["mapped"=>false, 'label' => 'Mot de passe'])
-            ->add('campus', null, ["choice_label"=>"nom"])
             ->add('photo',FileType::class,[
                 'mapped'=>false,
                 'required'=>false,
-                'label'=>'Ma photo (format .jpg)',
+                'label'=>'Ma photo',
                 'constraints'=>[
                     new File([
                        'maxSize'=>'5000k',
-                        'mimeTypesMessage'=>'On veux une photo en .jpg'
+                        'mimeTypesMessage'=>'On veux une photo qui fait moins de 5 Mo'
                     ])
                 ]
             ])

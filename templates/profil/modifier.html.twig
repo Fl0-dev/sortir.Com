@@ -13,38 +13,56 @@
     </nav>
 
     <h1>Modifies ton profil, {{ app.user.pseudo }}</h1>
+    <div class="container">
+        <div class="row">
 
-    <div class="col-4">
-        {{ form_start (formUser) }}
-        <div class="row">
-            <div class="group col-6">
+            <div class="col-sm">
+                <img  style="width:200px;" src="{{ asset('uploads/photos/' ~ user.photo) }}"  alt="photo de profil">
             </div>
-        </div>
-        <div class="row">
-            <div class="group col-6">
-            </div>
-        </div>
-        <div class="row">
-            <div class="group col-6">
-            </div>
-        </div>
-        <div class="row">
-            <div class="group col-6">
-            </div>
-        </div>
-        <div class="row">
-            <div class="group col-6">
-            </div>
-        </div>
-        <div class="row">
-            <div class="group col-6">
-            </div>
-        </div>
-        {{ form_widget(formUser) }}
-        <button type="submit" class="btn btn-success">Enregistrer</button>
-        {{ form_end (formUser) }}
-        <a href="{{ asset('uploads/photos/' ~ user.photo) }}">Voir photo</a>
 
+
+
+            <div class="col-sm">
+                {{ form_start (formUser) }}
+                <div class="form-group ">
+                    {{ form_row(formUser.pseudo) }}
+                </div>
+                <div class="form-group ">
+                    {{ form_row(formUser.email) }}
+
+                </div>
+                <div class="form-group ">
+                    {{ form_row(formUser.telephone) }}
+                </div>
+                <div class="form-group ">
+                    {{ form_row(formUser.photo) }}
+                </div>
+                <div class="form-group ">
+                    {{ form_row(formUser.plainPassword) }}
+                </div>
+
+            </div>
+            <div class="col-sm">
+                    <div class="form-group ">
+                        {{ form_row(formUser.prenom) }}
+                    </div>
+                    <div class="form-group ">
+                        {{ form_row(formUser.nom) }}
+
+                    </div>
+                    <div class="form-group ">
+                        {{ form_row(formUser.new_password) }}
+                    </div>
+
+                    <div class="form-group ">
+                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                    </div>
+
+
+
+                {{ form_end (formUser) }}
+            </div>
+        </div>
     </div>
 </div>
     <script>

@@ -55,15 +55,20 @@ class ProfilController extends AbstractController
                 $user->setPhoto($nomDeFichier);
             }
 
-
+            //gestion des password
             $mdp = $form->get('plainPassword')->getData();
+            //si ancien password et user pseudo/email est bon
             if($encoder->isPasswordValid($this->getUser(), $mdp)){
-                $user->setPassword(
-                    $encoder->encodePassword(
-                        $user,
-                        $form->get('new_password')->getData()
-                    )
-                );
+                //et si quelque chose est noté dans le champ new_password
+                //on change le password en BD
+                if($form->get('new_password')->getData()) {
+                    $user->setPassword(
+                        $encoder->encodePassword(
+                            $user,
+                            $form->get('new_password')->getData()
+                        )
+                    );
+                }
                 $em->flush();
                 $this->addFlash('success', 'Les modifications ont bien été prise en compte!');
                 return $this->redirectToRoute('accueil');
