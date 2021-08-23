@@ -62,9 +62,9 @@
 
                 <button type="submit" name="choix" value="publie" class="btn btn-lg btn-outline-primary">Publier</button>
 
-                <button href="{{ path('sortie_supprimer',{id:sortie.id}) }}" class="btn btn-lg btn-danger">Supprimer</button>
+                <a href="{{ path('sortie_supprimer',{id:sortie.id}) }}" class="btn btn-lg btn-danger">Supprimer</a>
 
-                <button href="{{ path('accueil') }}" class="btn btn-lg btn-secondary">Annuler</button>
+                <a href="{{ path('accueil') }}" class="btn btn-lg btn-secondary">Annuler</a>
             </div>
 
             {{ form_end(formSortie) }}

@@ -128,12 +128,15 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/supprimer/", name ="supprimer")
+     * @Route("/supprimer/{id}", name ="supprimer")
      */
-    public function supprimer(Sortie $sortie, EntityManagerInterface $em) : Response
+    public function supprimer(Sortie $sortie, EntityManagerInterface $entityManager) : Response
     {
-        $em->remove($sortie);
-        $em->flush();
+
+        if ($sortie->getEtat()->getId()==1) {
+            $entityManager->remove($sortie);
+            $entityManager->flush();
+        }
         return $this->redirectToRoute("accueil");
     }
 
