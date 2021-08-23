@@ -50,9 +50,10 @@ class ProfilController extends AbstractController
                         $nomDeFichier
                     );
                 }catch (FileException $e){
-
+                    $this->addFlash('error',"Soucis lors de l'enregistrement. Désolé");
                 }
                 $user->setPhoto($nomDeFichier);
+                $this->addFlash('success','la photo a été bien ernregistrée !');
             }
 
             //gestion des password
