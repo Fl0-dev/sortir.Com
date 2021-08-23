@@ -16,10 +16,41 @@
 
     <div class="col-4">
         {{ form_start (formUser) }}
+        <div class="row">
+            <div class="group col-6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="group col-6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="group col-6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="group col-6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="group col-6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="group col-6">
+            </div>
+        </div>
         {{ form_widget(formUser) }}
         <button type="submit" class="btn btn-success">Enregistrer</button>
         {{ form_end (formUser) }}
+        <a href="{{ asset('uploads/photos/' ~ user.photo) }}">Voir photo</a>
+
     </div>
 </div>
-
+    <script>
+        $(document).on('change', '.custom-file-input', function () {
+            let fileName = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+            $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
+        });
+    </script>
 {% endblock %}

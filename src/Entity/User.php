@@ -75,6 +75,11 @@ class User implements UserInterface
      */
     private $sortiesOrganisees;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $photo;
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
@@ -272,6 +277,18 @@ class User implements UserInterface
                 $sortiesOrganisee->setOrganisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

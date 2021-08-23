@@ -86,17 +86,23 @@ h2
 /*------------------------ Détail Profil ------------------------------*/
 
 #bloc-detail-profil {
-    border : 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+
+    /*border : 1px solid #ccc;
     border-radius: .5rem;
     box-shadow: 2px 2px 10px rgba(0,0,0,.2);
-    padding: .5rem;
+    padding: .5rem;*/
 }
 
 #bloc-detail-profil div {
     margin : 0 .5rem;
     padding: 0 1rem;
 }
+#photoProfil{
+    width: 300px;
 
+}
 /*------------------------ Détail sortie ------------------------------*/
 
 #bloc-detail-sortie {

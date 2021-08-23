@@ -14,27 +14,38 @@
 
     <h1>{{ user.pseudo }}</h1>
 
+    <div class="grid_2">
+    <div id="photoProfil">
+        <img id="photoProfil" src="{{ asset('uploads/photos/' ~ user.photo) }}"  alt="photo de profil">
+    </div>
 
-    <section id="bloc-detail-profil">
-        <div class="grid_2">
-            <div class="font">Prénom :</div>
-            <div>{{ user.prenom }}</div>
-        </div>
-        <div class="grid_2">
-            <div class="font">Nom :</div>
-            <div> {{ user.nom }}</div>
-        </div>
-        <div class="grid_2">
-            <div class="font">Téléphone :</div>
-            <div>{{ user.telephone }}</div>
-        </div>
-        <div class="grid_2">
-            <div class="font">Campus :</div>
-            <div> {{ user.campus.nom }}</div>
-        </div>
+    <section id="bloc-detail-profil" class="col-8">
+
+            <div class="">
+                <div class="">
+                    <div class="font">Prénom :</div>
+                    <div>{{ user.prenom }}</div>
+                </div>
+                <div class="">
+                    <div class="font">Nom :</div>
+                    <div> {{ user.nom }}</div>
+                </div>
+                <div class="">
+                    <div class="font">Téléphone :</div>
+                    <div>{{ user.telephone }}</div>
+                </div>
+                <div class="">
+                    <div class="font">Campus :</div>
+                    <div> {{ user.campus.nom }}</div>
+                </div>
+            </div>
+
+
     </section>
+    </div>
     <div class="py-5">
         <a href="{{ path('user_modifier', { id : user.id }) }}" class="btn btn-outline-primary">Modifier</a>
     </div>
+
 </div>
 {% endblock %}
