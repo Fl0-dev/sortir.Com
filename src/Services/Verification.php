@@ -62,9 +62,11 @@ class Verification
         //pour chaque sortie
         foreach ($sorties as $sortie){
 
-            $interval = new DateInterval('PT'.$sortie->getDuree(). 'M');
-            $dateFinsortie = $sortie->getDateHeureDebut()->add($interval);
+            $sortieDateDebut = $sortie->getDateHeureDebut();
 
+            $interval = new DateInterval('PT'.$sortie->getDuree(). 'M');
+            $dateFinsortie = $sortieDateDebut->add($interval);
+            //TODO: faire en sorte que la date de début ne bouge pas
             //si état ouvert
             if ($sortie->getEtat()->getId()==2) {
                 //si date d'insciption > date d'aujourd'hui
@@ -88,7 +90,6 @@ class Verification
             }
             //pour les sorties qui se sont finit depuis 1 mois minimum
             $dateFinSortiePlusTrente = $dateFinsortie->add(new DateInterval('P1M'));
-
             if ($dateFinSortiePlusTrente < $today){
 
                 $sortie->setEtat($etatArchivee);
@@ -96,6 +97,6 @@ class Verification
             $this->entityManager->persist($sortie);
             $this->entityManager->flush();
         }
-
+        dd($sorties);
     }
 }
