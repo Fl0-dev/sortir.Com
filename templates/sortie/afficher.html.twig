@@ -64,7 +64,7 @@
                     <tbody>
                     {% for u in sortie.users %}
                         <tr>
-                            <td>{{ u.pseudo }}</td>
+                            <td><a href="{{ sortie.users.id }}">{{ u.pseudo }}</a></td>
                             <td>{{ u.nom }}</td>
                             <td>{{ u.prenom }}</td>
                         </tr>
