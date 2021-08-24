@@ -50,20 +50,26 @@ class ProfilController extends AbstractController
                         $nomDeFichier
                     );
                 }catch (FileException $e){
-
+                    $this->addFlash('error',"Soucis lors de l'enregistrement. Désolé");
                 }
                 $user->setPhoto($nomDeFichier);
+                $this->addFlash('success','la photo a été bien ernregistrée !');
             }
 
-
+            //gestion des password
             $mdp = $form->get('plainPassword')->getData();
+            //si ancien password et user pseudo/email est bon
             if($encoder->isPasswordValid($this->getUser(), $mdp)){
-                $user->setPassword(
-                    $encoder->encodePassword(
-                        $user,
-                        $form->get('new_password')->getData()
-                    )
-                );
+                //et si quelque chose est noté dans le champ new_password
+                //on change le password en BD
+                if($form->get('new_password')->getData()) {
+                    $user->setPassword(
+                        $encoder->encodePassword(
+                            $user,
+                            $form->get('new_password')->getData()
+                        )
+                    );
+                }
                 $em->flush();
                 $this->addFlash('success', 'Les modifications ont bien été prise en compte!');
                 return $this->redirectToRoute('accueil');

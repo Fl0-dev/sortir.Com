@@ -15,9 +15,13 @@
     <h1>{{ user.pseudo }}</h1>
 
     <div class="grid_2">
-    <div id="photoProfil">
-        <img id="photoProfil" src="{{ asset('uploads/photos/' ~ user.photo) }}"  alt="photo de profil">
-    </div>
+        <div class="col-sm">
+            {% if user.photo==null %}
+                <img style="width:200px;" src="{{ asset('img/defaut.png') }}"  alt="photo de profil">
+            {% else %}
+                <img  style="width:200px;" src="{{ asset('uploads/photos/' ~ user.photo) }}"  alt="photo de profil">
+            {% endif %}
+        </div>
 
     <section id="bloc-detail-profil" class="col-8">
 
