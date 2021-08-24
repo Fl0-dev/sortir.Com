@@ -12,40 +12,28 @@
         </ol>
     </nav>
 
-    <h1>{{ user.pseudo }}</h1>
+    <div class="h1 container row justify-content-center mb-5"> Détail Profil</div>
 
-    <div class="grid_2">
-    <div id="photoProfil">
-        <img id="photoProfil" src="{{ asset('uploads/photos/' ~ user.photo) }}"  alt="photo de profil">
-    </div>
 
-    <section id="bloc-detail-profil" class="col-8">
-
-            <div class="">
-                <div class="">
-                    <div class="font">Prénom :</div>
-                    <div>{{ user.prenom }}</div>
-                </div>
-                <div class="">
-                    <div class="font">Nom :</div>
-                    <div> {{ user.nom }}</div>
-                </div>
-                <div class="">
-                    <div class="font">Téléphone :</div>
-                    <div>{{ user.telephone }}</div>
-                </div>
-                <div class="">
-                    <div class="font">Campus :</div>
-                    <div> {{ user.campus.nom }}</div>
-                </div>
+    <div class="container row justify-content-center">
+    <div class=" align-items-center col-6" style="max-width:18rem;">
+        {% if user.photo==null %}
+            <img style="width:200px;" src="{{ asset('img/defaut.png') }}"  alt="photo de profil">
+        {% else %}
+            <img  style="width:200px;" src="{{ asset('uploads/photos/' ~ user.photo) }}"  alt="photo de profil">
+        {% endif %}
+        <div class="card-body column justify-content-center">
+            <h5 class="card-title">{{ user.pseudo }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Prénom : {{ user.prenom }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Nom : {{ user.nom }}</h6>
+            <p class="card-text">Téléphone : {{ user.telephone }}</p>
+            <p class="card-text">Campus : {{ user.campus.nom }}</p>
+            <div class="container row justify-content-center">
+            <a href="{{ path('user_modifier', { id : user.id }) }}" class="card-link btn btn-outline-primary">Modifier</a>
             </div>
-
-
-    </section>
+        </div>
     </div>
-    <div class="py-5">
-        <a href="{{ path('user_modifier', { id : user.id }) }}" class="btn btn-outline-primary">Modifier</a>
-    </div>
+</div>
 
 </div>
 {% endblock %}

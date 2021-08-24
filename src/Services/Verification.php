@@ -62,8 +62,12 @@ class Verification
         //pour chaque sortie
         foreach ($sorties as $sortie){
 
+            $sortieDateDebut = $sortie->getDateHeureDebut();
+            //clonage de la variable pour éviter de toucher à la variable $dateHeureDebut
+            $dateFinsortie = clone $sortieDateDebut;
             $interval = new DateInterval('PT'.$sortie->getDuree(). 'M');
-            $dateFinsortie = $sortie->getDateHeureDebut()->add($interval);
+            $dateFinsortie->add($interval);
+
 
             //si état ouvert
             if ($sortie->getEtat()->getId()==2) {
@@ -88,7 +92,6 @@ class Verification
             }
             //pour les sorties qui se sont finit depuis 1 mois minimum
             $dateFinSortiePlusTrente = $dateFinsortie->add(new DateInterval('P1M'));
-
             if ($dateFinSortiePlusTrente < $today){
 
                 $sortie->setEtat($etatArchivee);
