@@ -63,11 +63,12 @@ class Verification
         foreach ($sorties as $sortie){
 
             $sortieDateDebut = $sortie->getDateHeureDebut();
-
+            //clonage de la variable pour éviter de toucher à la variable $dateHeureDebut
+            $dateFinsortie = clone $sortieDateDebut;
             $interval = new DateInterval('PT'.$sortie->getDuree(). 'M');
-            $dateFinsortie = $sortieDateDebut->add($interval);
+            $dateFinsortie->add($interval);
 
-            //TODO: faire en sorte que la date de début ne bouge pas
+
             //si état ouvert
             if ($sortie->getEtat()->getId()==2) {
                 //si date d'insciption > date d'aujourd'hui
