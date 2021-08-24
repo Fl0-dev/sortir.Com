@@ -7,6 +7,7 @@ use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\User;
+use App\Entity\Ville;
 use phpDocumentor\Reflection\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -29,6 +30,10 @@ class SortieFormType extends AbstractType
             ->add('duree')
             ->add('nbInscriptionsMax')
             ->add('infosSortie')
+            ->add('ville', EntityType::class,[
+                'class'=>Ville::class,
+                "mapped"=>false,
+                'choice_label' => 'nom'])
             ->add('campus',EntityType::class,[
                 'class'=>Campus::class,
                 'choice_label'=>'nom'])

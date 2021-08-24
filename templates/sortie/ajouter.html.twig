@@ -26,37 +26,39 @@
             <div class="group col-6">
                 {{ form_row(formSortie.dateHeureDebut) }}
             </div>
-            <div class="group col-6">
-                {{ form_row(formSortie.lieu) }}<a href="{{ path('lieu_ajouter',{route:route,id:'ajout'}) }}"><i class="bi bi-plus-circle-fill"></i></a>
-
+            <div class="group col-6" id="ville">
+                    {{ form_row(formSortie.ville) }}
             </div>
             <div class="group col-6">
                 {{ form_row(formSortie.dateLimiteInscription) }}
+            </div>
+
+            <div class="group col-6" id="lieu" name="lieu">
+                    {{ form_row(formSortie.lieu) }}<a href="{{ path('lieu_ajouter',{route:route,id:'ajout'}) }}"><i class="bi bi-plus-circle-fill"></i></a>
+            </div>
+
+            <div class="group col-6">
+                {{ form_row(formSortie.nbInscriptionsMax) }}
             </div>
             <div class="group col-6">
                 <p> Rue : </p>
                 <p>{</p>
             </div>
             <div class="group col-6">
-                {{ form_row(formSortie.nbInscriptionsMax) }}
+                {{ form_row(formSortie.duree) }}
             </div>
             <div class="group col-6">
                 <p> Code Postal : </p>
                 <p>{</p>
             </div>
             <div class="group col-6">
-                {{ form_row(formSortie.duree) }}
-            </div>
-            <div class="group col-6">
                 <p> Latitude : </p>
-
             </div>
             <div class="group col-6">
-                {{ form_row(formSortie.infosSortie) }}
+                  {{ form_row(formSortie.infosSortie) }}
             </div>
             <div class="group col-6">
                 <p> Longitude : </p>
-
             </div>
         </div>
         <div class="row-12 text-center">
@@ -64,7 +66,7 @@
 
             <button type="submit" name="choix" value="publie" class="btn btn-lg btn-outline-primary">Publier</button>
 
-            <button href="{{ path('accueil') }}" value="supprime" class="btn btn-lg btn-secondary">Annuler</button>
+            <a href="{{ path('accueil') }}" value="supprime" class="btn btn-lg btn-secondary">Annuler</a>
         </div>
 
         {{ form_end(formSortie) }}
@@ -72,4 +74,64 @@
     </section>
 
 </div>
+<script>
+
+    let lieux = [];
+    let villes = [];
+
+    let url = "http://localhost/sortirComv2Apache/public/sortie/ajouter";
+    fetch(url).then(response => response.json()) // je recupere le body de la requete
+        .then(data => {
+            console.log(data);
+
+            // ajax <- JSON fruits (tableau) et couleurs (tableau)
+            lieux = data.lieu;
+// ------------------------------
+            villes = data.ville;
+            // UN SELECTEUR SUR LA BALISE DIV #CVILLE
+            let divV = document.getElementById('ville');
+            // alimenter la balise ville :
+            for (let ville of villes)
+            {
+                let option = document.createElement('option'); // <option></option>
+                option.innerHTML = ville.nom; // <option> Nantes </option>
+                option.value = ville.id; // <option value="3"> Nantes </option>
+                // je met la balise option dans la balise div
+                divV.appendChild(option);
+            }
+
+            remplirLieu(ville[0].id);
+            // --------------------------------------------------------------------------------------------
+            divV.onchange= function ()
+            {
+                console.log('ok');
+                let idVille = this.value;
+                remplirLieu(idVille);
+            };
+        } )
+
+
+
+
+    function remplirLieu(idVille)
+    {
+        // en fonction de l'id ville
+        // construire la div / choice_label de lieux
+        let divL = document.getElementById('lieu');
+        divL.innerHTML = ''; // je vide la liste de lieux
+        for (let lieu of lieux){  // si la ville correspond à idVille
+
+            if (idVille == lieu.ville.id){
+                let option = document.createElement('option'); // <option></option>
+                option.innerHTML = lieu.nom; // <option> pomme </option>
+                option.value = lieu.id; // <option value="1"> pomme </option>
+                // je met la balise option dans la balise select
+                divL.appendChild(option);
+            }
+        }
+    }
+
+
+</script>
+
 {% endblock %}
