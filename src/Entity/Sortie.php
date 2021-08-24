@@ -41,7 +41,7 @@ class Sortie
      * * @Assert\Expression(
      *     "this.getdateHeureDebut() > this.getdateLimiteInscription()",
      *     message="La date de fin d'inscription doit être antérieure à la date du début de la sortie"
-     * )
+     * )!
      *
      */
     private $dateLimiteInscription;

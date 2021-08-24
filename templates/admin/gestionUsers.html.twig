@@ -13,6 +13,7 @@
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
             <th scope="col">Campus</th>
+            <th scope="col">Rôles</th>
             <th scope="col">Gestion</th>
         </tr>
         </thead>
@@ -24,6 +25,7 @@
             <td>{{ user.nom }}</td>
             <td>{{ user.prenom }}</td>
             <td>{{ user.campus.nom }}</td>
+            <td>{% for role in user.roles %}{{ role }}&nbsp;{% endfor %}</td>
             <td><a href="#" class="btn btn-sm btn-primary">Modifier Rôle</a> <a href="#" class="btn btn-sm btn-dark">Rendre Inactif</a> <a href="#" class="btn btn-sm btn-danger">Supprimer</a> </td>
         </tr>
         </tbody>
