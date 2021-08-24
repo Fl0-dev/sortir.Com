@@ -66,6 +66,7 @@ class Verification
 
             $interval = new DateInterval('PT'.$sortie->getDuree(). 'M');
             $dateFinsortie = $sortieDateDebut->add($interval);
+
             //TODO: faire en sorte que la date de début ne bouge pas
             //si état ouvert
             if ($sortie->getEtat()->getId()==2) {
@@ -97,6 +98,6 @@ class Verification
             $this->entityManager->persist($sortie);
             $this->entityManager->flush();
         }
-        dd($sorties);
+
     }
 }
