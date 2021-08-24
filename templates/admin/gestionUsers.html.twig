@@ -26,7 +26,7 @@
             <td>{{ user.prenom }}</td>
             <td>{{ user.campus.nom }}</td>
             <td>{% for role in user.roles %}{{ role }}&nbsp;{% endfor %}</td>
-            <td><a href="#" class="btn btn-sm btn-primary">Modifier Rôle</a> <a href="#" class="btn btn-sm btn-dark">Rendre Inactif</a> <a href="#" class="btn btn-sm btn-danger">Supprimer</a> </td>
+            <td><a href="{{ path('admin_modifierRole',{id:user.id}) }}" class="btn btn-sm btn-primary">Modifier Rôle</a> <a href="#" class="btn btn-sm btn-dark">Rendre Inactif</a> <a href="#" class="btn btn-sm btn-danger">Supprimer</a> </td>
         </tr>
         </tbody>
         {% endfor %}

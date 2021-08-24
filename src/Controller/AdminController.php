@@ -44,7 +44,12 @@ class AdminController extends AbstractController
      */
     public function modifierRole(User $user,EntityManagerInterface $entityManager): Response
     {
+        dd($user->getRoles());
+        //si 2 rôles dans le tableau enlever
+        if ($user->getRoles()=="ROLE_USER")
+        $user->setRoles(["ROLE_ADMIN"]);
 
+        $entityManager->flush();
         return $this->redirectToRoute('admin_gestionUsers');
     }
 
