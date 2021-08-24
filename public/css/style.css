@@ -80,6 +80,8 @@ h2
 
 #bouton-creer-sortie btn {
     text-align: center;
+    align-items: flex-start;
+
 }
 
 
@@ -146,3 +148,4 @@ h2
 .logonavbar {
     width: 125px;
 }
+
