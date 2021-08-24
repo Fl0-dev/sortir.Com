@@ -27,9 +27,7 @@ class Sortie
 
     /**
      * @ORM\Column(type="datetime")
-
      */
-
     private $dateHeureDebut;
 
     /**
