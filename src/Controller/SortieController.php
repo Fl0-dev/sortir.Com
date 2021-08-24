@@ -8,7 +8,9 @@ use App\Form\AnnulationType;
 use App\Form\SortieFormType;
 
 use App\Repository\EtatRepository;
+use App\Repository\LieuRepository;
 use App\Repository\SortieRepository;
+use App\Repository\VilleRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -188,6 +190,33 @@ class SortieController extends AbstractController
 
     }
 
+    /**
+     * @Route("/lieux-villes", name="lieux-et-villes")
+     */
+    public function lieuxVilles(LieuRepository $repoLieu, VilleRepository $repoVille): Response
+    {
+        $tabVille = [];
+        foreach ( $repoVille->findAll() as $v )
+        {
+            $ville['id'] = $v->getId();
+            $ville['nom'] = $v->getNom();
+            $tabVille[] = $ville;
+        }
 
+        $tabLieu = [];
+        foreach ( $repoLieu->findAll() as $l )
+        {
+            $lieu['id'] = $l->getId();
+            $lieu['nom'] = $l->getNom();
+            $lieu['ville']['id'] = $l->getVille()->getId();
+            $lieu['ville']['nom'] = $l->getVille()->getNom();
+            $tabLieu[] = $lieu;
+        }
+
+        $tab['villes'] = $tabVille;
+        $tab['lieux'] = $tabLieu;
+
+        return $this->json($tab);
+    }
 
 }
