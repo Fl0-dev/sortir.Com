@@ -29,7 +29,9 @@
             <p class="card-text">Téléphone : {{ user.telephone }}</p>
             <p class="card-text">Campus : {{ user.campus.nom }}</p>
             <div class="container row justify-content-center">
+                {% if app.user==app.user.id %}
             <a href="{{ path('user_modifier', { id : user.id }) }}" class="card-link btn btn-outline-primary">Modifier</a>
+                {% endif %}
             </div>
         </div>
     </div>
