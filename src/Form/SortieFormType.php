@@ -29,6 +29,8 @@ class SortieFormType extends AbstractType
             ->add('duree')
             ->add('nbInscriptionsMax')
             ->add('infosSortie')
+            ->add('ville', EntityType::class,[
+                'choice_label' => 'nom'])
             ->add('campus',EntityType::class,[
                 'class'=>Campus::class,
                 'choice_label'=>'nom'])

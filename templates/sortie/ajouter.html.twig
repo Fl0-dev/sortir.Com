@@ -27,36 +27,36 @@
                 {{ form_row(formSortie.dateHeureDebut) }}
             </div>
             <div class="group col-6">
-                {{ form_row(formSortie.lieu) }}<a href="{{ path('lieu_ajouter',{route:route,id:'ajout'}) }}"><i class="bi bi-plus-circle-fill"></i></a>
-
+                {{ form_row(formSortie.ville) }}
             </div>
             <div class="group col-6">
                 {{ form_row(formSortie.dateLimiteInscription) }}
+            </div>
+            <div class="group col-6">
+                {{ form_row(formSortie.lieu) }}<a href="{{ path('lieu_ajouter',{route:route,id:'ajout'}) }}"><i class="bi bi-plus-circle-fill"></i></a>
+            </div>
+            <div class="group col-6">
+                {{ form_row(formSortie.nbInscriptionsMax) }}
             </div>
             <div class="group col-6">
                 <p> Rue : </p>
                 <p>{</p>
             </div>
             <div class="group col-6">
-                {{ form_row(formSortie.nbInscriptionsMax) }}
+                {{ form_row(formSortie.duree) }}
             </div>
             <div class="group col-6">
                 <p> Code Postal : </p>
                 <p>{</p>
             </div>
             <div class="group col-6">
-                {{ form_row(formSortie.duree) }}
-            </div>
-            <div class="group col-6">
                 <p> Latitude : </p>
-
             </div>
             <div class="group col-6">
-                {{ form_row(formSortie.infosSortie) }}
+                  {{ form_row(formSortie.infosSortie) }}
             </div>
             <div class="group col-6">
                 <p> Longitude : </p>
-
             </div>
         </div>
         <div class="row-12 text-center">
@@ -64,7 +64,7 @@
 
             <button type="submit" name="choix" value="publie" class="btn btn-lg btn-outline-primary">Publier</button>
 
-            <button href="{{ path('accueil') }}" value="supprime" class="btn btn-lg btn-secondary">Annuler</button>
+            <a href="{{ path('accueil') }}" value="supprime" class="btn btn-lg btn-secondary">Annuler</a>
         </div>
 
         {{ form_end(formSortie) }}
@@ -72,4 +72,10 @@
     </section>
 
 </div>
+<script>
+
+
+
+</script>
+
 {% endblock %}
