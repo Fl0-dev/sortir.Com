@@ -12,10 +12,15 @@ class RechercheSortie{
 
     private ?string $text =null;
 
-    private ?Datetime $dateDebut;
+    /**
+     * @var null|DateTime
+     */
+    private Datetime $dateDebut;
 
-
-    private ?Datetime $dateFin;
+    /**
+     * @var null|DateTime
+     */
+    private Datetime $dateFin;
 
     private  $organise;
     private  $inscrit;

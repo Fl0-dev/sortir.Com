@@ -53,7 +53,7 @@ class ProfilController extends AbstractController
                     $this->addFlash('error',"Soucis lors de l'enregistrement. Désolé");
                 }
                 $user->setPhoto($nomDeFichier);
-                $this->addFlash('success','la photo a été bien ernregistrée !');
+
             }
 
             //gestion des password
@@ -72,7 +72,7 @@ class ProfilController extends AbstractController
                 }
                 $em->flush();
                 $this->addFlash('success', 'Les modifications ont bien été prise en compte!');
-                return $this->redirectToRoute('accueil');
+                return $this->redirectToRoute('user_profil',['id'=>$user->getId()]);
             }else{
                 $form->get('plainPassword')->addError(new FormError('mot de passe erroné.'));
             }

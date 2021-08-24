@@ -100,7 +100,6 @@ class SortieRepository extends ServiceEntityRepository
             $qb ->andWhere('s.dateHeureDebut <= :now')
                 ->setParameter('now', date('Y-m-d H:i:s') );
         }
-        //$qb->orderBy('dateHeureDebut','ASC');
         $query = $qb->getQuery();
         $query->setMaxResults(50);
 
