@@ -22,7 +22,7 @@ class CreationUserParFichierCommand extends Command
     private string $dataDirectory;
     private UserRepository $userRepository;
     private SymfonyStyle $io;
-    protected static $defaultName = 'creationUserParFichier';
+    protected static $defaultName = 'app:create-users-from-file';
     protected static $defaultDescription = 'Importer des données grâce à un fichier';
 
 
