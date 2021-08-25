@@ -12,14 +12,15 @@
             </ol>
         </nav>
 
-    <h1>Inscription</h1>
+    <section >
+    <h1 class="container row justify-content-center">Incription d'un utilisateur</h1>
 
-    <div class="col-4">
+    <div class="container justify-content-center col-8">
         {{ form_start(registrationForm) }}
         {{ form_widget(registrationForm)}}
         <button type="submit" class="btn btn-outline-primary">Enregister</button>
         {{ form_end(registrationForm) }}
     </div>
-
+    </section>
 </div>
 {% endblock %}
