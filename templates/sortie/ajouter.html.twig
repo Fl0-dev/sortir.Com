@@ -125,7 +125,6 @@
             remplirLieu(villes[0].id);
             remplirAdresse(lieux[0].id);
 
-            // --------------------------------------------------------------------------------------------
             selectV.onchange= function ()
             {
                 console.log('ok');
@@ -143,8 +142,16 @@
         let selectL = document.getElementById('lieu');
         selectL.innerHTML = ''; // je vide la liste de lieux
 
-        for (let lieu of lieux){  // si la ville correspond à idVille
+        let selectAdresse = document.getElementById('lieu_rue');
+        selectAdresse.innerHTML = ''; // je vide le paragraphe rue
 
+        let selectCP = document.getElementById('lieu_cp');
+        selectCP.innerHTML = ''; // je vide le paragraphe CP
+
+        let selectGPS = document.getElementById('lieu_gps');
+        selectGPS.innerHTML = ''; // je vide les paragraphes coordonnées GPS
+
+        for (let lieu of lieux){  // si la ville correspond à idVille
             if (idVille == lieu.ville.id){
                 let option = document.createElement('option'); // <option></option>
                 option.innerHTML = lieu.nom; // <option> le ferrailleur </option>
@@ -153,6 +160,11 @@
                 selectL.appendChild(option);
             }
         }
+        selectL.onchange = function () {
+            console.log('ok');
+            let idLieu = this.value;
+            remplirAdresse(idLieu);
+        };
     }
 
     function remplirAdresse(idLieu)
