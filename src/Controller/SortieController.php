@@ -84,6 +84,7 @@ class SortieController extends AbstractController
         return $this->render
         ('sortie/ajouter.html.twig', [
             'route'=>$routeName,
+            'user'=>$this->getUser(),
             'formSortie' => $form->createView(),
             ]);
     }
@@ -200,6 +201,7 @@ class SortieController extends AbstractController
         {
             $ville['id'] = $v->getId();
             $ville['nom'] = $v->getNom();
+            $ville['code_postal'] = $v->getCodePostal();
             $tabVille[] = $ville;
         }
 
@@ -208,8 +210,12 @@ class SortieController extends AbstractController
         {
             $lieu['id'] = $l->getId();
             $lieu['nom'] = $l->getNom();
+            $lieu['rue'] = $l->getRue();
+            $lieu['latitude'] = $l->getLatitude();
+            $lieu['longitude'] = $l->getLongitude();
             $lieu['ville']['id'] = $l->getVille()->getId();
             $lieu['ville']['nom'] = $l->getVille()->getNom();
+
             $tabLieu[] = $lieu;
         }
 
