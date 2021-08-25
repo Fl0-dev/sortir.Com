@@ -101,4 +101,32 @@ class Verification
         }
 
     }
+
+    /**
+     * permet de modifier les sorties d'un user
+     * @param $user
+     */
+    public function gestionSortiesSelonEtatUser($user){
+        //si user organisateur->annulation
+        //récupération des sorties organisées
+        $sortiesOrganisees = $this->sortieRepository->findBy(['organisateur'=>$user]);
+        if ($sortiesOrganisees){
+            $etatAnnule = $this->etatRepository->find(5);
+            foreach ($sortiesOrganisees as $sortie){
+                $sortie->setEtat($etatAnnule);
+                $sortie->setInfosAnnulation("L'organisateur/trice ne fait plus parti du site");
+                $this->entityManager->flush();
+            }
+        }
+        //si user participant
+        //récupération des sorties participées
+        $sortiesParticipees = $this->sortieRepository->findSortiesParticipeesBy($user);
+        if ($sortiesParticipees){
+            $etatAnnule = $this->etatRepository->find(5);
+            foreach ($sortiesParticipees as $sortie){
+                $sortie->removeUser($user);
+                $this->entityManager->flush();
+            }
+        }
+    }
 }

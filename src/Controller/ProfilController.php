@@ -22,6 +22,11 @@ class ProfilController extends AbstractController
      */
     public function profil(User $user): Response
     {
+        $user = $this->getUser();
+        if($user->getEtat()==false){
+            return $this->render('bundles/TwigBundle/Exception/inactifUser.html.twig');
+        }
+
         return $this->render('profil/profil.html.twig', [
             'user' => $user,
         ]);

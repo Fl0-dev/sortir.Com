@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Services\Verification;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,9 +60,12 @@ class AdminController extends AbstractController
     /**
      * @Route("accueil/gestionUsers/supprimer/{id}", name="supprimer")
      */
-    public function supprimerUser(User $user,EntityManagerInterface $entityManager): Response
+    public function supprimerUser(User $user,EntityManagerInterface $entityManager,Verification $verification): Response
     {
-
+        //gestion des sorties
+        $verification->gestionSortiesSelonEtatUser($user);
+        //si organisateur->annuler les sorties
+        //si participants->enlever de la sortie
         $entityManager->remove($user);
         $entityManager->flush();
         return $this->redirectToRoute('admin_gestionUsers');
@@ -73,12 +77,15 @@ class AdminController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function etatUser(User $user,EntityManagerInterface $entityManager): Response
+    public function etatUser(User $user,EntityManagerInterface $entityManager,Verification $verification): Response
     {
-
+        //si organisateur->annuler les sorties
+        //si participants->enlever de la sortie
         $userRoles = $user->getRoles();
         //si 2 rôles dans le tableau enlever
         if (in_array('ROLE_USER',$userRoles)) {
+            //gestion des sorties
+            $verification->gestionSortiesSelonEtatUser($user);
             $user->setRoles([""]);
             $user->setEtat(false);
         }else{

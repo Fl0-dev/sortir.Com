@@ -105,4 +105,12 @@ class SortieRepository extends ServiceEntityRepository
 
         return $query->execute();
     }
+
+    public function findSortiesParticipeesBy($user){
+        $qb =$this->createQueryBuilder('s');
+        $qb->where(':inscrit MEMBER OF s.users')
+            ->setParameter('inscrit', $user);
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
 }
