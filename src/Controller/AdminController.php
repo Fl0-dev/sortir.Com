@@ -76,11 +76,16 @@ class AdminController extends AbstractController
     public function etatUser(User $user,EntityManagerInterface $entityManager): Response
     {
 
-        if ($user->getEtat()==true){
+        $userRoles = $user->getRoles();
+        //si 2 rôles dans le tableau enlever
+        if (in_array('ROLE_USER',$userRoles)) {
+            $user->setRoles([""]);
             $user->setEtat(false);
         }else{
+            $user->setRoles(["ROLE_USER"]);
             $user->setEtat(true);
         }
+        $entityManager->flush();
         return $this->redirectToRoute('admin_gestionUsers');
     }
 }

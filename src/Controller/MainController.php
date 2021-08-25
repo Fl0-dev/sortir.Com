@@ -31,6 +31,11 @@ class MainController extends AbstractController
      */
     public function list(SortieRepository $sortieRepository,Verification $verification): Response
     {
+        $user = $this->getUser();
+        if($user->getEtat()==false){
+            return $this->render('bundles/TwigBundle/Exception/inactifUser.html.twig');
+        }
+
         //traitement des états des sorties
         $verification->gestionEtatSorties();
         $rechercheSortie = new RechercheSortie();
