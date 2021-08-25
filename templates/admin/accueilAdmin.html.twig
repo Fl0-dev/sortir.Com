@@ -3,7 +3,7 @@
 {% block title %}{{parent()}} | Administration{% endblock %}
 
 {% block body %}
-<h1> Bienvenue dans le volet administration {{ user.pseudo }}:</h1>
+<h1> Bienvenue dans le volet administration {{ app.user.pseudo }}:</h1>
 
     <div class="list-group">
         <a href="{{path('admin_gestionUsers') }}" class="list-group-item list-group-item-action ">Gestion des utilisateurs</a>

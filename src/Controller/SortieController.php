@@ -2,28 +2,24 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Sortie;
-use App\Entity\User;
 use App\Form\AnnulationType;
 use App\Form\SortieFormType;
-
 use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
-use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function Symfony\Component\Translation\t;
-
 /**
  * @Route("/sortie", name = "sortie_")
  */
 class SortieController extends AbstractController
 {
+
 
     /**
      * @Route("/afficher/{id}", name = "afficher")
@@ -42,8 +38,8 @@ class SortieController extends AbstractController
      * @param EtatRepository $etatRepository
      * @return Response
      */
-    public function ajouter(Request $request,
-                            EtatRepository $etatRepository,
+    public function ajouter(Request                $request,
+                            EtatRepository         $etatRepository,
                             EntityManagerInterface $entityManager): Response
     {
         //récupération de la route pour la redirection dans lieu
@@ -61,11 +57,11 @@ class SortieController extends AbstractController
         //si valide
         if ($form->isSubmitted() && $form->isValid()) {
             //si l'user veut que la sortie soit créée
-            if ($request->get("choix")==="enregistre") {
+            if ($request->get("choix") === "enregistre") {
                 $sortie->setEtat($etats[0]);
             }
             //Si l'user veut qu'elle soit publier direct
-            if ($request->get("choix")==="publie") {
+            if ($request->get("choix") === "publie") {
                 $sortie->setEtat($etats[1]);
             }
             //ajout de l'user dans la sortie
@@ -76,27 +72,27 @@ class SortieController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Sortie crée !');
+            $this->addFlash('success', 'La sortie a bien été crée.');
             return $this->redirectToRoute('accueil');
 
         }
 
         return $this->render
         ('sortie/ajouter.html.twig', [
-            'route'=>$routeName,
-            'user'=>$this->getUser(),
+            'route' => $routeName,
+            'user' => $this->getUser(),
             'formSortie' => $form->createView(),
-            ]);
+        ]);
     }
 
 
     /**
      * @Route("/{id}/modifier/", name ="modifier")
      */
-    public function modifier(Sortie $sortie,
-                             Request $request,
-                             EtatRepository $etatRepository,
-                             EntityManagerInterface $entityManager) : Response
+    public function modifier(Sortie                 $sortie,
+                             Request                $request,
+                             EtatRepository         $etatRepository,
+                             EntityManagerInterface $entityManager): Response
     {
         //récupération de la route pour la redirection dans lieu
         $routeName = $request->get('_route');
@@ -109,23 +105,23 @@ class SortieController extends AbstractController
         //si valide
         if ($form->isSubmitted() && $form->isValid()) {
             //si l'user veut que la sortie soit créée
-            if ($request->get("choix")==="enregistre") {
+            if ($request->get("choix") === "enregistre") {
                 $sortie->setEtat($etats[0]);
             }
             //Si l'user veut qu'elle soit publier direct
-            if ($request->get("choix")==="publie") {
+            if ($request->get("choix") === "publie") {
                 $sortie->setEtat($etats[1]);
             }
             //on inscrit en BD
             $entityManager->flush();
-
+            $this->addFlash('success', 'La sortie a bien été modifiée.');
             return $this->redirectToRoute('accueil');
         }
 
         return $this->render
         ('sortie/modifier.html.twig', [
-            'sortie'=>$sortie,
-            'route'=>$routeName,
+            'sortie' => $sortie,
+            'route' => $routeName,
             'formSortie' => $form->createView(),
         ]);
     }
@@ -133,12 +129,13 @@ class SortieController extends AbstractController
     /**
      * @Route("/supprimer/{id}", name ="supprimer")
      */
-    public function supprimer(Sortie $sortie, EntityManagerInterface $entityManager) : Response
+    public function supprimer(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
 
-        if ($sortie->getEtat()->getId()==1) {
+        if ($sortie->getEtat()->getId() == 1) {
             $entityManager->remove($sortie);
             $entityManager->flush();
+            $this->addFlash('success', 'La sortie a bien été supprimée.');
         }
         return $this->redirectToRoute("accueil");
     }
@@ -152,9 +149,9 @@ class SortieController extends AbstractController
      * @param EtatRepository $etatRepository
      * @return Response
      */
-    public function annuler(Sortie $sortie,EntityManagerInterface $entityManager, Request $request,EtatRepository $etatRepository): Response
+    public function annuler(Sortie $sortie, EntityManagerInterface $entityManager, Request $request, EtatRepository $etatRepository): Response
     {
-        $annulationForm = $this->createForm(AnnulationType::class,$sortie);
+        $annulationForm = $this->createForm(AnnulationType::class, $sortie);
         $annulationForm->handleRequest($request);
         if ($annulationForm->isSubmitted() && $annulationForm->isValid()) {
 
@@ -162,14 +159,14 @@ class SortieController extends AbstractController
             $etatAnnulee = $etatRepository->find(6);
             $sortie->setEtat($etatAnnulee);
             $entityManager->flush();
-
+            $this->addFlash('warning', 'La sortie a bien été annulée.');
             return $this->redirectToRoute('accueil');
         }
 
         return $this->render
-        ('sortie/annuler.html.twig',[
-            'annulationForm'=>$annulationForm->createView(),
-            'sortie'=>$sortie,
+        ('sortie/annuler.html.twig', [
+            'annulationForm' => $annulationForm->createView(),
+            'sortie' => $sortie,
         ]);
     }
 
@@ -180,13 +177,14 @@ class SortieController extends AbstractController
      * @param EtatRepository $etatRepository
      * @return Response
      */
-    public function publierDirect(Sortie $sortie,
+    public function publierDirect(Sortie                 $sortie,
                                   EntityManagerInterface $entityManager,
-                                  EtatRepository $etatRepository):Response
+                                  EtatRepository         $etatRepository): Response
     {
         $etatOuverte = $etatRepository->find(2);
         $sortie->setEtat($etatOuverte);
         $entityManager->flush();
+        $this->addFlash('success', 'La sortie a bien été publiée.');
         return $this->redirectToRoute('accueil');
 
     }
@@ -197,8 +195,7 @@ class SortieController extends AbstractController
     public function lieuxVilles(LieuRepository $repoLieu, VilleRepository $repoVille): Response
     {
         $tabVille = [];
-        foreach ( $repoVille->findAll() as $v )
-        {
+        foreach ($repoVille->findAll() as $v) {
             $ville['id'] = $v->getId();
             $ville['nom'] = $v->getNom();
             $ville['code_postal'] = $v->getCodePostal();
@@ -206,8 +203,7 @@ class SortieController extends AbstractController
         }
 
         $tabLieu = [];
-        foreach ( $repoLieu->findAll() as $l )
-        {
+        foreach ($repoLieu->findAll() as $l) {
             $lieu['id'] = $l->getId();
             $lieu['nom'] = $l->getNom();
             $lieu['rue'] = $l->getRue();
@@ -224,5 +220,4 @@ class SortieController extends AbstractController
 
         return $this->json($tab);
     }
-
 }

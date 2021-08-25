@@ -2,19 +2,21 @@
 
 namespace App\Command;
 
+use App\Entity\Campus;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\DocBlock\Serializer;
+use http\Env\Response;
 use Symfony\Component\Console\Command\Command;
-
 use Symfony\Component\Console\Input\InputInterface;
-
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\YamlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class CreationUserParFichierCommand extends Command
 {
@@ -58,7 +60,7 @@ class CreationUserParFichierCommand extends Command
             new YamlEncoder(),
         ];
         //création du serializer qui fera la conversion
-        $serializer = new \Symfony\Component\Serializer\Serializer($normalizers,$encoders);
+        $serializer = new Serializer($normalizers,$encoders);
         /** @var string $fileString */
         $fileString = file_get_contents($file);//mise en string du contenu du fichier
         //récupération grâce au serializer du contenu dans un tableau
@@ -80,6 +82,53 @@ class CreationUserParFichierCommand extends Command
 
 
     private function createUsers(): void{
-        $this->getDataFromFile();
+        $this->io->section('Création des utilisateurs à partir du fichier');
+        //connaître le nombre d'users créés
+        $userCreated = 0;
+        //boucler sur le tableau retourner par la fonction
+        foreach ($this->getDataFromFile() as $row){
+            //vérif si pas déjà dans la BD par l'email et par le pseudo
+            if (array_key_exists('email',$row) && !empty($row['email'])){
+                $user = $this->userRepository->findOneBy([
+                    'email'=>$row['email']
+                ]);
+            } elseif (array_key_exists('pseudo',$row) && !empty($row['pseudo'])) {
+                $user = $this->userRepository->findOneBy([
+                    'pseudo'=>$row['pseudo']
+                ]);
+                //si pas de user :
+                if(!$user){
+                    $user =new User();
+                    $campus =new Campus();
+                    //Hydratation d'un campus
+                    $campus->setNom($row['campus']);
+                    //hydratation d'un user avec
+                    $user->setEmail($row['email'])
+                        ->setPassword('badpassword')
+                        ->setNom($row['nom'])
+                        ->setPrenom($row['prenom'])
+                        ->setPseudo($row['pseudo'])
+                        ->setCampus($row['campus'])
+                        ->setRoles(["ROLE_USER"])
+                        ->setEtat(true);
+                    $this->entityManager->persist($user);
+                    //on incrémente pour chaque création
+                    $userCreated ++;
+
+                }
+            }
+        }
+        $this->entityManager->flush();
+
+        if($userCreated>1){
+            $string = $userCreated . "utilisateurs/trices créés en BD";
+        }elseif ($userCreated === 1){
+            $string = "1 utilisateur/trice a été créé en DB";
+        }else{
+            $string = "aucun utilisateur/trice n'a été créé en DB";
+        }
+        $this->io->success($string);
     }
+
+
 }
