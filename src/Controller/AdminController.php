@@ -67,5 +67,21 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_gestionUsers');
     }
 
+    /**
+     * @Route("accueil/gestionUsers/etatUser/{id}", name="etatUser")
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function etatUser(User $user,EntityManagerInterface $entityManager): Response
+    {
+
+        if ($user->getEtat()==true){
+            $user->setEtat(false);
+        }else{
+            $user->setEtat(true);
+        }
+        return $this->redirectToRoute('admin_gestionUsers');
+    }
 }
 
