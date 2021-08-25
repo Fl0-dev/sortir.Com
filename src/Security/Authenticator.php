@@ -69,7 +69,7 @@ class Authenticator extends AbstractFormLoginAuthenticator implements PasswordAu
         }
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
-        //dd($user);
+
         if (!$user) {
 
             $user = $this->entityManager->getRepository(User::class)->findOneBy(['pseudo' => $credentials['email']]);

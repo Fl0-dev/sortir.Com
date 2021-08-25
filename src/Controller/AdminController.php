@@ -56,7 +56,16 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_gestionUsers');
     }
 
+    /**
+     * @Route("accueil/gestionUsers/supprimer/{id}", name="supprimer")
+     */
+    public function supprimerUser(User $user,EntityManagerInterface $entityManager): Response
+    {
 
+        $entityManager->remove($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin_gestionUsers');
+    }
 
 }
 
