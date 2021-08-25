@@ -3,7 +3,7 @@
 {% block title %}Ajouter un lieu{% endblock %}
 
 {% block body %}
-<div id="container">
+<div class="container">
     <div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -12,7 +12,8 @@
             </ol>
         </nav>
         <h1 class="text-center">Ajouter un lieu :</h1>
-        <section>
+        <div id="form-ajout-lieu">
+        <section class = "col-4">
             {{ form_start(lieuForm) }}
             {{ form_widget(lieuForm) }}
             <button type="submit"  class="btn btn-primary">
@@ -20,6 +21,7 @@
             </button>
             {{ form_end(lieuForm) }}
         </section>
+        </div>
     </div>
 </div>
 {% endblock %}
