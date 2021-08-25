@@ -47,6 +47,7 @@ class ProfilController extends AbstractController
             $dossierPhotos = $form->get('photo')->getData();
             if ($dossierPhotos){
                 $nomOriginalDeFichier = pathinfo($dossierPhotos->getClientOriginalName(), PATHINFO_FILENAME);
+                //on change le nom du fichier
                 $nomDeFichierSecur = $slugger->slug($nomOriginalDeFichier);
                 $nomDeFichier = $nomDeFichierSecur.'-'.uniqid().'.'.$dossierPhotos->guessExtension();
                 try{
