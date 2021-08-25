@@ -6,7 +6,25 @@ body {
 }
 
 body{
-    /*background-image: url('../../public/img/979696.jpg');*/
+    background: #FFF7ED;
+}
+
+#entete {
+    background-color: #13A699;
+}
+
+#navbarNav ul li a {
+    color: #FFD708;
+    font-size: 1.5rem;
+}
+
+.btn {
+    background-color: #AAF0D1;
+
+}
+
+.btn:hover {
+    background-color: #13A699;
 }
 
 img
@@ -20,17 +38,26 @@ footer
     width: 100%; height: 50px;
     bottom: 0; left: 0; right: 0;
 }
-/*---------------------------- MAIN ------------------------------*/
 
 h1
 {
     margin: 2rem;
+    color: #043353;
 }
 
 h2
 {
     margin: 2rem;
+    color: #043353;
 }
+
+a[href] {
+    color: #043353;
+}
+
+/*---------------------------- MAIN ------------------------------*/
+
+
 
 #liste
 {
@@ -55,7 +82,7 @@ h2
 }
 
 .card-body a:hover {
-    background-color: #F5F5F5;
+    background-color: #FFF7ED;
     border-radius: .5rem;
 }
 
