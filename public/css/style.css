@@ -84,6 +84,11 @@ h2
 
 }
 
+#boutonSortie {
+    /*width: 3rem;*/
+    height: 1rem;
+    margin-left: 38rem;
+}
 
 /*------------------------ Détail Profil ------------------------------*/
 
@@ -149,3 +154,9 @@ h2
     width: 125px;
 }
 
+/* --------------------------- ajout lieu ------------------ */
+
+#form-ajout-lieu {
+    display: flex;
+    justify-content: center;
+}
