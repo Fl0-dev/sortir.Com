@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -113,7 +114,10 @@ class AdminController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function ajouterUserParFichier(EntityManagerInterface $entityManager,UserRepository $userRepository, Request $request): Response
+    public function ajouterUserParFichier(EntityManagerInterface $entityManager,
+                                          UserPasswordEncoderInterface $passwordEncoder,
+                                          UserRepository $userRepository,
+                                          Request $request): Response
     {
 
         $form = $this->createForm(ImportCsvType::class);
@@ -151,19 +155,22 @@ class AdminController extends AbstractController
                             $user = $userRepository->findOneBy([
                                 'pseudo' => $row['pseudo']
                             ]);
+                        }
+
                             //si pas de user :
                             if (!$user) {
                                 $user = new User();
                                 $campus = new Campus();
                                 //Hydratation d'un campus
                                 $campus->setNom($row['campus']);
+                                $entityManager->persist($campus);
                                 //hydratation d'un user avec
                                 $user->setEmail($row['email'])
-                                    ->setPassword('password')
+                                    ->setPassword($passwordEncoder->encodePassword($user,'password'))
                                     ->setNom($row['nom'])
                                     ->setPrenom($row['prenom'])
                                     ->setPseudo($row['pseudo'])
-                                    ->setCampus($row['campus'])
+                                    ->setCampus($campus)
                                     ->setRoles(["ROLE_USER"])
                                     ->setEtat(true);
                                 $entityManager->persist($user);
@@ -171,7 +178,7 @@ class AdminController extends AbstractController
                                 $userCreated++;
 
                             }
-                        }
+
                     }
                     $entityManager->flush();
                     if ($userCreated > 1) {
