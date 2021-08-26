@@ -2,31 +2,19 @@
 /*---------------------------- THEME ------------------------------*/
 body {
     font-family: "Proxima Soft", serif;
-
-}
-
-body{
     background: #FFFFFF;
 }
+
 
 #navbarNav {
     background-color: #2f274c;
 }
 
-#navbarNav ul li a {
-    color: #FFFFFF;
-    font-size: 1.5rem;
-}
 
-#navbarNav ul li a:hover {
-    color: #9272c2;
-    font-size: 1.5rem;
-}
 
-.btn {
-   /* background-color: #AAF0D1;*/
 
-}
+
+
 
 .btn:hover {
     background-color: #9272c2;
@@ -136,7 +124,7 @@ h2
     padding: .5rem;*/
 }
 
-#bouton-
+
 
 #bloc-detail-profil div {
     margin : 0 .5rem;
