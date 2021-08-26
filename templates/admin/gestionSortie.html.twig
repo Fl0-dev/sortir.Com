@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}} | GestionUsers{% endblock %}
+{% block title %}{{parent()}} | Gestion Sorties{% endblock %}
 
 {% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}">Accueil Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gestion Sorties</li>
+        </ol>
+    </nav>
+
     <h1>Liste des Sorties</h1>
     <table class="table table-striped">
         <thead>

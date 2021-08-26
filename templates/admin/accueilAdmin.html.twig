@@ -3,6 +3,14 @@
 {% block title %}{{parent()}} | Administration{% endblock %}
 
 {% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Accueil Admin</li>
+        </ol>
+    </nav>
+
 <h1> Bienvenue dans le volet administration {{ app.user.pseudo }}:</h1>
 
     <div class="list-group">

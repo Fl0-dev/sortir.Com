@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}} | Inscription{% endblock %}
+{% block title %}{{parent()}} | Enregistrement{% endblock %}
 
 {% block body %}
 <div class="container">
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
-                <li class="breadcrumb-item active" aria-current="page">inscription</li>
-            </ol>
-        </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}">Accueil Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gestion Users</li>
+            <li class="breadcrumb-item active" aria-current="page">Enregistrement</li>
+        </ol>
+    </nav>
 
     <section >
     <h1 class="container row justify-content-center">Incription d'un utilisateur</h1>
