@@ -9,18 +9,18 @@ body{
     background: #FFFFFF;
 }
 
-#navbarNav {
+#entete {
     background-color: #2f274c;
 }
 
 #navbarNav ul li a {
     color: #FFFFFF;
-
+    font-size: 1.5rem;
 }
 
 #navbarNav ul li a:hover {
     color: #9272c2;
-
+    font-size: 1.5rem;
 }
 
 .btn {
