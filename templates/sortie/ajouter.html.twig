@@ -73,7 +73,7 @@
                 <div class="col-6">
                     <div class="">
                         <label for="lieu_cp">Code Postal :</label>
-                        <p id="lieu_cp"></p>
+                        <select id="lieu_cp" name="lieu_cp"></select>
                     </div>
                     <div class="">
                         <label for="lieu_gps">Coordonnées GPS :</label>
@@ -118,15 +118,17 @@
             {
                 let option = document.createElement('option'); // <option></option>
                 option.innerHTML = ville.nom; // <option> Nantes </option>
-                //option.innerHTML= ville.code_postal;
                 option.value = ville.id; // <option value="3"> Nantes </option>
                 // je met la balise option dans la balise div
                 selectV.appendChild(option);
-                selectCP.innerHTML = ville.code_postal;
+                let optionCP = document.createElement('option'); // <option></option>
+                option.innerHTML = ville.code_postal; // <option> 44000 </option>
+                option.value = ville.id; // <option value="3"> Nantes </option>
+                // je met la balise option dans la balise div
+                selectCP.appendChild(option);
             }
 
             remplirLieu(villes[0].id);
-            //remplirAdresse(lieux[0].id);
 
             selectV.onchange= function ()
             {
