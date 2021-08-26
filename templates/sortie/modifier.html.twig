@@ -105,7 +105,7 @@
         let lieux = [];
         let villes = [];
 
-        let url = "http://localhost/sortirComv2Apache/public/sortie/lieux-villes";
+        let url = "{{ path('sortie_lieux-et-villes') }}";
         fetch(url).then(response => response.json()) // je recupere le body de la requete
             .then(data => {
                 console.log(data);

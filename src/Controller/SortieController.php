@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Form\AnnulationType;
 use App\Form\SortieFormType;
@@ -40,6 +41,7 @@ class SortieController extends AbstractController
      */
     public function ajouter(Request                $request,
                             EtatRepository         $etatRepository,
+                            LieuRepository         $lieuRepository,
                             EntityManagerInterface $entityManager): Response
     {
         //récupération de la route pour la redirection dans lieu
@@ -50,12 +52,22 @@ class SortieController extends AbstractController
         $sortie = new Sortie();
         //récupération de l'user
         $sortie->setOrganisateur($this->getUser());
+        //récupération du campus du user
+        $campus = $this->getUser()->getCampus();
+        $sortie->setCampus($campus);
+
         //Utilisation du form de sortie
         $form = $this->createForm(SortieFormType::class, $sortie);
         //et envoie du forme en requête
         $form->handleRequest($request);
         //si valide
         if ($form->isSubmitted() && $form->isValid()) {
+            //récupération du champ lieu qui ne fait parti du form
+            $lieuId = $request->request->get('lieu');
+            //recherche du lieu par id
+            $lieu=$lieuRepository->find($lieuId);
+            //hydratation de la sortie
+            $sortie->setLieu($lieu);
             //si l'user veut que la sortie soit créée
             if ($request->get("choix") === "enregistre") {
                 $sortie->setEtat($etats[0]);
@@ -92,6 +104,7 @@ class SortieController extends AbstractController
     public function modifier(Sortie                 $sortie,
                              Request                $request,
                              EtatRepository         $etatRepository,
+                             LieuRepository         $lieuRepository,
                              EntityManagerInterface $entityManager): Response
     {
         //récupération de la route pour la redirection dans lieu
@@ -104,6 +117,12 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
         //si valide
         if ($form->isSubmitted() && $form->isValid()) {
+            //récupération du champ lieu qui ne fait parti du form
+            $lieuId = $request->request->get('lieu');
+            //recherche du lieu par id
+            $lieu=$lieuRepository->find($lieuId);
+            //hydratation de la sortie
+            $sortie->setLieu($lieu);
             //si l'user veut que la sortie soit créée
             if ($request->get("choix") === "enregistre") {
                 $sortie->setEtat($etats[0]);

@@ -112,18 +112,17 @@
             // un selecteur sur la balise select #ville
             let selectV = document.getElementById('ville');
             let selectCP = document.getElementById('lieu_cp');
-            selectCP.innerHTML = ''; // je vide le paragraphe CP
 
             // alimenter la balise ville :
             for (let ville of villes)
             {
                 let option = document.createElement('option'); // <option></option>
                 option.innerHTML = ville.nom; // <option> Nantes </option>
+                //option.innerHTML= ville.code_postal;
                 option.value = ville.id; // <option value="3"> Nantes </option>
                 // je met la balise option dans la balise div
                 selectV.appendChild(option);
                 selectCP.innerHTML = ville.code_postal;
-
             }
 
             remplirLieu(villes[0].id);
@@ -163,6 +162,12 @@
                 option.value = lieu.id; // <option value="1"> le ferrailleur </option>
                 // je met la balise option dans la balise select
                 selectL.appendChild(option);
+               /* let optionCP = document.createElement('option'); // <option></option>
+                option.innerHTML = ville.code_postal; // <option> 44000 </option>
+                option.value = ville.id; // <option value="1"> Nantes </option>
+                // je met la balise option dans la balise select
+                selectCP.appendChild(option);*/
+
             }
         }
         remplirAdresse(selectL.firstChild.value);
@@ -192,7 +197,7 @@
             if (idLieu == lieu.id){
 
                 selectAdresse.innerHTML = lieu.rue;
-                selectCP.innerHTML = lieu.ville.code_postal;
+                //selectCP.innerHTML = lieu.ville.code_postal;
                 selectGPS.innerHTML = 'Latitude : ' + lieu.latitude + ', Longitude : ' + lieu.longitude;
 
             }
