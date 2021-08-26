@@ -147,7 +147,6 @@ class AdminController extends AbstractController
                     $userCreated = 0;
                     //boucler sur le tableau retourner par la fonction
                     foreach ($data as $row) {
-                        //TODO: pas de passage ici ?
                         //vérif si pas déjà dans la BD par l'email et par le pseudo
                         if (array_key_exists('email', $row) && !empty($row['email'])) {
                             $user = $userRepository->findOneBy([
