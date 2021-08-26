@@ -7,9 +7,9 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}">Accueil Admin</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Gestion Users</li>
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}" class="lien">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}" class="lien">Accueil Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('admin_gestionUsers')}}" class="lien">Gestion Users</a></li>
             <li class="breadcrumb-item active" aria-current="page">Enregistrement</li>
         </ol>
     </nav>
@@ -20,7 +20,7 @@
     <div class="container justify-content-center col-8">
         {{ form_start(registrationForm) }}
         {{ form_widget(registrationForm)}}
-        <button type="submit" class="btn btn-outline-primary">Enregister</button>
+        <button type="submit" class="btn btn-page">Enregister</button>
         {{ form_end(registrationForm) }}
     </div>
     </section>

@@ -42,8 +42,8 @@
     </div>
 
     <section id="liste">
-        <div id="bouton-creer-sortie" class="container">
-            <h2>Listes des sorties :   <a href="{{ path('sortie_ajouter') }}" class="btn" id="boutonSortie" style="height: 45px" >Créer une sortie</a></h2>
+        <div id="bouton-creer-sortie" class="container row">
+            <h2 class="col">Listes des sorties : <a href="{{ path('sortie_ajouter') }}" class="btn btn-lg" id="btncreer" >Créer une sortie</a></h2>
 
         </div>
         <div id="boites-sorties-alignement">
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="info-droite-carte-sortie">
                                     <div class="">
-                                        <a href="{{ path('sortie_afficher',{id:sortie.id}) }}" class="card-link">Détail</a>
+                                        <a href="{{ path('sortie_afficher',{id:sortie.id}) }}" class="lien card-link">Détail</a>
                                     </div>
                                     <div class="">
                                         <p class="card-text">{{ sortie.users|length }}/{{ sortie.nbInscriptionsMax }}</p>
@@ -74,22 +74,22 @@
                                 <p>Motif d'annulation : {{ sortie.infosAnnulation }}</p>
                             {% endif %}
                             {% if app.user in sortie.users %} {#si inscrit#}
-                                <p>Inscrit/e {% if not app.user==sortie.organisateur %}<a href="{{ path('desinscription',{id:sortie.id})}}" class="card-link">(Se désister)</a>{% endif %}</p>
+                                <p>Inscrit/e {% if not app.user==sortie.organisateur %}<a href="{{ path('desinscription',{id:sortie.id})}}" class="lien card-link">(Se désister)</a>{% endif %}</p>
                             {% endif %}
 
                             {% if sortie.etat.id==2 and app.user not in sortie.users %} {# si sortie ouverte et pas déjà inscrit#}
-                                <a href="{{ path('inscription',{id:sortie.id})}}" class="card-link">S'inscrire</a>
+                                <a href="{{ path('inscription',{id:sortie.id})}}" class="lien card-link">S'inscrire</a>
                             {% endif %}
 
                             {% if app.user==sortie.organisateur%} {# si organisateur#}
 
                                 {% if sortie.etat.id== 1%} {# si créée#}
-                                    <a href="{{ path('sortie_publier',{id:sortie.id}) }}" class="card-link">Publier</a>
-                                    <a href="{{ path('sortie_modifier',{id:sortie.id}) }}" class="card-link">Modifier sortie</a>
+                                    <a href="{{ path('sortie_publier',{id:sortie.id}) }}" class=" lien card-link">Publier</a>
+                                    <a href="{{ path('sortie_modifier',{id:sortie.id}) }}" class=" lien card-link">Modifier sortie</a>
                                 {% endif %}
 
                                 {% if sortie.etat.id==2 %} {# si ouverte#}
-                                    <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="card-link">Annuler</a>
+                                    <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class=" lien card-link">Annuler</a>
                                 {% endif %}
 
                             {% endif %}

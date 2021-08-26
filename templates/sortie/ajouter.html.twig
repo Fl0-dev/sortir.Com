@@ -6,7 +6,7 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}" class="lien">Accueil</a></li>
             <li class="breadcrumb-item active" aria-current="page">Créer une sortie</li>
         </ol>
     </nav>
@@ -36,7 +36,7 @@
                         <label for="lieu">Lieu :</label>
                         <select class="custom-select" id="lieu" name="lieu">
                         </select>
-                        <a href="{{ path('lieu_ajouter',{route:route,id:'ajout'}) }}" class="btn ">Ajouter un lieu</a>
+                        <a href="{{ path('lieu_ajouter',{route:route,id:'ajout'}) }}" class="btn btn-page mt-2">Ajouter un lieu</a>
                     </div>
                 </div>
 
@@ -82,9 +82,9 @@
             </div>
 
         <div class="row-12 text-center">
-            <button type="submit" name="choix" value="enregistre" class="btn  btn-primary">Enregistrer</button>
+            <button type="submit" name="choix" value="enregistre" class="btn btn-page">Enregistrer</button>
 
-            <button type="submit" name="choix" value="publie" class="btn  btn-outline-primary">Publier</button>
+            <button type="submit" name="choix" value="publie" class="btn  btn-page-outline">Publier</button>
 
             <a href="{{ path('accueil') }}" value="supprime" class="btn  btn-secondary">Annuler</a>
         </div>

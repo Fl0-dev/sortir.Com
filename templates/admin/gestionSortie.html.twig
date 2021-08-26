@@ -6,8 +6,8 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}">Accueil Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}" class="lien">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}" class="lien">Accueil Admin</a></li>
             <li class="breadcrumb-item active" aria-current="page">Gestion Sorties</li>
         </ol>
     </nav>
@@ -39,7 +39,7 @@
             <td>{{ sortie.lieu.ville.codePostal }}</td>
             <td>
             {% if sortie.etat.id==2 %} {# si ouverte#}
-                <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="card-link">Annuler</a>
+                <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="lien card-link">Annuler</a>
             {% endif %}
             </td>
         {% endfor %}

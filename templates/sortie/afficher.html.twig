@@ -64,7 +64,7 @@
                     <tbody>
                     {% for u in sortie.users %}
                         <tr>
-                            <td><a href="{{ path('user_profil', { id : u.id }) }}">{{ u.pseudo }}</a></td>
+                            <td><a href="{{ path('user_profil', { id : u.id }) }}" class="lien">{{ u.pseudo }}</a></td>
                             <td>{{ u.nom }}</td>
                             <td>{{ u.prenom }}</td>
                         </tr>
