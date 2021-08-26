@@ -17,7 +17,6 @@
     <section >
         {{ form_start(formSortie) }}
             <div class="row">
-
                 <div class="col-6">
                     <div class="group">
                             {{ form_row(formSortie.nom) }}
@@ -27,15 +26,17 @@
                     </div>
                 </div>
 
-                <div class="col-6 mt-4">
-                    <div class="group">
-                        <label for="campus">Campus :</label>
-                        {{ user.campus.nom }}
-                    </div>
-                    <div class="form-group mt-4">
+                <div class="col-6">
+                    <div class="form-group">
                         <label for="ville">Villes :</label>
                         <select class="custom-select" id="ville" name="ville">
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="lieu">Lieu :</label>
+                        <select class="custom-select" id="lieu" name="lieu">
+                        </select>
+                        <a href="{{ path('lieu_ajouter',{route:route,id:'ajout'}) }}" class="btn ">Ajouter un lieu</a>
                     </div>
                 </div>
 
@@ -49,14 +50,12 @@
                 </div>
 
                 <div class="col-6">
-                    <div class="form-group">
-                        <label for="lieu">Lieu :</label>
-                        <select class="custom-select" id="lieu" name="lieu">
-                        </select>
-                        <a href="{{ path('lieu_ajouter',{route:route,id:'ajout'}) }}" class="btn ">Ajouter un lieu</a>
+                    <div class="group mt-4">
+                        <label for="campus" style="font-weight: bold">Campus :</label>
+                        {{ user.campus.nom }}
                     </div>
-                    <div class="">
-                        <label for="lieu_rue">Adresse :</label>
+                    <div class="mt-4">
+                        <label for="lieu_rue" style="font-weight: bold">Adresse :</label>
                         <p id="lieu_rue"></p>
                     </div>
                 </div>
@@ -72,11 +71,11 @@
 
                 <div class="col-6">
                     <div class="">
-                        <label for="lieu_cp">Code Postal :</label>
+                        <label for="lieu_cp" style="font-weight: bold">Code Postal :</label>
                         <select id="lieu_cp" name="lieu_cp"></select>
                     </div>
-                    <div class="">
-                        <label for="lieu_gps">Coordonnées GPS :</label>
+                    <div class="mt-4">
+                        <label for="lieu_gps" style="font-weight: bold">Coordonnées GPS :</label>
                         <p id="lieu_gps"></p>
                     </div>
                 </div>
@@ -121,11 +120,11 @@
                 option.value = ville.id; // <option value="3"> Nantes </option>
                 // je met la balise option dans la balise div
                 selectV.appendChild(option);
-                let optionCP = document.createElement('option'); // <option></option>
-                option.innerHTML = ville.code_postal; // <option> 44000 </option>
-                option.value = ville.id; // <option value="3"> Nantes </option>
+               /* let optionCP = document.createElement('option'); // <option></option>
+                optionCP.innerHTML = ville.code_postal; // <option> 44000 </option>
+                optionCP.value = ville.id; // <option value="3"> Nantes </option>
                 // je met la balise option dans la balise div
-                selectCP.appendChild(option);
+                selectCP.appendChild(option);*/
             }
 
             remplirLieu(villes[0].id);
