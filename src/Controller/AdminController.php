@@ -10,6 +10,7 @@ use App\Form\ImportCsvType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Repository\UserRepository;
+use App\Repository\VilleRepository;
 use App\Services\Verification;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -203,6 +204,18 @@ class AdminController extends AbstractController
             ['formUser' => $form->createView(),
             ]);
     }
+
+    /**
+     * @Route("accueil/gestionVille", name="gestionVille")
+     */
+    public function gestionVilles(VilleRepository $villeRepository){
+        //récupération des villes
+        $villes = $villeRepository->findAll();
+        return $this->render('admin/gestionVilles.html.twig', [
+            'villes'=>$villes,
+        ]);
+    }
+
     /**
      * @Route("accueil/gestionSortie", name="gestionSortie")
      */

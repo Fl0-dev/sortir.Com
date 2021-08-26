@@ -101,4 +101,11 @@
         </div>
     </section>
 </div>
+    <script>
+        let tailleEcranX = window.innerHeight;
+        btnCreer=document.querySelector('#btncreer');
+        if (tailleEcranX<1000){
+            btnCreer.remove();
+        }
+    </script>
 {% endblock %}
