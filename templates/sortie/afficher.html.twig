@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de la sortie {% endblock %}
+{% block title %}{{parent()}} | Détails Sortie {% endblock %}
 
 {% block body %}
 
@@ -10,7 +10,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">détail sortie</li>
+            <li class="breadcrumb-item active" aria-current="page">Détail Sortie</li>
         </ol>
     </nav>
 
