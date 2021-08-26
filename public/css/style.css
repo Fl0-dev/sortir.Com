@@ -1,8 +1,8 @@
 
-
 /*---------------------------- THEME ------------------------------*/
 body {
-    font-family: Calibri;
+    font-family: "Proxima Soft", serif;
+
 }
 
 body{
@@ -41,6 +41,7 @@ footer
 
 h1
 {
+
     margin: 2rem;
     color: #9272c2;
 }
@@ -187,3 +188,197 @@ h2
     display: flex;
     justify-content: center;
 }
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-SemiBold.eot');
+    src: local('Proxima Soft SemiBold'), local('ProximaSoft-SemiBold'),
+    url('../css/font/ProximaSoft-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-SemiBold.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-SemiBold.woff') format('woff'),
+    url('../css/font/ProximaSoft-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-BoldIt.eot');
+    src: local('Proxima Soft Bold Italic'), local('ProximaSoft-BoldIt'),
+    url('../css/font/ProximaSoft-BoldIt.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-BoldIt.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-BoldIt.woff') format('woff'),
+    url('../css/font/ProximaSoft-BoldIt.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-Light.eot');
+    src: local('Proxima Soft Light'), local('ProximaSoft-Light'),
+    url('../css/font/ProximaSoft-Light.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-Light.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-Light.woff') format('woff'),
+    url('../css/font/ProximaSoft-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-Thin.eot');
+    src: local('Proxima Soft Thin'), local('ProximaSoft-Thin'),
+    url('../css/font/ProximaSoft-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-Thin.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-Thin.woff') format('woff'),
+    url('../css/font/ProximaSoft-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-LightIt.eot');
+    src: local('Proxima Soft Light Italic'), local('ProximaSoft-LightIt'),
+    url('../css/font/ProximaSoft-LightIt.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-LightIt.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-LightIt.woff') format('woff'),
+    url('../css/font/ProximaSoft-LightIt.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-Medium.eot');
+    src: local('Proxima Soft Medium'), local('ProximaSoft-Medium'),
+    url('../css/font/ProximaSoft-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-Medium.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-Medium.woff') format('woff'),
+    url('../css/font/ProximaSoft-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-SemiBoldIt.eot');
+    src: url('../css/font/ProximaSoft-SemiBoldIt.eot');
+    src: local('Proxima Soft SemiBold Italic'), local('ProximaSoft-SemiBoldIt'),
+    url('../css/font/ProximaSoft-SemiBoldIt.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-SemiBoldIt.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-SemiBoldIt.woff') format('woff'),
+    url('../css/font/ProximaSoft-SemiBoldIt.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-Bold.eot');
+    src: local('Proxima Soft Bold'), local('ProximaSoft-Bold'),
+    url('../css/font/ProximaSoft-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-Bold.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-Bold.woff') format('woff'),
+    url('../css/font/ProximaSoft-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-Black.eot');
+    src: local('Proxima Soft Black'), local('ProximaSoft-Black'),
+    url('../css/font/ProximaSoft-Black.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-Black.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-Black.woff') format('woff'),
+    url('../css/font/ProximaSoft-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-RegularIt.eot');
+    src: local('Proxima Soft Regular Italic'), local('ProximaSoft-RegularIt'),
+    url('../css/font/ProximaSoft-RegularIt.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-RegularIt.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-RegularIt.woff') format('woff'),
+    url('../css/font/ProximaSoft-RegularIt.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-Regular.eot');
+    src: local('Proxima Soft Regular'), local('ProximaSoft-Regular'),
+    url('../css/font/ProximaSoft-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-Regular.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-Regular.woff') format('woff'),
+    url('../css/font/ProximaSoft-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-MediumIt.eot');
+    src: local('../css/font/Proxima Soft Medium Italic'), local('ProximaSoft-MediumIt'),
+    url('../css/font/ProximaSoft-MediumIt.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-MediumIt.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-MediumIt.woff') format('woff'),
+    url('../css/font/ProximaSoft-MediumIt.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-BlackIt.eot');
+    src: local('../css/font/Proxima Soft Black Italic'), local('ProximaSoft-BlackIt'),
+    url('../css/font/ProximaSoft-BlackIt.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-BlackIt.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-BlackIt.woff') format('woff'),
+    url('../css/font/ProximaSoft-BlackIt.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-ExtraBoldIt.eot');
+    src: local('../css/font/Proxima Soft ExtraBold Italic'), local('ProximaSoft-ExtraBoldIt'),
+    url('../css/font/ProximaSoft-ExtraBoldIt.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-ExtraBoldIt.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-ExtraBoldIt.woff') format('woff'),
+    url('../css/font/ProximaSoft-ExtraBoldIt.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-ThinIt.eot');
+    src: local('../css/font/Proxima Soft Thin Italic'), local('ProximaSoft-ThinIt'),
+    url('../css/font/ProximaSoft-ThinIt.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-ThinIt.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-ThinIt.woff') format('woff'),
+    url('../css/font/ProximaSoft-ThinIt.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Proxima Soft';
+    src: url('../css/font/ProximaSoft-ExtraBold.eot');
+    src: local('../public/css/font/Proxima Soft ExtraBold'), local('ProximaSoft-ExtraBold'),
+    url('../css/font/ProximaSoft-ExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('../css/font/ProximaSoft-ExtraBold.woff2') format('woff2'),
+    url('../css/font/ProximaSoft-ExtraBold.woff') format('woff'),
+    url('../css/font/ProximaSoft-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
