@@ -28,7 +28,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 {% set chemin = app.request.get('_route') %}
                 {% if app.user %}
                     <li class="nav-item {% if chemin  == 'accueil' %}active{% endif %}">
