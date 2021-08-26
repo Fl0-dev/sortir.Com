@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\Sortie;
 use App\Entity\User;
+use App\Form\AnnulationType;
 use App\Form\ImportCsvType;
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Repository\UserRepository;
 use App\Services\Verification;
@@ -203,6 +206,34 @@ class AdminController extends AbstractController
 
         return $this->render('admin/gestionSortie.html.twig', [
             'sorties'=>$sorties
+        ]);
+    }
+    /**
+     * @Route("/{id}/annuler", name="annuler")
+     * @param Sortie $sortie
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @param EtatRepository $etatRepository
+     * @return Response
+     */
+    public function annuler(Sortie $sortie, EntityManagerInterface $entityManager, Request $request, EtatRepository $etatRepository): Response
+    {
+        $annulationForm = $this->createForm(AnnulationType::class, $sortie);
+        $annulationForm->handleRequest($request);
+        if ($annulationForm->isSubmitted() && $annulationForm->isValid()) {
+
+
+            $etatAnnulee = $etatRepository->find(2);
+            $sortie->setEtat($etatAnnulee);
+            $entityManager->flush();
+            $this->addFlash('warning', 'La sortie a bien été annulée.');
+            return $this->redirectToRoute('accueil');
+        }
+
+        return $this->render
+        ('sortie/annuler.html.twig', [
+            'annulationForm' => $annulationForm->createView(),
+            'sortie' => $sortie,
         ]);
     }
 }

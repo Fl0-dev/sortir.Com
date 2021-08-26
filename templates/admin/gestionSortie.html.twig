@@ -15,18 +15,24 @@
             <th scope="col">Nombres de places disponibles</th>
             <th scope="col">Adresse</th>
             <th scope="col">Code postal</th>
+            <th scope="col">Gestion</th>
         </tr>
         </thead>
         <tbody>
         {% for sortie in sorties %}
         <tr>
             <td>{{ sortie.infosSortie }}</td>
-            <td>{{ sortie.campus }}</td>
-            <td>{{ sortie.dateHeureDebut }}</td>
-            <td>{{ sortie.dateLimiteInscription }}</td>
+            <td>{{ sortie.campus.nom }}</td>
+            <td>{{ sortie.dateHeureDebut|date("d-m-Y") }}</td>
+            <td>{{ sortie.dateLimiteInscription|date("d-m-Y") }}</td>
             <td>{{ sortie.nbInscriptionsMax }}</td>
             <td>{{ sortie.lieu.rue }}</td>
             <td>{{ sortie.lieu.ville.codePostal }}</td>
+            <td>
+            {% if sortie.etat.id==2 %} {# si ouverte#}
+                <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="card-link">Annuler</a>
+            {% endif %}
+            </td>
         {% endfor %}
         </tr>
         </tbody>
