@@ -145,6 +145,7 @@ class AdminController extends AbstractController
                             $user = $userRepository->findOneBy([
                                 'email' => $row['email']
                             ]);
+
                         } elseif (array_key_exists('pseudo', $row) && !empty($row['pseudo'])) {
                             $user = $userRepository->findOneBy([
                                 'pseudo' => $row['pseudo']
