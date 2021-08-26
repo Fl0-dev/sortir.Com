@@ -14,7 +14,12 @@ body{
 }
 
 #navbarNav ul li a {
-    color: #f5f4fa;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+}
+
+#navbarNav ul li a:hover {
+    color: #9272c2;
     font-size: 1.5rem;
 }
 
@@ -83,8 +88,9 @@ h2
 }
 
 .card-body a:hover {
-    background-color: #FFF7ED;
+    color: #9272c2;
     border-radius: .5rem;
+    font-weight: bold;
 }
 
 .sortie{
@@ -130,13 +136,15 @@ h2
     padding: .5rem;*/
 }
 
+#bouton-
+
 #bloc-detail-profil div {
     margin : 0 .5rem;
     padding: 0 1rem;
 }
+
 #photoProfil{
     width: 300px;
-
 }
 /*------------------------ Détail sortie ------------------------------*/
 

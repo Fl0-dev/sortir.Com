@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}} | Ajouter une sortie{% endblock %}
+{% block title %}{{parent()}} | Créer une sortie{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -128,8 +128,15 @@
             selectV.onchange= function ()
             {
                 console.log('ok');
+                let thisCP;
                 let idVille = this.value;
-                remplirLieu(idVille);
+                for(i=0;i<villes.length;i++){
+                    if (villes[i].id == idVille){
+                        thisCP = villes[i].code_postal;
+                        break;
+                    }
+                }
+                remplirLieu(idVille,thisCP);
                 //let idLieu = this.value;
                 //remplirAdresse(idLieu);
             };
@@ -189,7 +196,6 @@
         selectGPS.innerHTML = ''; // je vide les paragraphes coordonnées GPS
 
         for (let lieu of lieux){  // si le lieu correspond à idLieu
-            console.log(lieu.id);
             if (idLieu == lieu.id){
                 selectAdresse.innerHTML = lieu.rue;
                 selectGPS.innerHTML = 'Latitude : ' + lieu.latitude + ', Longitude : ' + lieu.longitude;

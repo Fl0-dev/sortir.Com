@@ -30,7 +30,7 @@
             <p class="card-text">Campus : {{ user.campus.nom }}</p>
             <div class="container row justify-content-center">
                 {% if app.user.pseudo==user.pseudo %}
-            <a href="{{ path('user_modifier', { id : user.id }) }}" class="card-link btn btn-outline-primary">Modifier</a>
+            <a href="{{ path('user_modifier', { id : user.id }) }}" class="btn btn-primary">Modifier</a>
                 {% endif %}
             </div>
         </div>
