@@ -67,7 +67,7 @@
 
                             </nav>
                             <h6 class="card-title">{{ sortie.organisateur.pseudo }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ sortie.dateHeureDebut |date("d/m/Y h:m")}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ sortie.dateHeureDebut |format_datetime(locale='fr')}}</h6>
 
                             <p class="card-text">Etat : {{ sortie.etat.libelle }}</p>
                             {% if sortie.etat.id==6 %}
