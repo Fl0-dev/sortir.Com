@@ -32,8 +32,8 @@
         <tr>
             <td>{{ sortie.infosSortie }}</td>
             <td>{{ sortie.campus.nom }}</td>
-            <td>{{ sortie.dateHeureDebut|date("d-m-Y") }}</td>
-            <td>{{ sortie.dateLimiteInscription|date("d-m-Y") }}</td>
+            <td>{{ sortie.dateHeureDebut |format_datetime(locale='fr') }}</td>
+            <td>{{ sortie.dateLimiteInscription |format_datetime(locale='fr') }}</td>
             <td>{{ sortie.nbInscriptionsMax }}</td>
             <td>{{ sortie.lieu.rue }}</td>
             <td>{{ sortie.lieu.ville.codePostal }}</td>
