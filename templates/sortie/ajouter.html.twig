@@ -83,11 +83,11 @@
             </div>
 
         <div class="row-12 text-center">
-            <button type="submit" name="choix" value="enregistre" class="btn btn-lg btn-primary">Enregistrer</button>
+            <button type="submit" name="choix" value="enregistre" class="btn  btn-primary">Enregistrer</button>
 
-            <button type="submit" name="choix" value="publie" class="btn btn-lg btn-outline-primary">Publier</button>
+            <button type="submit" name="choix" value="publie" class="btn  btn-outline-primary">Publier</button>
 
-            <a href="{{ path('accueil') }}" value="supprime" class="btn btn-lg btn-secondary">Annuler</a>
+            <a href="{{ path('accueil') }}" value="supprime" class="btn  btn-secondary">Annuler</a>
         </div>
 
         {{ form_end(formSortie) }}
@@ -100,17 +100,19 @@
     let lieux = [];
     let villes = [];
 
-    let url = "http://localhost/sortirComv2Apache/public/sortie/lieux-villes";
+    let url = '{{ path('sortie_lieux-et-villes') }}';
     fetch(url).then(response => response.json()) // je recupere le body de la requete
         .then(data => {
             console.log(data);
 
-            // ajax <- JSON fruits (tableau) et couleurs (tableau)
+            // ajax <- JSON lieux (tableau) et villes (tableau)
             lieux = data.lieux;
             villes = data.villes;
 
             // un selecteur sur la balise select #ville
             let selectV = document.getElementById('ville');
+            let selectCP = document.getElementById('lieu_cp');
+            selectCP.innerHTML = ''; // je vide le paragraphe CP
 
             // alimenter la balise ville :
             for (let ville of villes)
@@ -120,20 +122,23 @@
                 option.value = ville.id; // <option value="3"> Nantes </option>
                 // je met la balise option dans la balise div
                 selectV.appendChild(option);
+                selectCP.innerHTML = ville.code_postal;
+
             }
 
             remplirLieu(villes[0].id);
-            remplirAdresse(lieux[0].id);
+            //remplirAdresse(lieux[0].id);
 
             selectV.onchange= function ()
             {
                 console.log('ok');
                 let idVille = this.value;
                 remplirLieu(idVille);
-                let idLieu = this.value;
-                remplirAdresse(idLieu);
+                //let idLieu = this.value;
+                //remplirAdresse(idLieu);
             };
-        } )
+
+        });
 
     function remplirLieu(idVille)
     {
@@ -160,6 +165,8 @@
                 selectL.appendChild(option);
             }
         }
+        remplirAdresse(selectL.firstChild.value);
+
         selectL.onchange = function () {
             console.log('ok');
             let idLieu = this.value;
@@ -181,8 +188,9 @@
         selectGPS.innerHTML = ''; // je vide les paragraphes coordonnées GPS
 
         for (let lieu of lieux){  // si le lieu correspond à idLieu
-
+            console.log(lieu.id);
             if (idLieu == lieu.id){
+
                 selectAdresse.innerHTML = lieu.rue;
                 selectCP.innerHTML = lieu.ville.code_postal;
                 selectGPS.innerHTML = 'Latitude : ' + lieu.latitude + ', Longitude : ' + lieu.longitude;
