@@ -30,17 +30,18 @@ class SortieFormType extends AbstractType
             ->add('duree')
             ->add('nbInscriptionsMax')
             ->add('infosSortie')
-            ->add('ville', EntityType::class,[
+            /*->add('ville', EntityType::class,[
                 'class'=>Ville::class,
                 "mapped"=>false,
-                'choice_label' => 'nom'])
-            ->add('campus',EntityType::class,[
+                'choice_label' => 'nom'])*/
+            /*->add('campus',EntityType::class,[
                 'class'=>Campus::class,
-                'choice_label'=>'nom'])
-            ->add('lieu', EntityType::class, [
+                //'choice_label'=>'nom'
+            ])*/
+            /*->add('lieu', EntityType::class, [
                 'class'=>Lieu::class,
                 'choice_label'=>'nom',
-            ])
+            ])*/
 
         ;
     }

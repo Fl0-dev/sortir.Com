@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un lieu{% endblock %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}">Accueil Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ajouter par fichier</li>
+        </ol>
+    </nav>
+    <div class="container">
+        <h1 class="text-center">Ajouter des utilisateurs :</h1>
+        <section>
+            {{ form_start(formUser) }}
+            {{ form_widget(formUser) }}
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            {{ form_end(formUser) }}
+        </section>
+    </div>
+{% endblock %}
