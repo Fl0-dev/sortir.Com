@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Services\Verification;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -119,12 +120,8 @@ class AdminController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
 
             /** @var UploadedFile $dossierFichier */
-            $dossierFichier = $form->get('fichier')->getData();
-            if ($dossierFichier) {
-                //TODO:souci dans la récupération de $dossierFichier
-                //récupération du type de fichier (extension)
-                $fileExtension = pathinfo($dossierFichier, PATHINFO_EXTENSION);
-                //permet de mettre un objet en tableau
+            $fichier = $form->get('fichier')->getData();
+            if ($fichier) {
                 $normalizers = [new ObjectNormalizer()];
                 //permet de mettre une donnée en objet
                 $encoders = [
@@ -132,16 +129,17 @@ class AdminController extends AbstractController
                 ];
                 //création du serializer qui fera la conversion
                 $serializer = new Serializer($normalizers, $encoders);
-                /** @var string $fileString */
-                $fileString = file_get_contents($dossierFichier);//mise en string du contenu du fichier
+                //mise en string du contenu du fichier
+                $fileString = file_get_contents($fichier);
                 //récupération grâce au serializer du contenu dans un tableau
-                $data = $serializer->decode($fileString, $fileExtension);
+                $data = $serializer->decode($fileString, $fichier->getClientOriginalExtension());
                 //si on a bien un tableau
-                if (array_key_exists('results', $data)) {
+                if ($data) {
                     //connaître le nombre d'users créés
                     $userCreated = 0;
                     //boucler sur le tableau retourner par la fonction
                     foreach ($data as $row) {
+                        //TODO: pas de passage ici ?
                         //vérif si pas déjà dans la BD par l'email et par le pseudo
                         if (array_key_exists('email', $row) && !empty($row['email'])) {
                             $user = $userRepository->findOneBy([
@@ -181,6 +179,7 @@ class AdminController extends AbstractController
                     } else {
                         $string = "aucun utilisateur/trice n'a été créé en DB";
                     }
+
                     $this->addFlash('success', $string);
                     return $this->redirectToRoute('admin_gestionUsers');
                 }
