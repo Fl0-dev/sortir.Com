@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Campus;
 use App\Entity\User;
 use App\Form\ImportCsvType;
+use App\Repository\SortieRepository;
 use App\Repository\UserRepository;
 use App\Services\Verification;
 use Doctrine\ORM\EntityManagerInterface;
@@ -192,6 +193,18 @@ class AdminController extends AbstractController
             'admin/ajoutCsv.html.twig',
             ['formUser' => $form->createView(),
             ]);
+    }
+    /**
+     * @Route("accueil/gestionSortie", name="gestionSortie")
+     */
+    public function gestionSortie (SortieRepository $sortieRepository) : Response
+    {
+        // récupération de la liste des sorties
+        $sorties = $sortieRepository->findAll();
+
+        return $this->render('admin/gestionSortie.html.twig', [
+            'sorties'=>$sorties
+        ]);
     }
 }
 

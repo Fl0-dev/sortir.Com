@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} | GestionUsers{% endblock %}
+
+{% block body %}
+    <h1>Liste des Sorties</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+
+            <th scope="col">Description</th>
+            <th scope="col">Campus</th>
+            <th scope="col">Date de sortie</th>
+            <th scope="col">Date limite d'inscription</th>
+            <th scope="col">Nombres de places disponibles</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Code postal</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sortie in sorties %}
+        <tr>
+            <td>{{ sortie.infosSortie }}</td>
+            <td>{{ sortie.campus }}</td>
+            <td>{{ sortie.dateHeureDebut }}</td>
+            <td>{{ sortie.dateLimiteInscription }}</td>
+            <td>{{ sortie.nbInscriptionsMax }}</td>
+            <td>{{ sortie.lieu.rue }}</td>
+            <td>{{ sortie.lieu.ville.codePostal }}</td>
+        {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+

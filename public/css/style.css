@@ -6,25 +6,25 @@ body {
 }
 
 body{
-    background: #FFF7ED;
+    background: #DFDDC5;
 }
 
 #entete {
-    background-color: #13A699;
+    background-color: #777D71;
 }
 
 #navbarNav ul li a {
-    color: #FFD708;
+    color: #BBD38B;
     font-size: 1.5rem;
 }
 
 .btn {
-    background-color: #AAF0D1;
+   /* background-color: #AAF0D1;*/
 
 }
 
 .btn:hover {
-    background-color: #13A699;
+    background-color: #777D71;
 }
 
 img
@@ -51,9 +51,9 @@ h2
     color: #043353;
 }
 
-a[href] {
-    color: #043353;
-}
+/*a[href] {
+    color: #777D71;
+}*/
 
 /*---------------------------- MAIN ------------------------------*/
 
