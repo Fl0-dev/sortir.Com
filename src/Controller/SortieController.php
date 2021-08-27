@@ -50,7 +50,7 @@ class SortieController extends AbstractController
         $etats = $etatRepository->findAll();
         //création de l'ojet sortie
         $sortie = new Sortie();
-        //récupération de l'user
+        //récupération de l'user pour le mettre en organisateur
         $sortie->setOrganisateur($this->getUser());
         //récupération du campus du user
         $campus = $this->getUser()->getCampus();
@@ -78,7 +78,7 @@ class SortieController extends AbstractController
             }
             //ajout de l'user dans la sortie
             $sortie->addUser($this->getUser());
-            //if ($this.date_diff())
+
 
             //on inscrit en BD
             $entityManager->persist($sortie);
