@@ -141,7 +141,7 @@ class MainController extends AbstractController
         $inscrit =$verification->verifUserInscrit($sortie,$user);
 
         //vérifier si sortie toujours ouverte et si déjà inscrit
-        if ($sortie->getEtat()->getId() == '2'&&$inscrit) {
+        if ($sortie->getEtat()->getId() == 2 && $inscrit) {
             $sortie->removeUser($user);
             $entityManager->flush();
             $this->addFlash('success', 'Tu as bien annulé ton inscription à la sortie : ' . $sortie->getNom());
