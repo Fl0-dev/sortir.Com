@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réinitialisation du mot de passe{% endblock %}
+{% block title %}{{parent()}} | Réinitialisation{% endblock %}
 
 {% block body %}
     {% for flashError in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-    <h1>Réinitialisation mot de passe</h1>
+    <h1>Réinitialiser Mot De Passe</h1>
 
     {{ form_start(requestForm) }}
         {{ form_row(requestForm.email) }}
@@ -17,6 +17,6 @@
             </small>
         </div>
 
-        <button class="btn btn-primary">Envoyer le mail pour le changement du mdp</button>
+        <button class="btn btn-page">Envoyer Mail</button>
     {{ form_end(requestForm) }}
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de la sortie {% endblock %}
+{% block title %}{{parent()}} | Détails Sortie {% endblock %}
 
 {% block body %}
 
@@ -10,7 +10,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">détail sortie</li>
+            <li class="breadcrumb-item active" aria-current="page">Détail Sortie</li>
         </ol>
     </nav>
 
@@ -26,11 +26,11 @@
         </div>
         <div class="grid_2">
             <div class="font"> Date et heure de sortie : </div>
-            <div>{{ sortie.dateHeureDebut|date("d-m-Y") }}</div>
+            <div>{{ sortie.dateHeureDebut |format_datetime(locale='fr') }}</div>
         </div>
         <div class="grid_2">
             <div class="font"> Date limite d'inscription :</div>
-            <div> {{ sortie.dateLimiteInscription|date("d-m-Y") }}</div>
+            <div> {{ sortie.dateLimiteInscription |format_datetime(locale='fr') }}</div>
         </div>
         <div class="grid_2">
             <div class="font"> Nombres de places disponibles :</div>
@@ -64,7 +64,7 @@
                     <tbody>
                     {% for u in sortie.users %}
                         <tr>
-                            <td><a href="{{ path('user_profil', { id : u.id }) }}">{{ u.pseudo }}</a></td>
+                            <td><a href="{{ path('user_profil', { id : u.id }) }}" class="lien">{{ u.pseudo }}</a></td>
                             <td>{{ u.nom }}</td>
                             <td>{{ u.prenom }}</td>
                         </tr>

@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | modifier profil{% endblock %}
+{% block title %}{{ parent() }} | Modifier profil{% endblock %}
 
 {% block body %}
 
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('accueil')}}">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">modifier le profil</li>
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}" class="lien">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('user_profil',{id:user.id})}}" class="lien">Détail Profil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modifier Profil</li>
         </ol>
     </nav>
 
@@ -56,20 +57,13 @@
                     </div>
 
                     <div class="form-group ">
-                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                        <button type="submit" class="btn btn-page">Enregistrer</button>
+                        <a href="{{ path('user_profil',{id:user.id}) }}" class="btn btn-secondary">Retour</a>
                     </div>
                 {{ form_end (formUser) }}
             </div>
         </div>
     </div>
 </div>
-<script>
-    //récupération des élèments du DOM
-    let btn = document.querySelector('button');
-    let img = element.getAttribute("src");
-    btn.addEventListener('click'()=>{
-        //requête ajax pour récupérer l'image chargée
-        element.setAttribute("src,")
-    });
-</script>
+
 {% endblock %}

@@ -7,10 +7,7 @@
             lang="fr">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}La Nouba Maggle{% endblock %}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" href="{{ asset('img/faviconDEFOU.png') }}">
-    <script src="https://kit.fontawesome.com/3e5a47e53a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
@@ -21,10 +18,10 @@
 <body>
 
 <header>
-    <nav class="navbar navbar-expand-lg" id="entete">
+    <nav class="navbar navbar-expand-lg navbar-dark" id="entete">
 
-        <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('img/logoBlanc22.png') }}" class="logonavbar"  alt="home !"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('img/logoBlanc22.png') }}" class="logonavbar"  alt="Logo La Nouba Maggle"></a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -47,7 +44,7 @@
                 {% endif %}
                 {% if is_granted("ROLE_ADMIN") %}
                     <li class="nav-item {% if chemin  == 'app_register' %}active{% endif %}">
-                        <a class="nav-link" href="{{path('admin_accueil') }}">Volet Admin-></a>
+                        <a class="nav-link" href="{{path('admin_accueil') }}">Volet Admin</a>
                     </li>
                 {% endif %}
 
@@ -75,11 +72,7 @@
         {% block body %}{% endblock %}
     </section>
 </main>
-<!--
-<footer class="py-5 bg-dark">
-    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Sortie.com {{ "now"|date('d-m-Y') }}</p></div>
-</footer>
--->
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

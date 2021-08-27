@@ -1,20 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un lieu{% endblock %}
+{% block title %}{{ parent() }} | EnregistrementCSV{% endblock %}
 
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}">Accueil Admin</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Ajouter par fichier</li>
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}" class="lien">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}" class="lien">Accueil Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('admin_gestionUsers')}}" class="lien">Gestion Users</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Enregistrement Par Fichier</li>
         </ol>
     </nav>
+
     <div class="container">
         <h1 class="text-center">Ajouter des utilisateurs :</h1>
         <section class="container justify-content-center col-8">
             {{ form_start(formUser) }}
             {{ form_widget(formUser) }}
-            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="submit" class="btn btn-page">Ajouter</button>
             {{ form_end(formUser) }}
         </section>
     </div>

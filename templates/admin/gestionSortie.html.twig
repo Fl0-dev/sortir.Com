@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}} | GestionUsers{% endblock %}
+{% block title %}{{parent()}} | Gestion Sorties{% endblock %}
 
 {% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('accueil')}}" class="lien">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('admin_accueil')}}" class="lien">Accueil Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gestion Sorties</li>
+        </ol>
+    </nav>
+
     <h1>Liste des Sorties</h1>
     <table class="table table-striped">
         <thead>
@@ -23,14 +32,14 @@
         <tr>
             <td>{{ sortie.infosSortie }}</td>
             <td>{{ sortie.campus.nom }}</td>
-            <td>{{ sortie.dateHeureDebut|date("d-m-Y") }}</td>
-            <td>{{ sortie.dateLimiteInscription|date("d-m-Y") }}</td>
+            <td>{{ sortie.dateHeureDebut |format_datetime(locale='fr') }}</td>
+            <td>{{ sortie.dateLimiteInscription |format_datetime(locale='fr') }}</td>
             <td>{{ sortie.nbInscriptionsMax }}</td>
             <td>{{ sortie.lieu.rue }}</td>
             <td>{{ sortie.lieu.ville.codePostal }}</td>
             <td>
             {% if sortie.etat.id==2 %} {# si ouverte#}
-                <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="card-link">Annuler</a>
+                <a href="{{ path('sortie_annuler',{id:sortie.id}) }}" class="lien card-link">Annuler</a>
             {% endif %}
             </td>
         {% endfor %}
