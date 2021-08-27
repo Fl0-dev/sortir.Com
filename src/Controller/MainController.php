@@ -108,11 +108,11 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil/inscription/{id}", name="inscription")
      */
-    public function inscription(Sortie $sortie, EntityManagerInterface $entityManager,SortieRepository $sortieRepository): Response
+    public function inscription(Sortie $sortie, EntityManagerInterface $entityManager,Verification $verification): Response
     {
         //recupération de l'User connecté
         $user = $this->getUser();
-        $inscrit =$sortieRepository->findInscrit($user);
+        $inscrit =$verification->verifUserInscrit($sortie,$user);
 
         //vérifier si sortie est à l'état : ouverte, si il y a encore de la place et si pas déjà inscrit
         if (($sortie->getEtat()->getId() == '2') && ($sortie->getNbInscriptionsMax() > count($sortie->getUsers()))&&!$inscrit) {
@@ -134,15 +134,14 @@ class MainController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function desincription(Sortie $sortie, EntityManagerInterface $entityManager,SortieRepository $sortieRepository):Response
+    public function desincription(Sortie $sortie, EntityManagerInterface $entityManager,Verification $verification):Response
     {
         //recupération de l'User connecté
         $user = $this->getUser();
-        $inscrit= $sortieRepository->findInscrit($user);
-
+        $inscrit =$verification->verifUserInscrit($sortie,$user);
 
         //vérifier si sortie toujours ouverte et si déjà inscrit
-        if ($sortie->getEtat()->getId() == 2 && $inscrit) {
+        if (($sortie->getEtat()->getId() == 2) && $inscrit) {
             $sortie->removeUser($user);
             $entityManager->flush();
             $this->addFlash('success', 'Tu as bien annulé ton inscription à la sortie : ' . $sortie->getNom());

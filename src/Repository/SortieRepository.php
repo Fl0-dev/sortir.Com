@@ -114,11 +114,5 @@ class SortieRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
-    public function findInscrit($user){
-        $qb =$this->createQueryBuilder('s');
-        $qb ->andWhere(':inscrit MEMBER OF s.users')
-            ->setParameter('inscrit', $user);
-        $query = $qb->getQuery();
-        return $query->execute();
-    }
+
 }
