@@ -108,11 +108,11 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil/inscription/{id}", name="inscription")
      */
-    public function inscription(Sortie $sortie, EntityManagerInterface $entityManager,Verification $verification): Response
+    public function inscription(Sortie $sortie, EntityManagerInterface $entityManager,SortieRepository $sortieRepository): Response
     {
         //recupération de l'User connecté
         $user = $this->getUser();
-        $inscrit =$verification->verifUserInscrit($sortie,$user);
+        $inscrit =$sortieRepository->findInscrit($user);
 
         //vérifier si sortie est à l'état : ouverte, si il y a encore de la place et si pas déjà inscrit
         if (($sortie->getEtat()->getId() == '2') && ($sortie->getNbInscriptionsMax() > count($sortie->getUsers()))&&!$inscrit) {
@@ -134,11 +134,12 @@ class MainController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function desincription(Sortie $sortie, EntityManagerInterface $entityManager,Verification $verification):Response
+    public function desincription(Sortie $sortie, EntityManagerInterface $entityManager,SortieRepository $sortieRepository):Response
     {
         //recupération de l'User connecté
         $user = $this->getUser();
-        $inscrit =$verification->verifUserInscrit($sortie,$user);
+        $inscrit= $sortieRepository->findInscrit($user);
+
 
         //vérifier si sortie toujours ouverte et si déjà inscrit
         if ($sortie->getEtat()->getId() == 2 && $inscrit) {
