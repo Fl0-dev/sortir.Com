@@ -68,11 +68,10 @@ class Verification
             $interval = new DateInterval('PT'.$sortie->getDuree(). 'M');
             $dateFinsortie->add($interval);
 
-
             //si état ouvert
             if ($sortie->getEtat()->getId()==2) {
                 //si date d'insciption > date d'aujourd'hui
-                if($sortie->getDateLimiteInscription()<$today){
+                if($sortie->getDateLimiteInscription()<$today || $sortie->getNbInscriptionsMax()===count($sortie->getUsers())){
                     $sortie->setEtat($etatCloture);
 
                 }
